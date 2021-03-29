@@ -8,7 +8,7 @@ export class GameScene extends Phaser.Scene {
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 200 }
+                    gravity: { y: 300 }
                 }
             }
         })
@@ -55,7 +55,6 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        if (this.wizard.body.onFloor()){
             if (this.cursors.left.isDown){
                 this.wizard.setVelocityX(-50);
             }
@@ -67,10 +66,9 @@ export class GameScene extends Phaser.Scene {
             }
 
             // Make the player jump if he is touching the ground
-            if (this.cursors.up.isDown) {
+            if (this.cursors.up.isDown && this.wizard.body.onFloor()) {
                 this.wizard.setVelocityY(-220);
             }
-        }
     }
 
 }
