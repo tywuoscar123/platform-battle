@@ -22,9 +22,9 @@ export default class EndScene extends Phaser.Scene {
 
         this.add.text(screenCenterX, 150, "Result", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
-        this.add.text(screenCenterX, 250, "Winner is " + this.winner , { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 350, "heroScore = " + this.heroScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 450, "devilScore = " + this.devilScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 250, this.winner + " Wins!", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
     }
 
     update(time, delta) {
