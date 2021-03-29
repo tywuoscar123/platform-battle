@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { CST } from "../CST";
 import Player from "../characters/Player";
 import Spikes from "../objects/Spikes";
+import MouseTracer from "../MouseTracer";
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -55,10 +56,13 @@ export class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.wizard.sprite, this.spikesFactory.spikes, this.restart, null, this);
 
         this.spikesFactory.createSpike(200, 580);
+
+        this.tracer = new MouseTracer(this, this.castleMap);
     }
 
     update(time, delta) {
         this.wizard.update();
+        this.tracer.update();
     }
 
     restart() {
