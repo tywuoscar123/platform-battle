@@ -1,8 +1,11 @@
+import Phaser from "phaser";
+
 export default class MouseTracer {
     constructor(scene, map) {
         this.map = map;
         this.scene = scene;
 
+        //draw a rectangle to show tile selectd by hero player
         this.graphics = scene.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.graphics.strokeRect(0, 0, map.tileWidth, map.tileHeight);
@@ -11,6 +14,7 @@ export default class MouseTracer {
     }
 
     update() {
+        //update the selected tile if clicked
         const pointer = this.scene.input.activePointer;
         if (pointer.isDown){
             const worldPoint = pointer.positionToCamera(this.scene.cameras.main);

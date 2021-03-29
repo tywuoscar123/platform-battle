@@ -4,6 +4,7 @@ export default class Player {
     constructor(scene, x, y) {
         this.scene = scene;
 
+        //create animations for player
         const anims = scene.anims;
         anims.create({
             key: 'Idle',
@@ -12,6 +13,7 @@ export default class Player {
             repeat: -1
         });
 
+        //set player properties
         this.sprite = scene.physics.add.sprite(x, y, "EvilWizard", 0);
 
         this.sprite.setDrag(1000, 0);
@@ -21,6 +23,7 @@ export default class Player {
         this.sprite.setBounce(0.1);
         this.sprite.setCollideWorldBounds(true);
 
+        //get the keyboard input for controlling player
         const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
         this.keys = scene.input.keyboard.addKeys({
             w: W,
@@ -30,6 +33,7 @@ export default class Player {
     }
 
     update() {
+        //update player movement according to key strokes
         const keys= this.keys;
         const sprite = this.sprite;
 
