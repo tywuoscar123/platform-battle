@@ -20,11 +20,11 @@ export default class EndScene extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         //const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
-        this.add.text(screenCenterX, 150, "Result", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 150, "Result", { font: "75px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         this.add.text(screenCenterX, 250, this.winner + " Wins!", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
     }
 
     update(time, delta) {

@@ -64,7 +64,7 @@ export default class GameScene extends Phaser.Scene {
 
         //add timer for stage
         this.timer = this.time.delayedCall( 5*1000, this.HeroWin, null, this);
-        this.text = this.add.text(20, 30, '', { font: 'bold 72px system-ui' });
+        this.text = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
     }
 
     update(time, delta) {
@@ -79,7 +79,7 @@ export default class GameScene extends Phaser.Scene {
         this.tracer.update();
 
         //update remaining time
-        this.text.setText(this.timer.getRemainingSeconds().toFixed(1));
+        this.text.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
     }
 
     restart() {
