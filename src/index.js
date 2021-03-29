@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 
-import {MenuScene} from "./scenes/MenuScene";
-import {GameScene} from "./scenes/GameScene";
+import MenuScene from "./scenes/MenuScene";
+import GameScene from "./scenes/GameScene";
+import EndScene from "./scenes/EndScene";
 
 const config = {
     type: Phaser.AUTO,
@@ -14,7 +15,7 @@ const config = {
             gravity: { y: 200 }
         }
     },
-    scene: [GameScene]
+    scene: [MenuScene, GameScene, EndScene]
 };
 
 const game = new Phaser.Game(config);

@@ -4,7 +4,7 @@ import Player from "../characters/Player";
 import Spikes from "../objects/Spikes";
 import MouseTracer from "../MouseTracer";
 
-export class GameScene extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene {
     constructor() {
         super({
             key: CST.SCENES.GAME,
@@ -58,14 +58,26 @@ export class GameScene extends Phaser.Scene {
         this.spikesFactory.createSpike(200, 580);
 
         this.tracer = new MouseTracer(this, this.castleMap);
+
+        this.gameover = false;
+
+        this.timer = this.time.delayedCall( 5*1000, this.HeroWin, null, this);
+
+        this.text = this.add.text(20, 30, '', { font: 'bold 72px system-ui' });
     }
 
     update(time, delta) {
+        if (this.gameover === true){
+            return;
+        }
         this.wizard.update();
         this.tracer.update();
+
+        this.text.setText(this.timer.getRemainingSeconds().toFixed(1));
     }
 
     restart() {
+        console.log("restart");
         this.wizard.sprite.setVelocity(0, 0);
         this.wizard.sprite.setX(25);
         this.wizard.sprite.setY(590);
@@ -77,6 +89,28 @@ export class GameScene extends Phaser.Scene {
             duration: 100,
             ease: 'Linear',
             repeat: 5,
+        });
+    }
+
+    HeroWin() {
+        console.log("Hero Wins");
+        this.gameover = true;
+        this.wizard.sprite.anims.stop();
+        this.scene.start(CST.SCENES.END, {
+            winner: 'Hero',
+            heroScore: 60,
+            devilScore: 20
+        });
+    }
+
+    DevilWin() {
+        console.log("Devil Wins");
+        this.gameover = true;
+        this.wizard.sprite.anims.stop();
+        this.scene.start(CST.SCENES.END, {
+            winner: 'Hero',
+            heroScore: 20,
+            devilScore: 60
         });
     }
 
