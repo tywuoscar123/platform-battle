@@ -8,7 +8,15 @@ const config = {
     parent: 'Platform_Battles',
     width: 1280,
     height: 640,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 200 }
+        }
+    },
     scene: [GameScene]
 };
 
 const game = new Phaser.Game(config);
+
+export { game };
