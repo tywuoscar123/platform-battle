@@ -30,6 +30,9 @@ export default class Player {
             a: A,
             d: D
         });
+
+        //additional attributes for player
+        this.hp = 3;
     }
 
     update() {
@@ -53,6 +56,14 @@ export default class Player {
             sprite.setVelocityY(-300);
         }
 
+    }
+
+    takeDamage(number){
+        this.hp -= number;
+    }
+
+    resetStatus(){
+        this.hp = 3;
     }
 
     destroy() {

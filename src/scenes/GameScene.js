@@ -54,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
         //add in obstacles spikes
         this.spikesFactory = new Spikes(this);
         this.physics.add.collider(this.spikesFactory.spikes, this.platformLayer);
-        this.physics.add.collider(this.wizard.sprite, this.spikesFactory.spikes, this.restart, null, this);
+        this.physics.add.collider(this.wizard.sprite, this.spikesFactory.spikes, this.damagePlayer, null, this);
         //create sample spike
         this.spikesFactory.createSpike(200, 580);
 
@@ -66,7 +66,7 @@ export default class GameScene extends Phaser.Scene {
 
         //add timer for stage
         this.timer = this.time.delayedCall( CST.CONFIG.TIMER, this.HeroWin, null, this);
-        this.text = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
+        this.timertext = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
     }
 
     update(time, delta) {
@@ -81,9 +81,20 @@ export default class GameScene extends Phaser.Scene {
         this.tracer.update();
 
         //update remaining time
-        this.text.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
+        this.timertext.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
         if (this.wizard.sprite.x > this.goal.x && this.wizard.sprite.y > this.goal.y){
             this.DevilWin();
+        }
+    }
+
+    damagePlayer(object1, object2){
+        this.wizard.takeDamage(1);
+        this.wizard.sprite.setVelocity(-200, -100);
+        console.log(object2.x);
+        console.log(object2.y);
+        if (this.wizard.hp <= 0){
+            this.wizard.resetStatus();
+            this.restart();
         }
     }
 
