@@ -82,6 +82,8 @@ export default class GameScene extends Phaser.Scene {
 
         //update remaining time
         this.timertext.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
+
+        //check player reaching goal
         if (this.wizard.sprite.x > this.goal.x && this.wizard.sprite.y > this.goal.y){
             this.DevilWin();
         }
