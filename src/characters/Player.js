@@ -8,18 +8,25 @@ export default class Player {
         const anims = scene.anims;
         anims.create({
             key: 'Idle',
-            frames: 'EvilWizard',
+            frames: 'EvilWizard_Idle',
+            frameRate: 6,
+            repeat: -1
+        });
+
+        anims.create({
+            key: 'Run',
+            frames: 'EvilWizard_Run',
             frameRate: 8,
             repeat: -1
         });
 
         //set player properties
-        this.sprite = scene.physics.add.sprite(x, y, "EvilWizard", 0);
+        this.sprite = scene.physics.add.sprite(x, y, 'EvilWizard_Idle', 0);
 
         this.sprite.setDrag(1000, 0);
         this.sprite.setMaxVelocity(100, 300);
         this.sprite.setScale(0.5, 0.5);
-        this.sprite.play('Idle');
+        this.sprite.play('Idle', true);
         this.sprite.setBounce(0.1);
         this.sprite.setCollideWorldBounds(true);
 
@@ -56,6 +63,13 @@ export default class Player {
             sprite.setVelocityY(-300);
         }
 
+    if (sprite.body.velocity.x !== 0){
+            console.log('Run');
+            sprite.play('Run', true);
+        }else{
+            console.log('Idle');
+            sprite.play('Idle', true);
+        }
     }
 
     takeDamage(number){
