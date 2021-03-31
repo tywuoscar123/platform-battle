@@ -2,6 +2,7 @@ export const CST = {
     SCENES: {
         MENU: "MENU",
         GAME: "GAME",
+        PAUSE: "PAUSE",
         END: "END"
     },
     CONFIG: {
