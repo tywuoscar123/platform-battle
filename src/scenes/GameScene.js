@@ -19,6 +19,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     init(){
+
     }
 
     preload() {
@@ -35,6 +36,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+
+        this.escKey = this.input.keyboard.addKey('ESC', false, false);
+
         //load the tile map
         this.castleMap = this.add.tilemap('CastlePrison');
 
@@ -74,6 +78,20 @@ export default class GameScene extends Phaser.Scene {
         if (this.gameover === true){
             return;
         }
+        
+        /*this.escKey.on("down",()=>{
+            console.log("ESC PRESSED");
+            this.scene.pause();
+            this.scene.launch(CST.SCENES.PAUSE);
+        })*/
+
+        if(this.escKey.isDown){
+            console.log("ESC PRESSED");
+            this.scene.pause();
+            this.scene.launch(CST.SCENES.PAUSE);
+        }
+
+        this.input.addListener
 
         //update devil player position
         this.wizard.update();
