@@ -110,9 +110,28 @@ export default class GameScene extends Phaser.Scene {
 
     damagePlayer(object1, object2){
         this.wizard.takeDamage(1);
-        this.wizard.sprite.setVelocity(-200, -100);
-        console.log(object2.x);
-        console.log(object2.y);
+        let bounceX, bounceY;
+        if (object1.x < object2.x){
+            bounceX = -1;
+        }else if (object1.x > object2.x){
+            bounceX = 1;
+        }else{
+            bounceX = 0;
+        }
+
+        if (object1.x < object2.y){
+            bounceY = -1;
+        }else if (object1.x > object2.y){
+            bounceY = 1;
+        }else{
+            bounceY = 0;
+        }
+
+        this.wizard.sprite.setVelocity(bounceX * 200, bounceY * 100);
+        console.log(bounceX * 200);
+        console.log(bounceY * 100);
+        //console.log(object2.x);
+        //console.log(object2.y);
         if (this.wizard.hp <= 0){
             this.wizard.resetStatus();
             this.restart();
