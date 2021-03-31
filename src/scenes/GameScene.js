@@ -115,6 +115,7 @@ export default class GameScene extends Phaser.Scene {
             ease: 'Linear',
             repeat: 5,
         });
+        this.cameras.main.flash(500, 0,0,0);
     }
 
     HeroWin() {

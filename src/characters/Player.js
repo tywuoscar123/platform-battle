@@ -63,16 +63,18 @@ export default class Player {
             sprite.setVelocityY(-300);
         }
 
-    if (sprite.body.velocity.x !== 0){
-            console.log('Run');
+        if (sprite.body.velocity.x !== 0){
             sprite.play('Run', true);
         }else{
-            console.log('Idle');
             sprite.play('Idle', true);
         }
     }
 
     takeDamage(number){
+        this.sprite.tint = 0xff0000;
+        this.scene.time.delayedCall(200, function(){
+            this.sprite.clearTint();
+        }, null, this);
         this.hp -= number;
     }
 
