@@ -8,7 +8,7 @@ import PauseScene from "./scenes/PauseScene";
 const config = {
     type: Phaser.AUTO,
     parent: 'Platform_Battles',
-    width: 1280,
+    width: 1400,
     height: 640,
     physics: {
         default: 'arcade',

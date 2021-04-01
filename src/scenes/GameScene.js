@@ -51,6 +51,45 @@ export default class GameScene extends Phaser.Scene {
 
         this.spawnPt = this.castleMap.findObject('Objects', obj => obj.name === 'Spawn');
         this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
+
+    //add squares/buttons for skills
+        
+       let skillOne = this.add.rectangle(1340, 100, 120, 120, 0xff0000);
+       skillOne.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillOne.width, skillOne.height), Phaser.Geom.Rectangle.Contains);
+       skillOne.on('pointerover', function() {
+            skillOne.fillColor= 0xffffff;
+        });
+        skillOne.on('pointerout', function() {
+            skillOne.fillColor = 0xff0000;
+        });
+
+       let skillTwo = this.add.rectangle(1340, 230, 120, 120, 0xff0000);
+       skillTwo.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillTwo.width, skillTwo.height), Phaser.Geom.Rectangle.Contains);
+       skillTwo.on('pointerover', function() {
+            skillTwo.fillColor= 0xffffff;
+        });
+        skillTwo.on('pointerout', function() {
+            skillTwo.fillColor = 0xff0000;
+        });
+        
+       let skillThree = this.add.rectangle(1340, 360, 120, 120, 0xff0000);
+       skillThree.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillThree.width, skillThree.height), Phaser.Geom.Rectangle.Contains);
+       skillThree.on('pointerover', function() {
+            skillThree.fillColor= 0xffffff;
+        });
+        skillThree.on('pointerout', function() {
+            skillThree.fillColor = 0xff0000;
+        });
+        
+        let skillFour = this.add.rectangle(1340, 490, 120, 120, 0xff0000);
+        skillFour.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillFour.width, skillFour.height), Phaser.Geom.Rectangle.Contains);
+        skillFour.on('pointerover', function() {
+        skillFour.fillColor= 0xffffff;
+        });
+        skillFour.on('pointerout', function() {
+        skillFour.fillColor = 0xff0000;
+        });
+
         //create the player character and add physics to player
         this.wizard = new Player(this, this.spawnPt.x, this.spawnPt.y);
         this.physics.world.addCollider(this.wizard.sprite, this.platformLayer);
