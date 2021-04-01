@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { CST } from "../CST";
 import Player from "../characters/Player";
-import Spikes from "../objects/Spikes";
+import Spike from "../objects/Spike";
 import MouseTracer from "../MouseTracer";
 
 export default class GameScene extends Phaser.Scene {
@@ -54,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
         this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
 
     //add squares/buttons for skills
-        
+
        let skillOne = this.add.rectangle(1340, 100, 120, 120, 0xff0000);
        skillOne.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillOne.width, skillOne.height), Phaser.Geom.Rectangle.Contains);
        skillOne.on('pointerover', function() {
@@ -96,11 +96,21 @@ export default class GameScene extends Phaser.Scene {
         this.physics.world.addCollider(this.wizard.sprite, this.platformLayer);
 
         //add in obstacles spikes
-        this.spikesFactory = new Spikes(this);
-        this.physics.add.collider(this.spikesFactory.spikes, this.platformLayer);
-        this.physics.add.collider(this.wizard.sprite, this.spikesFactory.spikes, this.damagePlayer, null, this);
+
+        this.spikeGroup = this.physics.add.group({
+            immovable: true
+        });
+        this.physics.add.collider(this.spikeGroup, this.platformLayer);
+        this.physics.add.collider(this.wizard.sprite, this.spikeGroup, this.damagePlayer, null, this);
+        this.spikeStack = [];
         //create sample spike
-        this.spikesFactory.createSpike(200, 580);
+        let newSpike = new Spike(this, 200, 580);
+        this.spikeStack.push(newSpike);
+        this.spikeGroup.add(newSpike.sprite);
+
+        let newSpike2 = new Spike(this, 250, 580);
+        this.spikeStack.push(newSpike2);
+        this.spikeGroup.add(newSpike2.sprite);
 
         //add mouse click tracer for hero player
         this.tracer = new MouseTracer(this, this.castleMap);
@@ -143,6 +153,10 @@ export default class GameScene extends Phaser.Scene {
         if (this.wizard.sprite.x > this.goal.x && this.wizard.sprite.y > this.goal.y){
             this.DevilWin();
         }
+
+        this.spikeStack.forEach(function (value){
+            value.update();
+        })
     }
 
     damagePlayer(object1, object2){

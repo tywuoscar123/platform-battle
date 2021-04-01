@@ -63,6 +63,12 @@ export default class Player {
             sprite.setVelocityY(-300);
         }
 
+        //possible implementation for gravity
+        /*
+        if (!sprite.body.blocked.down){
+            sprite.setAccelerationY(500);
+        }*/
+
         if (sprite.body.velocity.x !== 0){
             sprite.play('Run', true);
         }else{
