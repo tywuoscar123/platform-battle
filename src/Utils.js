@@ -15,4 +15,5 @@ export default class Utils{
         textButton.on('pointerdown', callback, this.GameScene);
         return textButton;
     }
+
 }

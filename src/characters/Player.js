@@ -1,11 +1,11 @@
 import Phaser from "phaser";
 
-export default class Player {
-    constructor(scene, x, y) {
-        this.scene = scene;
+export default class Player extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, texture = 'EvilWizard_Idle', frame = 0) {
+        super(scene, x, y, texture, frame);
 
         //create animations for player
-        const anims = scene.anims;
+        const anims = this.scene.anims;
         anims.create({
             key: 'Idle',
             frames: 'EvilWizard_Idle',
@@ -21,18 +21,19 @@ export default class Player {
         });
 
         //set player properties
-        this.sprite = scene.physics.add.sprite(x, y, 'EvilWizard_Idle', 0);
+        this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
 
-        this.sprite.setDrag(1000, 0);
-        this.sprite.setMaxVelocity(100, 300);
-        this.sprite.setScale(0.5, 0.5);
-        this.sprite.play('Idle', true);
-        this.sprite.setBounce(0.1);
-        this.sprite.setCollideWorldBounds(true);
+        this.body.setDrag(1000, 0);
+        this.body.setMaxVelocity(100, 300);
+        this.setScale(0.5, 0.5);
+        this.play('Idle', true);
+        this.body.setBounce(0.1, 0.1);
+        this.body.setCollideWorldBounds(true);
 
         //get the keyboard input for controlling player
         const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
-        this.keys = scene.input.keyboard.addKeys({
+        this.keys = this.scene.input.keyboard.addKeys({
             w: W,
             a: A,
             d: D
@@ -42,25 +43,24 @@ export default class Player {
         this.hp = 3;
     }
 
-    update() {
+    update(args) {
         //update player movement according to key strokes
         const keys= this.keys;
-        const sprite = this.sprite;
 
-        const accel = sprite.body.blocked.down ? 200 : 70;
+        const accel = this.body.blocked.down ? 200 : 70;
 
         if (keys.a.isDown) {
-            sprite.setAccelerationX(-accel);
-            sprite.setFlipX(true);
+            this.body.setAccelerationX(-accel);
+            this.setFlipX(true);
         } else if (keys.d.isDown) {
-            sprite.setAccelerationX(accel);
-            sprite.setFlipX(false);
+            this.body.setAccelerationX(accel);
+            this.setFlipX(false);
         } else {
-            sprite.setAccelerationX(0);
+            this.body.setAccelerationX(0);
         }
 
-        if (sprite.body.blocked.down && (keys.w.isDown)) {
-            sprite.setVelocityY(-300);
+        if (this.body.blocked.down && (keys.w.isDown)) {
+            this.body.setVelocityY(-300);
         }
 
         //possible implementation for gravity
@@ -69,17 +69,17 @@ export default class Player {
             sprite.setAccelerationY(500);
         }*/
 
-        if (sprite.body.velocity.x !== 0){
-            sprite.play('Run', true);
+        if (this.body.velocity.x !== 0){
+            this.play('Run', true);
         }else{
-            sprite.play('Idle', true);
+            this.play('Idle', true);
         }
     }
 
     takeDamage(number){
-        this.sprite.tint = 0xff0000;
+        this.tint = 0xff0000;
         this.scene.time.delayedCall(200, function(){
-            this.sprite.clearTint();
+            this.clearTint();
         }, null, this);
         this.hp -= number;
     }
@@ -87,9 +87,4 @@ export default class Player {
     resetStatus(){
         this.hp = 3;
     }
-
-    destroy() {
-        this.sprite.destroy();
-    }
-
 }

@@ -93,24 +93,23 @@ export default class GameScene extends Phaser.Scene {
 
         //create the player character and add physics to player
         this.wizard = new Player(this, this.spawnPt.x, this.spawnPt.y);
-        this.physics.world.addCollider(this.wizard.sprite, this.platformLayer);
+        this.physics.world.addCollider(this.wizard, this.platformLayer);
 
         //add in obstacles spikes
 
         this.spikeGroup = this.physics.add.group({
             immovable: true
         });
+
         this.physics.add.collider(this.spikeGroup, this.platformLayer);
-        this.physics.add.collider(this.wizard.sprite, this.spikeGroup, this.damagePlayer, null, this);
-        this.spikeStack = [];
+        this.physics.add.collider(this.wizard, this.spikeGroup, this.damagePlayer, null, this);
+
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
-        this.spikeStack.push(newSpike);
-        this.spikeGroup.add(newSpike.sprite);
+        this.spikeGroup.add(newSpike);
 
         let newSpike2 = new Spike(this, 250, 580);
-        this.spikeStack.push(newSpike2);
-        this.spikeGroup.add(newSpike2.sprite);
+        this.spikeGroup.add(newSpike2);
 
         //add mouse click tracer for hero player
         this.tracer = new MouseTracer(this, this.castleMap);
@@ -150,13 +149,13 @@ export default class GameScene extends Phaser.Scene {
         this.timertext.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
 
         //check player reaching goal
-        if (this.wizard.sprite.x > this.goal.x && this.wizard.sprite.y > this.goal.y){
+        if (this.wizard.x > this.goal.x && this.wizard.y > this.goal.y){
             this.DevilWin();
         }
 
-        this.spikeStack.forEach(function (value){
+        this.spikeGroup.getChildren().forEach(function (value){
             value.update();
-        })
+        });
     }
 
     damagePlayer(object1, object2){
@@ -178,7 +177,7 @@ export default class GameScene extends Phaser.Scene {
             bounceY = 0;
         }
 
-        this.wizard.sprite.setVelocity(bounceX * 200, bounceY * 100);
+        this.wizard.body.setVelocity(bounceX * 200, bounceY * 100);
         console.log(bounceX * 200);
         console.log(bounceY * 100);
         //console.log(object2.x);
@@ -187,17 +186,18 @@ export default class GameScene extends Phaser.Scene {
             this.wizard.resetStatus();
             this.restart();
         }
+        object2.destroy();
     }
 
     restart() {
         //reset the devil player position
-        this.wizard.sprite.setVelocity(0, 0);
-        this.wizard.sprite.setX(this.spawnPt.x);
-        this.wizard.sprite.setY(this.spawnPt.y);
-        this.wizard.sprite.play('Idle', true);
-        this.wizard.sprite.setAlpha(0);
+        this.wizard.body.setVelocity(0, 0);
+        this.wizard.setX(this.spawnPt.x);
+        this.wizard.setY(this.spawnPt.y);
+        this.wizard.play('Idle', true);
+        this.wizard.setAlpha(0);
         this.tweens.add({
-            targets: this.wizard.sprite,
+            targets: this.wizard,
             alpha: 1,
             duration: 100,
             ease: 'Linear',
@@ -210,7 +210,7 @@ export default class GameScene extends Phaser.Scene {
         //game end, hero wins, go to end scene
         console.log("Hero Wins");
         this.gameover = true;
-        this.wizard.sprite.anims.stop();
+        this.wizard.anims.stop();
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 60,
@@ -222,7 +222,7 @@ export default class GameScene extends Phaser.Scene {
         //game end devil wins, go to end scene
         console.log("Devil Wins");
         this.gameover = true;
-        this.wizard.sprite.anims.stop();
+        this.wizard.anims.stop();
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 20,

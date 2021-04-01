@@ -1,18 +1,18 @@
 import Phaser from "phaser";
 
-export default class Spike {
-    constructor(scene, x, y) {
-        this.scene = scene;
-        this.sprite = scene.physics.add.sprite(x, y, 'spike', 0);
-        this.sprite.setScale(0.5, 0.5);
-        this.sprite.setCollideWorldBounds(true);
+export default class Spike extends Phaser.GameObjects.Sprite{
+    constructor(scene, x, y, texture = 'spike', frame = 0) {
+        super(scene, x, y, texture, frame);
+
+        //set player properties
+        this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
+
+        this.setScale(0.5, 0.5);
+        this.body.setCollideWorldBounds(true);
     }
 
-    update() {
-
+    update(args) {
     }
 
-    destroy(){
-        this.sprite.destroy();
-    }
 }
