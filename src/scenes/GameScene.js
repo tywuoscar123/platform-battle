@@ -131,8 +131,6 @@ export default class GameScene extends Phaser.Scene {
             this.scene.launch(CST.SCENES.PAUSE);
         }
 
-        this.input.addListener
-
         //update devil player position
         this.wizard.update();
         //update hero player select tile if clicked
