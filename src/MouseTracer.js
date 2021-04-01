@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { CST } from "./CST";
 
 export default class MouseTracer {
     constructor(scene, map) {
@@ -16,6 +17,10 @@ export default class MouseTracer {
     update() {
         //update the selected tile if clicked
         const pointer = this.scene.input.activePointer;
+        if (pointer.x < 0 || pointer.y < 0 || pointer.x > CST.CONFIG.GameX || pointer.y > CST.CONFIG.GameY ){
+            return;
+        }
+
         if (pointer.isDown){
             const worldPoint = pointer.positionToCamera(this.scene.cameras.main);
             const pointerTileXY = this.map.worldToTileXY(worldPoint.x, worldPoint.y);
