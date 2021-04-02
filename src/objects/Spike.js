@@ -24,6 +24,8 @@ export default class Spike extends Phaser.GameObjects.Sprite{
     }
 
     update(args) {
+        let Fx = 0;
+        let Fy = 0;
     }
 
 }

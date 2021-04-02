@@ -6,15 +6,14 @@ export const CST = {
         END: "END"
     },
     CONFIG: {
+        gravity: 500,
         GameX: 1280,
         GameY: 640,
         TIMER: 60*1000,
         TileSize: 16,
-        GroundY: 640 - 16
-    },
-    PLAYER: {
-        PlayerSpeedX: 200,
-        PlayerSpeedY: 200,
+        GroundY: 640 - 16,
+        AirDensity: 1.22,
+        PixelPerMeter: 20
     },
     SPIKE: {
         SpikeCoolDown: 3*1000,

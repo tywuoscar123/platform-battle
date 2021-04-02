@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
 export default class Utils{
-    constructor(GameScene) {
-        this.currentScene = GameScene;
+    constructor(Scene) {
+        this.currentScene = Scene;
     }
 
     createTextButton(x, y, text, style, originalColor, overColor){

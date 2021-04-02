@@ -13,8 +13,8 @@ export default class GameScene extends Phaser.Scene {
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 500 },
-                    debug: false
+                    //gravity: { y: 500 },
+                    debug: true
                 }
             }
         });
@@ -33,8 +33,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.load.tilemapTiledJSON('CastlePrison', 'assets/tilemaps/CastlePrison.json');
 
-        this.load.atlas('EvilWizard_Idle', 'assets/Wizard_Pack/Idle.png', 'assets/Wizard_Pack/Idle.json');
-        this.load.atlas('EvilWizard_Run', 'assets/Wizard_Pack/Run.png', 'assets/Wizard_Pack/Run.json');
+        this.load.atlas('EvilWizard_Idle', 'assets/Evil_Wizard/Idle.png', 'assets/Evil_Wizard/Idle.json');
+        this.load.atlas('EvilWizard_Run', 'assets/Evil_Wizard/Move.png', 'assets/Evil_Wizard/Move.json');
 
         //load additional assets
         this.load.image('spike', 'assets/Traps/spike.png');
@@ -141,6 +141,10 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
+    collidesWithPlatform(object1, object2){
+
+    }
+
     damagePlayer(object1, object2){
         if (object2 instanceof Spike){
             this.wizard.takeDamage(1);
@@ -231,6 +235,5 @@ export default class GameScene extends Phaser.Scene {
             this.spikeButton.setInteractive();
         }, null, this);
     }
-
 
 }
