@@ -10,14 +10,14 @@ export default class MouseTracer {
         this.graphics = scene.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.graphics.strokeRect(0, 0, map.tileWidth, map.tileHeight);
-        this.x = 0;
+        this.x = 32;
         this.y = 0;
     }
 
     update() {
         //update the selected tile if clicked
         const pointer = this.scene.input.activePointer;
-        if (pointer.x < 0 || pointer.y < 0 || pointer.x > CST.CONFIG.GameX || pointer.y > CST.CONFIG.GameY ){
+        if (pointer.x < CST.CONFIG.TileSize*3 || pointer.y < 0 || pointer.x > CST.CONFIG.GameX - CST.CONFIG.TileSize*3 || pointer.y > CST.CONFIG.GroundY ){
             return;
         }
 

@@ -9,7 +9,10 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
-        this.setScale(0.5, 0.5);
+        this.setOrigin(0.5, 0.5);
+        this.displayWidth = CST.CONFIG.TileSize;
+        this.displayHeight = CST.CONFIG.TileSize;
+
         this.body.setCollideWorldBounds(true);
 
         /* Sprite lifespan

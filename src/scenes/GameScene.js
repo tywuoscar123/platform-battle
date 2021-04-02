@@ -3,6 +3,7 @@ import { CST } from "../CST";
 import Player from "../characters/Player";
 import Spike from "../objects/Spike";
 import MouseTracer from "../MouseTracer";
+import Utils from "../Utils";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -15,11 +16,13 @@ export default class GameScene extends Phaser.Scene {
                     debug: false
                 }
             }
-        })
+        });
+
+        this.utilfunctions = new Utils(this);
     }
 
     init(){
-
+        this.physics.world.setBounds(0, 0, CST.CONFIG.GameX, CST.CONFIG.GameY);
     }
 
     preload() {
@@ -37,10 +40,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-
-        this.escKey = this.input.keyboard.addKey('ESC', false, false);
-
-        //load the tile map
+        //create the tile map
         this.castleMap = this.add.tilemap('CastlePrison');
 
         this.castleMap.addTilesetImage('Castletiles');
@@ -50,59 +50,30 @@ export default class GameScene extends Phaser.Scene {
         this.platformLayer = this.castleMap.createLayer('Platform', 'Castletiles');
         this.platformLayer.setCollisionByProperty({collides:  true});
 
+        //press esc key for pause
+        this.escKey = this.input.keyboard.addKey('ESC', false, false);
+
+        //add mouse click tracer for hero player
+        this.tracer = new MouseTracer(this, this.castleMap);
+
+        //set up spawn and goal pointer for devil player
         this.spawnPt = this.castleMap.findObject('Objects', obj => obj.name === 'Spawn');
         this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
 
-    //add squares/buttons for skills
-
-       let skillOne = this.add.rectangle(1340, 100, 120, 120, 0xff0000);
-       skillOne.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillOne.width, skillOne.height), Phaser.Geom.Rectangle.Contains);
-       skillOne.on('pointerover', function() {
-            skillOne.fillColor= 0xffffff;
-        });
-        skillOne.on('pointerout', function() {
-            skillOne.fillColor = 0xff0000;
-        });
-
-       let skillTwo = this.add.rectangle(1340, 230, 120, 120, 0xff0000);
-       skillTwo.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillTwo.width, skillTwo.height), Phaser.Geom.Rectangle.Contains);
-       skillTwo.on('pointerover', function() {
-            skillTwo.fillColor= 0xffffff;
-        });
-        skillTwo.on('pointerout', function() {
-            skillTwo.fillColor = 0xff0000;
-        });
-        
-       let skillThree = this.add.rectangle(1340, 360, 120, 120, 0xff0000);
-       skillThree.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillThree.width, skillThree.height), Phaser.Geom.Rectangle.Contains);
-       skillThree.on('pointerover', function() {
-            skillThree.fillColor= 0xffffff;
-        });
-        skillThree.on('pointerout', function() {
-            skillThree.fillColor = 0xff0000;
-        });
-        
-        let skillFour = this.add.rectangle(1340, 490, 120, 120, 0xff0000);
-        skillFour.setInteractive(new Phaser.Geom.Rectangle(0, 0, skillFour.width, skillFour.height), Phaser.Geom.Rectangle.Contains);
-        skillFour.on('pointerover', function() {
-        skillFour.fillColor= 0xffffff;
-        });
-        skillFour.on('pointerout', function() {
-        skillFour.fillColor = 0xff0000;
-        });
+        //add squares/buttons for skills
+        this.spikeButton = this.utilfunctions.createImageButton(1340, 100, 'spike');
+        this.spikeButton.on('pointerdown', this.createSpike, this);
 
         //create the player character and add physics to player
         this.wizard = new Player(this, this.spawnPt.x, this.spawnPt.y);
         this.physics.world.addCollider(this.wizard, this.platformLayer);
 
         //add in obstacles spikes
-
-        this.spikeGroup = this.physics.add.group({
-            immovable: true
-        });
+        this.spikeGroup = this.physics.add.group();
 
         this.physics.add.collider(this.spikeGroup, this.platformLayer);
         this.physics.add.collider(this.wizard, this.spikeGroup, this.damagePlayer, null, this);
+        this.physics.add.collider(this.spikeGroup, this.spikeGroup);
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
@@ -110,9 +81,6 @@ export default class GameScene extends Phaser.Scene {
 
         let newSpike2 = new Spike(this, 250, 580);
         this.spikeGroup.add(newSpike2);
-
-        //add mouse click tracer for hero player
-        this.tracer = new MouseTracer(this, this.castleMap);
 
         //add state for game over checking
         this.gameover = false;
@@ -186,7 +154,7 @@ export default class GameScene extends Phaser.Scene {
             this.wizard.resetStatus();
             this.restart();
         }
-        object2.destroy();
+        //object2.destroy();
     }
 
     restart() {
@@ -229,5 +197,22 @@ export default class GameScene extends Phaser.Scene {
             devilScore: 60
         });
     }
+
+    createSpike(){
+        let newSpike = new Spike(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
+        this.spikeGroup.add(newSpike);
+        this.spikeButton.tint = 0x262626;
+        //console.log(newSpike.body.overlapX);
+        //console.log(newSpike.body.overlapY);
+
+        //console.log(this.physics.closest(newSpike));
+
+        this.spikeButton.disableInteractive();
+        this.time.delayedCall(CST.SPIKE.SpikeCoolDown, function(){
+            this.spikeButton.clearTint();
+            this.spikeButton.setInteractive();
+        }, null, this);
+    }
+
 
 }

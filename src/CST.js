@@ -9,13 +9,15 @@ export const CST = {
         GameX: 1280,
         GameY: 640,
         TIMER: 60*1000,
+        TileSize: 16,
+        GroundY: 640 - 16
     },
     PLAYER: {
         PlayerSpeedX: 200,
         PlayerSpeedY: 200,
     },
     SPIKE: {
-        SpikeCoolDown: 5*1000,
+        SpikeCoolDown: 3*1000,
         SpikeDuration: 10*1000
     }
 }

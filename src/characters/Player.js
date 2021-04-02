@@ -24,6 +24,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
+        this.setOrigin(0.5, 0.5);
         this.body.setDrag(1000, 0);
         this.body.setMaxVelocity(100, 300);
         this.setScale(0.5, 0.5);

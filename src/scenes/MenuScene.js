@@ -24,14 +24,14 @@ export default class MenuScene extends Phaser.Scene {
         this.add.text(screenCenterX, screenCenterY - 100, "Platform Battle: Devil vs Hero", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         //add play button
-        this.utilfunctions.createTextButton(screenCenterX,
+        let playButton = this.utilfunctions.createTextButton(screenCenterX,
             screenCenterY+100,
             "Play",
             { font: "65px Arial", fill: "#ff0044"},
             "#ff0044",
-            "#ffffff",
-            function() {
-                this.scene.start(CST.SCENES.GAME);
-            });
+            "#ffffff");
+        playButton.on('pointerdown', function(){
+            this.scene.start(CST.SCENES.GAME);
+            }, this);
     }
 }
