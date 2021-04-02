@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { CST } from "../CST";
 import Player from "../characters/Player";
 import Spike from "../objects/Spike";
+import BouncingBomb from "../objects/BouncingBomb";
 import MouseTracer from "../MouseTracer";
 import Utils from "../Utils";
 
@@ -37,50 +38,64 @@ export default class GameScene extends Phaser.Scene {
 
         //load additional assets
         this.load.image('spike', 'assets/Traps/spike.png');
+        this.load.image('bomb', 'assets/Traps/bomb.png');
     }
 
     create() {
-        //create the tile map
+        /*
+            create in the map in the scene
+         */
         this.castleMap = this.add.tilemap('CastlePrison');
-
         this.castleMap.addTilesetImage('Castletiles');
         this.castleMap.addTilesetImage('CastleBG');
-
         this.backgroundLayer = this.castleMap.createLayer('Background', 'CastleBG');
         this.platformLayer = this.castleMap.createLayer('Platform', 'Castletiles');
         this.platformLayer.setCollisionByProperty({collides:  true});
-
-        //press esc key for pause
-        this.escKey = this.input.keyboard.addKey('ESC', false, false);
-
-        //add mouse click tracer for hero player
-        this.tracer = new MouseTracer(this, this.castleMap);
-
         //set up spawn and goal pointer for devil player
         this.spawnPt = this.castleMap.findObject('Objects', obj => obj.name === 'Spawn');
         this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
 
+        /*
+            add inputs for the 2 players
+         */
+        //press esc key for pause
+        this.escKey = this.input.keyboard.addKey('ESC', false, false);
+        //add mouse click tracer for hero player
+        this.tracer = new MouseTracer(this, this.castleMap);
         //add squares/buttons for skills
         this.spikeButton = this.utilfunctions.createImageButton(1340, 100, 'spike');
         this.spikeButton.on('pointerdown', this.createSpike, this);
 
+        /*
+            create player
+         */
         //create the player character and add physics to player
         this.wizard = new Player(this, this.spawnPt.x, this.spawnPt.y);
         this.physics.world.addCollider(this.wizard, this.platformLayer);
 
+        /*
+            create obstacle groups
+         */
         //add in obstacles spikes
-        this.spikeGroup = this.physics.add.group();
+        this.trapsGroup = this.physics.add.group();
+        this.physics.add.collider(this.trapsGroup, this.platformLayer);
+        this.physics.add.collider(this.trapsGroup, this.trapsGroup);
 
-        this.physics.add.collider(this.spikeGroup, this.platformLayer);
-        this.physics.add.collider(this.wizard, this.spikeGroup, this.damagePlayer, null, this);
-        this.physics.add.collider(this.spikeGroup, this.spikeGroup);
+        /*
+        add in collider between objects
+         */
+        this.physics.add.collider(this.wizard, this.trapsGroup, this.damagePlayer, null, this);
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
-        this.spikeGroup.add(newSpike);
+        this.trapsGroup.add(newSpike);
 
         let newSpike2 = new Spike(this, 250, 580);
-        this.spikeGroup.add(newSpike2);
+        this.trapsGroup.add(newSpike2);
+
+        let newBomb = new BouncingBomb(this, 300, 580);
+        this.trapsGroup.add(newBomb);
+        newBomb.body.setVelocity(500, -20);
 
         //add state for game over checking
         this.gameover = false;
@@ -121,13 +136,16 @@ export default class GameScene extends Phaser.Scene {
             this.DevilWin();
         }
 
-        this.spikeGroup.getChildren().forEach(function (value){
+        this.trapsGroup.getChildren().forEach(function (value){
             value.update();
         });
     }
 
     damagePlayer(object1, object2){
-        this.wizard.takeDamage(1);
+        if (object2 instanceof Spike){
+            this.wizard.takeDamage(1);
+        }
+
         let bounceX, bounceY;
         if (object1.x < object2.x){
             bounceX = -1;
@@ -200,7 +218,7 @@ export default class GameScene extends Phaser.Scene {
 
     createSpike(){
         let newSpike = new Spike(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
-        this.spikeGroup.add(newSpike);
+        this.trapsGroup.add(newSpike);
         this.spikeButton.tint = 0x262626;
         //console.log(newSpike.body.overlapX);
         //console.log(newSpike.body.overlapY);

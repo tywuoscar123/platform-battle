@@ -17,6 +17,7 @@ export default class Spike extends Phaser.GameObjects.Sprite{
 
         /* Sprite lifespan
         this.scene.time.delayedCall(CST.SPIKE.SpikeDuration, function(){
+            console.log('destroyed');
             this.destroy();
         }, null, this);
          */
