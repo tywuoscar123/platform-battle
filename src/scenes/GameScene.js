@@ -154,7 +154,7 @@ export default class GameScene extends Phaser.Scene {
             this.wizard.resetStatus();
             this.restart();
         }
-        //object2.destroy();
+        object2.destroy();
     }
 
     restart() {

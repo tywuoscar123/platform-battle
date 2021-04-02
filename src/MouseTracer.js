@@ -7,11 +7,15 @@ export default class MouseTracer {
         this.scene = scene;
 
         //draw a rectangle to show tile selectd by hero player
-        this.graphics = scene.add.graphics();
+        this.x = CST.CONFIG.TileSize*3;
+        this.y = 0;
+
+        this.graphics = scene.add.graphics({
+            x: this.x,
+            y: this.y
+        });
         this.graphics.lineStyle(2, 0xffffff, 1);
         this.graphics.strokeRect(0, 0, map.tileWidth, map.tileHeight);
-        this.x = 32;
-        this.y = 0;
     }
 
     update() {
