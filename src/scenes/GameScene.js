@@ -109,12 +109,14 @@ export default class GameScene extends Phaser.Scene {
         newBomb.body.setVelocity(-500, -20);
         newBomb.setBodyProperty();
 
-        let newCannon = new Cannon(this, 300, 580);
-        this.trapsGroup.add(newCannon);
+        let newCannon = new Cannon(this, 300, 550)
 
-        let newCannonBall = new Cannonball(this,310, 580);
-        this.trapsGroup.add(newCannonBall);
-        newCannonBall.body.setVelocity(150, 0);
+        /*let newCannon = new Cannon(this, 300, 580);
+        this.trapsGroup.add(newCannon);*/
+
+        //let newCannonBall = new Cannonball(this,310, 580);
+        //this.trapsGroup.add(newCannonBall);
+        //newCannonBall.body.setVelocity(150, 0);
 
         let newBeartrap = new Beartrap(this, 400, 500);
         this.trapsGroup.add(newBeartrap);
