@@ -9,6 +9,7 @@ import Cannon from '../objects/Cannon';
 import Beartrap from '../objects/Beartrap';
 import MagicOrb from '../objects/MagicOrb';
 import Cannonball from '../objects/Cannonball';
+import {SAVES} from "../saves";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -74,6 +75,15 @@ export default class GameScene extends Phaser.Scene {
         this.spikeButton = this.utilfunctions.createImageButton(1340, 100, 'spike');
         this.spikeButton.on('pointerdown', this.createSpike, this);
 
+        this.bombButton = this.utilfunctions.createImageButton(1340, 200, 'bomb');
+        this.bombButton.on('pointerdown', this.createBomb, this);
+
+        this.bearTrapButton = this.utilfunctions.createImageButton(1340, 300, 'beartrap');
+        this.bearTrapButton.on('pointerdown', this.createBearTrap, this);
+
+        this.cannonButton = this.utilfunctions.createImageButton(1340, 400, 'cannon');
+        this.cannonButton.on('pointerdown', this.createCannon, this);
+
         /*
             create player
          */
@@ -97,16 +107,12 @@ export default class GameScene extends Phaser.Scene {
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
-
         let newSpike2 = new Spike(this, 250, 580);
-
         let newBomb = new BouncingBomb(this, 50, 400);
-
         let newCannon = new Cannon(this, 300, 550)
-
         let newBeartrap = new Beartrap(this, 400, 500);
+        let newMagicOrb = new MagicOrb(this,350, 500, 1);
 
-        let newMagicOrb = new MagicOrb(this,350, 500);
 
         //add state for game over checking
         this.gameover = false;
@@ -240,10 +246,42 @@ export default class GameScene extends Phaser.Scene {
         //console.log(this.physics.closest(newSpike));
 
         this.spikeButton.disableInteractive();
-        this.time.delayedCall(CST.SPIKE.SpikeCoolDown, function(){
+        this.time.delayedCall(SAVES.SPIKE.SpikeCoolDown, function(){
             this.spikeButton.clearTint();
             this.spikeButton.setInteractive();
         }, null, this);
     }
 
+    createBomb() {
+        let newBomb = new BouncingBomb(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
+        this.bombButton.tint = 0x262626;
+
+        this.bombButton.disableInteractive();
+        this.time.delayedCall(SAVES.BOMB.BombCoolDown, function(){
+            this.bombButton.clearTint();
+            this.bombButton.setInteractive();
+        }, null, this);
+    }
+
+    createBearTrap() {
+        let newBearTrap = new Beartrap(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
+        this.bearTrapButton.tint = 0x262626;
+
+        this.bearTrapButton.disableInteractive();
+        this.time.delayedCall(SAVES.BEARTRAP.BearTrapCoolDown, function(){
+            this.bearTrapButton.clearTint();
+            this.bearTrapButton.setInteractive();
+        }, null, this);
+    }
+
+    createCannon() {
+        let newCannon = new Cannon(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
+        this.cannonButton.tint = 0x262626;
+
+        this.cannonButton.disableInteractive();
+        this.time.delayedCall(SAVES.CANNON.CannonCoolDown, function(){
+            this.cannonButton.clearTint();
+            this.cannonButton.setInteractive();
+        }, null, this);
+    }
 }

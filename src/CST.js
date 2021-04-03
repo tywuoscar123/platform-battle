@@ -14,9 +14,5 @@ export const CST = {
         GroundY: 640 - 16,
         AirDensity: 1.22,
         PixelPerMeter: 20
-    },
-    SPIKE: {
-        SpikeCoolDown: 3*1000,
-        SpikeDuration: 10*1000
     }
 }

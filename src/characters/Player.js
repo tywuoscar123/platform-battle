@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import PhysicsCal from "../PhysicsCal";
 import {CST} from "../CST";
+import MagicOrb from "../objects/MagicOrb";
 
 export default class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture = 'EvilWizard_Idle', frame = 0) {
@@ -44,7 +45,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.keys = this.scene.input.keyboard.addKeys({
             w: W,
             a: A,
-            d: D
+            d: D,
+            space: 'SPACE',
         });
     }
 
@@ -52,6 +54,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //console.log(this.body.velocity.x);
         //console.log(this.body.velocity.y);
         //jumping will set velocity directly upwards
+        if (Phaser.Input. Keyboard.JustDown(this.keys.space)){
+            let spawnDistance = this.displayWidth * 2;
+            if (!this.flipX){
+                let orb = new MagicOrb(this.scene, this.x + spawnDistance, this.y, 1);
+            }else{
+                let orb = new MagicOrb(this.scene, this.x - spawnDistance, this.y, -1);
+            }
+        }
+
         if (this.body.blocked.down && (this.keys.w.isDown)) {
             this.body.setVelocityY(-350);
         }
