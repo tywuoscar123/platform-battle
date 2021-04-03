@@ -1,6 +1,21 @@
 import {CST} from "./CST";
 
 export default class PhysicsCal {
+    /*
+    every sprite class need to set mass and drag coefficient before using this class
+     */
+
+    static calculateVelocityX(object, force){
+        let Fx = force;
+        Fx += PhysicsCal.calculateTotalExternalForceX(object);
+        return (object.body.velocity.x/CST.CONFIG.PixelPerMeter) + (Fx / object.body.mass)/60;
+    }
+    static calculateVelocityY(object, force){
+        let Fy = force
+        Fy += PhysicsCal.calculateTotalExternalForceY(object);
+        return (object.body.velocity.y/CST.CONFIG.PixelPerMeter) + (Fy / object.body.mass)/60;
+    }
+
     static calculateTotalExternalForceX(object){
         let Fx = 0;
         Fx += PhysicsCal.calculateDragX(object);
@@ -14,7 +29,7 @@ export default class PhysicsCal {
             return 0;
         }
 
-        let friction = object.body.mass * CST.CONFIG.gravity/CST.CONFIG.PixelPerMeter * 0.1;
+        let friction = object.body.mass * CST.CONFIG.gravity/CST.CONFIG.PixelPerMeter * 0.2;
         if (object.body.velocity.x > 0){
             friction = -friction;
         }
