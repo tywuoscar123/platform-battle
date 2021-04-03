@@ -65,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
         this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
 
         /*
-            add inputs for the 2 players
+            add spawn traps buttons for the hero players
          */
         //press esc key for pause
         this.escKey = this.input.keyboard.addKey('ESC', false, false);
@@ -92,18 +92,34 @@ export default class GameScene extends Phaser.Scene {
         this.physics.world.addCollider(this.wizard, this.platformLayer);
 
         /*
-            create obstacle groups
+            create object groups
          */
-        //add in obstacles spikes
-        this.trapsGroup = this.physics.add.group();
-        this.physics.add.collider(this.trapsGroup, this.platformLayer);
-        this.physics.add.collider(this.trapsGroup, this.trapsGroup);
-       
+        //create group for traps that will collides together
+        this.collidingTraps = this.physics.add.group();
+        this.physics.add.collider(this.collidingTraps, this.platformLayer);
+        this.physics.add.collider(this.collidingTraps, this.collidingTraps);
+
+        this.overlappingTraps = this.physics.add.group();
+        this.physics.add.collider(this.overlappingTraps, this.platformLayer);
+        this.physics.add.collider(this.overlappingTraps, this.overlappingTraps);
+
+        this.enemyProjectiles = this.physics.add.group();
+        this.physics.add.collider(this.enemyProjectiles, this.platformLayer, this.destroyProjectile, null, this);
+        this.physics.add.collider(this.enemyProjectiles, this.enemyProjectiles);
+
+        this.playerProjectiles = this.physics.add.group();
+        this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.destroyProjectile, null, this);
 
         /*
         add in collider between objects
          */
-        this.physics.add.collider(this.wizard, this.trapsGroup, this.damagePlayer, null, this);
+        this.physics.add.collider(this.wizard, this.collidingTraps, this.damagePlayer, null, this);
+        this.physics.add.overlap(this.wizard, this.overlappingTraps);
+        this.physics.add.collider(this.wizard, this.enemyProjectiles);
+
+        this.physics.add.collider(this.playerProjectiles, this.collidingTraps);
+        this.physics.add.collider(this.playerProjectiles, this.overlappingTraps);
+        this.physics.add.collider(this.playerProjectiles, this.enemyProjectiles);
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
@@ -111,8 +127,9 @@ export default class GameScene extends Phaser.Scene {
         let newBomb = new BouncingBomb(this, 50, 400);
         let newCannon = new Cannon(this, 300, 550)
         let newBeartrap = new Beartrap(this, 400, 500);
-        let newMagicOrb = new MagicOrb(this,350, 500, 1);
+        let newMagicOrb = new MagicOrb(this,350, 400, 1);
 
+        console.log(this.collidingTraps.getLength());
 
         //add state for game over checking
         this.gameover = false;
@@ -127,7 +144,7 @@ export default class GameScene extends Phaser.Scene {
         if (this.gameover === true){
             return;
         }
-        
+        //console.log('update');
         /*this.escKey.on("down",()=>{
             console.log("ESC PRESSED");
             this.scene.pause();
@@ -153,9 +170,13 @@ export default class GameScene extends Phaser.Scene {
             this.DevilWin();
         }
 
-        this.trapsGroup.getChildren().forEach(function (object){
+        for (const object of this.collidingTraps.getChildren()){
             object.update();
-        });
+        }
+
+        for (const object of this.overlappingTraps.getChildren()){
+            object.update();
+        }
     }
 
     collidesWithPlatform(object1, object2){
@@ -196,6 +217,10 @@ export default class GameScene extends Phaser.Scene {
         object2.destroy();
     }
 
+    destroyProjectile(object1, object2) {
+        object1.destroy();
+    }
+
     restart() {
         //reset the devil player position
         this.wizard.body.setVelocity(0, 0);
@@ -217,7 +242,8 @@ export default class GameScene extends Phaser.Scene {
         //game end, hero wins, go to end scene
         console.log("Hero Wins");
         this.gameover = true;
-        this.wizard.anims.stop();
+        this.destroyScene();
+        //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 60,
@@ -229,12 +255,29 @@ export default class GameScene extends Phaser.Scene {
         //game end devil wins, go to end scene
         console.log("Devil Wins");
         this.gameover = true;
-        this.wizard.anims.stop();
+        this.destroyScene();
+        //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 20,
             devilScore: 60
         });
+    }
+
+    destroyScene(){
+        //console.log(this.collidingTraps.getChildren().length);
+        this.destroyGroup(this.collidingTraps);
+        this.destroyGroup(this.overlappingTraps);
+        this.destroyGroup(this.enemyProjectiles);
+        this.destroyGroup(this.playerProjectiles);
+        this.wizard.destroy();
+    }
+
+    destroyGroup(group){
+        let children = group.getChildren();
+        for (let i = this.collidingTraps.getChildren().length - 1; i>=0; i--){
+            children[i].destroy();
+        }
     }
 
     createSpike(){

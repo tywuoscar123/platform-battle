@@ -9,7 +9,7 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         //set player properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.scene.trapsGroup.add(this);
+        this.scene.collidingTraps.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.displayWidth = CST.CONFIG.TileSize;
@@ -36,4 +36,10 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
     }
 
+    destroy() {
+        if (this.body !== undefined){
+            this.body.enable = false;
+        }
+        super.destroy();
+    }
 }

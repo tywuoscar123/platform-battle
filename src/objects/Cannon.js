@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 import Cannonball from '../objects/Cannonball';
+import PhysicsCal from "../PhysicsCal";
+import MagicOrb from "./MagicOrb";
 
 export default class Cannon extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture = 'cannon', frame = 0) {
@@ -20,7 +22,7 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
-        this.scene.trapsGroup.add(this);
+        this.scene.collidingTraps.add(this);
 
         this.setOrigin(0.5, 0.5);
         //this.displayWidth = CST.CONFIG.TileSize;
@@ -38,23 +40,46 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         //loop shooting animation
         this.play("shoot", true);
         //this.cannonShoot(x,y);
-        this.scene.time.addEvent({
+        this.shootEvent = this.scene.time.addEvent({
             delay:2000,
             callback: this.cannonShoot,
             callbackScope:this,
             args: [x, y],
             loop: true
-        })
+        });
+
+        this.body.mass = 5000;
+        this.DragCoefficient = 1.05;
     }
 
     update(args) {
+        let newVelocityX = PhysicsCal.calculateVelocityX(this, 0);
+        let newVelocityY = PhysicsCal.calculateVelocityY(this, 0);
 
+        this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
+        this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
     }
 
     //function for shooting
     cannonShoot(x, y){
-        this.scene.add.existing(new Cannonball(this.scene, x+10, y))
-        
+        let spawnDistance = this.displayWidth / 2;
+        if (!this.flipX){
+            new Cannonball(this.scene, this.x + spawnDistance, this.y, 1);
+        }else{
+            new Cannonball(this.scene, this.x - spawnDistance, this.y, -1);
+        }
+    }
+
+    destroy() {
+        console.log('destroy');
+        if (this.scene !== undefined) {
+            this.scene.time.removeEvent(this.shootEvent);
+        }
+        if (this.body !== undefined){
+            this.body.enable = false;
+        }
+
+        super.destroy();
     }
 
 }

@@ -55,11 +55,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //console.log(this.body.velocity.y);
         //jumping will set velocity directly upwards
         if (Phaser.Input. Keyboard.JustDown(this.keys.space)){
-            let spawnDistance = this.displayWidth * 2;
+            let spawnDistance = this.displayWidth / 2;
             if (!this.flipX){
-                let orb = new MagicOrb(this.scene, this.x + spawnDistance, this.y, 1);
+                new MagicOrb(this.scene, this.x + spawnDistance, this.y, 1);
             }else{
-                let orb = new MagicOrb(this.scene, this.x - spawnDistance, this.y, -1);
+                new MagicOrb(this.scene, this.x - spawnDistance, this.y, -1);
             }
         }
 
@@ -118,5 +118,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     resetStatus(){
         this.hp = 3;
+    }
+
+    destroy() {
+        if (this.body !== undefined){
+            this.body.enable = false;
+        }
+        super.destroy();
     }
 }

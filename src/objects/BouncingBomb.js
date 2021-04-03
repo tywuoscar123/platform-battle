@@ -9,7 +9,7 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         //set sprite properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.scene.trapsGroup.add(this);
+        this.scene.collidingTraps.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.setScale(0.5, 0.5);
@@ -27,6 +27,13 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
+    }
+
+    destroy() {
+        if (this.body !== undefined){
+            this.body.enable = false;
+        }
+        super.destroy();
     }
 
 }

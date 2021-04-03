@@ -8,7 +8,7 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
         //set sprite properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.scene.trapsGroup.add(this);
+        this.scene.playerProjectiles.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.setScale(0.2, 0.2);
@@ -20,4 +20,10 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
     update(args) {
     }
 
+    destroy() {
+        if (this.body !== undefined){
+            this.body.enable = false;
+        }
+        super.destroy();
+    }
 }
