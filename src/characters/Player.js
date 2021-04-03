@@ -22,22 +22,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
             repeat: -1
         });
 
-        //add player to scene, create body
+        //set player properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
         this.setOrigin(0.5, 0.5);
+        //this.body.setDrag(1000, 0);
+        this.body.setMaxVelocity(100, 1000);
         this.setScale(0.7, 0.7);
         this.play('Idle', true);
-
-        this.body.setMaxVelocity(100, 1000);
         this.body.setBounce(0.1, 0.1);
         this.body.setCollideWorldBounds(true);
-
-        //additional attributes for player
-        this.hp = 3;
-        this.body.mass = 50;
-        this.DragCoefficient = 1.0;
 
         //get the keyboard input for controlling player
         const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
@@ -46,6 +41,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
             a: A,
             d: D
         });
+
+        //additional attributes for player
+        this.hp = 3;
+        this.body.mass = 50;
+        this.DragCoefficient = 1.0;
     }
 
     update(args) {
@@ -53,12 +53,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //console.log(this.body.velocity.y);
         //jumping will set velocity directly upwards
         if (this.body.blocked.down && (this.keys.w.isDown)) {
-            this.body.setVelocityY(-350);
+            this.body.setVelocityY(-300);
         }
 
         //calculate final velocity at time
         //Starting from this point, all measurement of distance, velocity and acceleration need to be calculated in meters
-        const StepForce = this.body.blocked.down ? 1000 : 100;
+        const StepForce = this.body.blocked.down ? 500 : 50;
 
         let Fx = 0;
         let Fy = 0;
@@ -71,11 +71,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.setFlipX(false);
         }
 
+        Fx += PhysicsCal.calculateTotalExternalForceX(this);
+        Fy += PhysicsCal.calculateTotalExternalForceY(this);
+
         //console.log('original: ' + (this.body.velocity.x/CST.CONFIG.PixelPerMeter));
         //console.log('change in Velocity: ' + (Fx / this.body.mass)/60);
         //console.log(Fy);
-        let newVelocityX = PhysicsCal.calculateVelocityX(this, Fx);
-        let newVelocityY = PhysicsCal.calculateVelocityY(this, Fy);
+        let newVelocityX = (this.body.velocity.x/CST.CONFIG.PixelPerMeter) + (Fx / this.body.mass)/60;
+        let newVelocityY = (this.body.velocity.y/CST.CONFIG.PixelPerMeter) + (Fy / this.body.mass)/60;
 
         //console.log(newVelocityX * CST.CONFIG.PixelPerMeter);
         //console.log(Math.floor(newVelocityX * CST.CONFIG.PixelPerMeter));

@@ -98,21 +98,13 @@ export default class GameScene extends Phaser.Scene {
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
         this.trapsGroup.add(newSpike);
-        newSpike.setBodyProperty();
 
         let newSpike2 = new Spike(this, 250, 580);
         this.trapsGroup.add(newSpike2);
-        newSpike2.setBodyProperty();
 
-<<<<<<< HEAD
         let newBomb = new BouncingBomb(this, 400, 580);
-=======
-        let newBomb = new BouncingBomb(this, 50, 400);
->>>>>>> master
         this.trapsGroup.add(newBomb);
         newBomb.body.setVelocity(500, -20);
-        newBomb.body.setVelocity(-500, -20);
-        newBomb.setBodyProperty();
 
         let newCannon = new Cannon(this, 300, 580);
         this.trapsGroup.add(newCannon);
@@ -169,8 +161,6 @@ export default class GameScene extends Phaser.Scene {
 
         this.trapsGroup.getChildren().forEach(function (value){
             value.update();
-        this.trapsGroup.getChildren().forEach(function (object){
-            object.update();
         });
     }
 
@@ -256,7 +246,6 @@ export default class GameScene extends Phaser.Scene {
     createSpike(){
         let newSpike = new Spike(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
         this.trapsGroup.add(newSpike);
-        newSpike.setBodyProperty();
         this.spikeButton.tint = 0x262626;
         //console.log(newSpike.body.overlapX);
         //console.log(newSpike.body.overlapY);
