@@ -5,6 +5,10 @@ import Spike from "../objects/Spike";
 import BouncingBomb from "../objects/BouncingBomb";
 import MouseTracer from "../MouseTracer";
 import Utils from "../Utils";
+import Cannon from '../objects/Cannon';
+import Beartrap from '../objects/Beartrap';
+import MagicOrb from '../objects/MagicOrb';
+import Cannonball from '../objects/Cannonball';
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -39,6 +43,10 @@ export default class GameScene extends Phaser.Scene {
         //load additional assets
         this.load.image('spike', 'assets/Traps/spike.png');
         this.load.image('bomb', 'assets/Traps/bomb.png');
+        this.load.atlas('cannon', 'assets/Traps/cannon_asset/cannon.png', 'assets/Traps/cannon_asset/Cannon.json');
+        this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json' );
+        this.load.image('magicOrb', 'assets/Attack/Magic_orb.png');
+        this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
     }
 
     create() {
@@ -80,6 +88,7 @@ export default class GameScene extends Phaser.Scene {
         this.trapsGroup = this.physics.add.group();
         this.physics.add.collider(this.trapsGroup, this.platformLayer);
         this.physics.add.collider(this.trapsGroup, this.trapsGroup);
+       
 
         /*
         add in collider between objects
@@ -99,6 +108,20 @@ export default class GameScene extends Phaser.Scene {
         this.trapsGroup.add(newBomb);
         newBomb.body.setVelocity(-500, -20);
         newBomb.setBodyProperty();
+
+        let newCannon = new Cannon(this, 300, 580);
+        this.trapsGroup.add(newCannon);
+
+        let newCannonBall = new Cannonball(this,310, 580);
+        this.trapsGroup.add(newCannonBall);
+        newCannonBall.body.setVelocity(150, 0);
+
+        let newBeartrap = new Beartrap(this, 400, 500);
+        this.trapsGroup.add(newBeartrap);
+
+        let newMagicOrb = new MagicOrb(this,350, 500);
+        this.trapsGroup.add(newMagicOrb);
+        newMagicOrb.body.setVelocity(0, -150);
 
         //add state for game over checking
         this.gameover = false;
