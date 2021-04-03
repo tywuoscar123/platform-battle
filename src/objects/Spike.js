@@ -14,6 +14,7 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         this.displayWidth = CST.CONFIG.TileSize;
         this.displayHeight = CST.CONFIG.TileSize;
 
+        //uncomment if set lifespan
         /* Sprite lifespan
         this.scene.time.delayedCall(CST.SPIKE.SpikeDuration, function(){
             console.log('destroyed');
