@@ -13,11 +13,10 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
- 
-
         //set player properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.scene.trapsGroup.add(this);
 
         this.setOrigin(0.5, 0.5);
 

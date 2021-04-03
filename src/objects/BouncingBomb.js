@@ -9,16 +9,16 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         //set sprite properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.scene.trapsGroup.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.setScale(0.5, 0.5);
 
+        this.body.setCollideWorldBounds(true, 1, 1);
+        this.body.setVelocity(-300, -20);
+
         this.body.mass = 500;
         this.DragCoefficient = 0.05;
-    }
-
-    setBodyProperty(){
-        this.body.setCollideWorldBounds(true, 1, 1);
     }
 
     update(args) {

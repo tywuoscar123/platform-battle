@@ -9,10 +9,12 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         //set player properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.scene.trapsGroup.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.displayWidth = CST.CONFIG.TileSize;
         this.displayHeight = CST.CONFIG.TileSize;
+        this.body.setCollideWorldBounds(true, 0.1, 0.1);
 
         //uncomment if set lifespan
         /* Sprite lifespan
@@ -24,10 +26,6 @@ export default class Spike extends Phaser.GameObjects.Sprite{
 
         this.body.mass = 1000;
         this.DragCoefficient = 2.0;
-    }
-
-    setBodyProperty(){
-        this.body.setCollideWorldBounds(true, 0.1, 0.1);
     }
 
     update(args) {

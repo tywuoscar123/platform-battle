@@ -8,11 +8,12 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
         //set sprite properties
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.scene.trapsGroup.add(this);
 
         this.setOrigin(0.5, 0.5);
         this.setScale(0.2, 0.2);
         this.body.setCollideWorldBounds(true);
-
+        this.body.setVelocity(0, -150);
 
     }
 

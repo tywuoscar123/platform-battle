@@ -97,33 +97,16 @@ export default class GameScene extends Phaser.Scene {
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
-        this.trapsGroup.add(newSpike);
-        newSpike.setBodyProperty();
 
         let newSpike2 = new Spike(this, 250, 580);
-        this.trapsGroup.add(newSpike2);
-        newSpike2.setBodyProperty();
 
         let newBomb = new BouncingBomb(this, 50, 400);
-        this.trapsGroup.add(newBomb);
-        newBomb.body.setVelocity(-500, -20);
-        newBomb.setBodyProperty();
 
         let newCannon = new Cannon(this, 300, 550)
 
-        /*let newCannon = new Cannon(this, 300, 580);
-        this.trapsGroup.add(newCannon);*/
-
-        //let newCannonBall = new Cannonball(this,310, 580);
-        //this.trapsGroup.add(newCannonBall);
-        //newCannonBall.body.setVelocity(150, 0);
-
         let newBeartrap = new Beartrap(this, 400, 500);
-        this.trapsGroup.add(newBeartrap);
 
         let newMagicOrb = new MagicOrb(this,350, 500);
-        this.trapsGroup.add(newMagicOrb);
-        newMagicOrb.body.setVelocity(0, -150);
 
         //add state for game over checking
         this.gameover = false;
@@ -250,8 +233,6 @@ export default class GameScene extends Phaser.Scene {
 
     createSpike(){
         let newSpike = new Spike(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
-        this.trapsGroup.add(newSpike);
-        newSpike.setBodyProperty();
         this.spikeButton.tint = 0x262626;
         //console.log(newSpike.body.overlapX);
         //console.log(newSpike.body.overlapY);
