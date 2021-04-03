@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import { CST } from "../CST";
 import Cannonball from '../objects/Cannonball';
 import PhysicsCal from "../PhysicsCal";
-import MagicOrb from "./MagicOrb";
 
 export default class Cannon extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture = 'cannon', frame = 0) {
@@ -44,7 +43,6 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
             delay:2000,
             callback: this.cannonShoot,
             callbackScope:this,
-            args: [x, y],
             loop: true
         });
 
@@ -58,16 +56,17 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
+
+        if (this.scene.wizard.x < this.x ){
+            this.setFlipX(true);
+        }else{
+            this.setFlipX(false);
+        }
     }
 
     //function for shooting
-    cannonShoot(x, y){
-        let spawnDistance = this.displayWidth / 2;
-        if (!this.flipX){
-            new Cannonball(this.scene, this.x + spawnDistance, this.y, 1);
-        }else{
-            new Cannonball(this.scene, this.x - spawnDistance, this.y, -1);
-        }
+    cannonShoot(){
+        new Cannonball(this.scene, this.x, this.y, -1);
     }
 
     destroy() {

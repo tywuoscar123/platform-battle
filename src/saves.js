@@ -18,5 +18,8 @@ export var SAVES = {
     CANNON: {
         CannonCoolDown: 3*1000,
         CannonDuration: 10*1000
+    },
+    PLAYER: {
+        InitialBullet: 10,
     }
 }
