@@ -103,9 +103,10 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.overlappingTraps, this.platformLayer);
         this.physics.add.collider(this.overlappingTraps, this.overlappingTraps);
 
+
         this.enemyProjectiles = this.physics.add.group();
         this.physics.add.collider(this.enemyProjectiles, this.platformLayer, this.destroyProjectile, null, this);
-        this.physics.add.collider(this.enemyProjectiles, this.enemyProjectiles);
+        this.physics.add.collider(this.enemyProjectiles, this.enemyProjectiles, this.cannonBallCollide, null, this);
 
         this.playerProjectiles = this.physics.add.group();
         this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.destroyProjectile, null, this);
@@ -115,11 +116,12 @@ export default class GameScene extends Phaser.Scene {
          */
         this.physics.add.collider(this.wizard, this.collidingTraps, this.damagePlayer, null, this);
         this.physics.add.overlap(this.wizard, this.overlappingTraps);
-        this.physics.add.collider(this.wizard, this.enemyProjectiles);
+        this.physics.add.collider(this.wizard, this.enemyProjectiles, this.damagePlayer, null, this);
 
-        this.physics.add.collider(this.playerProjectiles, this.collidingTraps);
-        this.physics.add.collider(this.playerProjectiles, this.overlappingTraps);
+        this.physics.add.collider(this.playerProjectiles, this.collidingTraps, this.playerHitsTrap, null, this);
+        this.physics.add.collider(this.playerProjectiles, this.overlappingTraps, this.playerHitsTrap, null, this);
         this.physics.add.collider(this.playerProjectiles, this.enemyProjectiles);
+        this.physics.add.collider(this.wizard, this.overlappingTraps, this.overlappingTrapAction, null, this);
 
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
@@ -183,8 +185,29 @@ export default class GameScene extends Phaser.Scene {
 
     }
 
+    //if cannon balls hit each other, destroy
+    cannonBallCollide(object1, object2){
+        if(object1 instanceof Cannonball && object2 instanceof Cannonball){
+            object1.destroy();
+            object2.destroy();
+        }
+
+    }
+
+    //if player hits trap with magic orb, destroy traps
+    playerHitsTrap(object1, object2){
+        if(object1 instanceof MagicOrb){
+            object1.destroy();
+            object2.destroy();
+        }
+    }
+
     damagePlayer(object1, object2){
         if (object2 instanceof Spike){
+            this.wizard.takeDamage(1);
+        }
+
+        if(object1 instanceof Player && object2 instanceof Cannonball){
             this.wizard.takeDamage(1);
         }
 
@@ -219,6 +242,14 @@ export default class GameScene extends Phaser.Scene {
 
     destroyProjectile(object1, object2) {
         object1.destroy();
+    }
+
+    overlappingTrapAction(object1, object2){
+        //if player and object2 (a trap) overlaps, freeze player (player trapped), trap destroyed 
+        if(object1 instanceof Player && object2 instanceof Beartrap){
+            object1.freezePlayer();
+            this.time.delayedCall(SAVES.BEARTRAP.BearTrapFreezeTime, object2.destroy, null, object2);
+        }
     }
 
     restart() {
@@ -327,4 +358,5 @@ export default class GameScene extends Phaser.Scene {
             this.cannonButton.setInteractive();
         }, null, this);
     }
+
 }

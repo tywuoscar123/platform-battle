@@ -8,6 +8,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture = 'EvilWizard_Idle', frame = 0) {
         super(scene, x, y, texture, frame);
 
+        //check if player is frozen  
+        this.freeze = false;
+
         //create animations for player
         const anims = this.scene.anims;
         anims.create({
@@ -67,9 +70,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.remainingBullet -= 1;
         }
 
-        if (this.body.blocked.down && (this.keys.w.isDown)) {
-            this.body.setVelocityY(-350);
-        }
 
         //calculate final velocity at time
         //Starting from this point, all measurement of distance, velocity and acceleration need to be calculated in meters
@@ -78,12 +78,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
         let Fx = 0;
         let Fy = 0;
 
-        if (this.keys.a.isDown) {
-            Fx += -StepForce;
-            this.setFlipX(true);
-        } else if (this.keys.d.isDown) {
-            Fx += StepForce;
-            this.setFlipX(false);
+        if(!this.freeze){
+            if (this.body.blocked.down && (this.keys.w.isDown)) {
+                this.body.setVelocityY(-350);
+            }
+            if (this.keys.a.isDown) {
+                Fx += -StepForce;
+                this.setFlipX(true);
+            } else if (this.keys.d.isDown) {
+                Fx += StepForce;
+                this.setFlipX(false);
+            }
         }
 
         //console.log('original: ' + (this.body.velocity.x/CST.CONFIG.PixelPerMeter));
@@ -129,5 +134,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.enable = false;
         }
         super.destroy();
+    }
+    
+    //function to freeze player
+    freezePlayer(){
+        this.freeze = true;
+        this.body.setVelocityX(0);
+        this.body.setVelocityY(0);
+        this.freezeEvent = this.scene.time.delayedCall(SAVES.BEARTRAP.BearTrapFreezeTime, ()=>{
+            this.freeze = false;
+        }, this)
     }
 }

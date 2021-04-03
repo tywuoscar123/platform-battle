@@ -13,7 +13,8 @@ export var SAVES = {
     },
     BEARTRAP: {
         BearTrapCoolDown: 3*1000,
-        BearTrapDuration: 10*1000
+        BearTrapDuration: 10*1000,
+        BearTrapFreezeTime: 3*1000
     },
     CANNON: {
         CannonCoolDown: 3*1000,
