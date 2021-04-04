@@ -24,6 +24,7 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         this.scene.collidingTraps.add(this);
 
         this.setOrigin(0.5, 0.5);
+        this.body.setCollideWorldBounds(true);
         //this.displayWidth = CST.CONFIG.TileSize;
         //this.displayHeight = CST.CONFIG.TileSize;
 

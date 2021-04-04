@@ -20,8 +20,9 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
         this.scene.overlappingTraps.add(this);
 
         this.setOrigin(0.5, 0.5);
-
         this.setScale(1.5, 1.5);
+        this.body.setCollideWorldBounds(true);
+
         this.play("activate", true);
 
         this.body.mass = 1000;
