@@ -27,6 +27,9 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
 
         this.body.mass = 1000;
         this.DragCoefficient = 1.3;
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     update(args) {
@@ -35,6 +38,9 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     destroy() {
