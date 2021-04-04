@@ -32,6 +32,7 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
 
+        //save velocity if not colliding
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
