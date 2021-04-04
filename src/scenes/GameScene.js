@@ -52,25 +52,28 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         /*
+            Map Setting:
             create in the map in the scene
          */
-        this.castleMap = this.add.tilemap('CastlePrison');
-        this.castleMap.addTilesetImage('Castletiles');
-        this.castleMap.addTilesetImage('CastleBG');
-        this.backgroundLayer = this.castleMap.createLayer('Background', 'CastleBG');
-        this.platformLayer = this.castleMap.createLayer('Platform', 'Castletiles');
+        this.map = this.add.tilemap('CastlePrison');
+        this.map.addTilesetImage('Castletiles');
+        this.map.addTilesetImage('CastleBG');
+        this.backgroundLayer = this.map.createLayer('Background', 'CastleBG');
+        this.platformLayer = this.map.createLayer('Platform', 'Castletiles');
         this.platformLayer.setCollisionByProperty({collides:  true});
         //set up spawn and goal pointer for devil player
-        this.spawnPt = this.castleMap.findObject('Objects', obj => obj.name === 'Spawn');
-        this.goal = this.castleMap.findObject('Objects', obj => obj.name === 'Goal');
+        this.spawnPt = this.map.findObject('Objects', obj => obj.name === 'Spawn');
+        this.goal = this.map.findObject('Objects', obj => obj.name === 'Goal');
+
 
         /*
+            Input Settings:
             add spawn traps buttons for the hero players
          */
         //press esc key for pause
         this.escKey = this.input.keyboard.addKey('ESC', false, false);
         //add mouse click tracer for hero player
-        this.tracer = new MouseTracer(this, this.castleMap);
+        this.tracer = new MouseTracer(this, this.map);
         //add squares/buttons for skills
         this.spikeButton = this.utilfunctions.createImageButton(1340, 100, 'spike');
         this.spikeButton.on('pointerdown', this.createSpike, this);
@@ -84,45 +87,68 @@ export default class GameScene extends Phaser.Scene {
         this.cannonButton = this.utilfunctions.createImageButton(1340, 400, 'cannon');
         this.cannonButton.on('pointerdown', this.createCannon, this);
 
+
         /*
-            create player
+            Physics Setting:
+            Player & Group creations:
          */
         //create the player character and add physics to player
         this.wizard = new Player(this, this.spawnPt.x, this.spawnPt.y);
         this.physics.world.addCollider(this.wizard, this.platformLayer);
 
-        /*
-            create object groups
-         */
         //create group for traps that will collides together
         this.collidingTraps = this.physics.add.group();
         this.physics.add.collider(this.collidingTraps, this.platformLayer);
-        this.physics.add.collider(this.collidingTraps, this.collidingTraps);
+        //this.physics.add.collider(this.collidingTraps, this.collidingTraps);
 
         this.overlappingTraps = this.physics.add.group();
         this.physics.add.collider(this.overlappingTraps, this.platformLayer);
-        this.physics.add.collider(this.overlappingTraps, this.overlappingTraps);
+        //this.physics.add.collider(this.overlappingTraps, this.overlappingTraps);
 
+        /*
+        this.bombsGroup = this.physics.add.group();
+        this.physics.add.collider(this.bombsGroup, this.platformLayer, this.interactWithPlatform, null, this);
+        */
 
         this.enemyProjectiles = this.physics.add.group();
-        this.physics.add.collider(this.enemyProjectiles, this.platformLayer, this.destroyProjectile, null, this);
+        this.physics.add.collider(this.enemyProjectiles, this.platformLayer, this.interactWithPlatform, null, this);
         this.physics.add.collider(this.enemyProjectiles, this.enemyProjectiles, this.cannonBallCollide, null, this);
 
         this.playerProjectiles = this.physics.add.group();
-        this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.destroyProjectile, null, this);
+        this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.interactWithPlatform, null, this);
+
 
         /*
-        add in collider between objects
+            Add collisions between objects, Assign callbacks
          */
-        this.physics.add.collider(this.wizard, this.collidingTraps, this.damagePlayer, null, this);
-        this.physics.add.overlap(this.wizard, this.overlappingTraps);
-        this.physics.add.collider(this.wizard, this.enemyProjectiles, this.damagePlayer, null, this);
+        //collision/overlap between player and traps/enemy attackers
+        this.physics.add.overlap(this.wizard, this.collidingTraps, this.damagePlayer, null, this);
+        this.physics.add.overlap(this.wizard, this.enemyProjectiles, this.damagePlayer, null, this);
+        this.physics.add.overlap(this.wizard, this.overlappingTraps, this.overlappingTrapAction, null, this);
 
+        //collision between player projectiles and traps/enemy attackers
         this.physics.add.collider(this.playerProjectiles, this.collidingTraps, this.playerHitsTrap, null, this);
         this.physics.add.collider(this.playerProjectiles, this.overlappingTraps, this.playerHitsTrap, null, this);
-        this.physics.add.collider(this.playerProjectiles, this.enemyProjectiles);
-        this.physics.add.collider(this.wizard, this.overlappingTraps, this.overlappingTrapAction, null, this);
+        this.physics.add.collider(this.playerProjectiles, this.enemyProjectiles, this.playerHitsTrap, null, this);
 
+        //collision among traps, not yet implemented
+
+
+        /*
+            Additional Physics setting for level
+         */
+        //destroy projectiles on level edge
+        this.physics.world.on('worldbounds', function (body) {
+            console.log(body);
+            let object = body.gameObject;
+            if (object instanceof Cannonball || object instanceof MagicOrb){
+                object.destroy();
+            }
+        });
+
+        /*
+             Create Sample objects
+         */
         //create sample spike
         let newSpike = new Spike(this, 200, 580);
         let newSpike2 = new Spike(this, 250, 580);
@@ -131,14 +157,16 @@ export default class GameScene extends Phaser.Scene {
         let newBeartrap = new Beartrap(this, 400, 500);
         let newMagicOrb = new MagicOrb(this,350, 400, 1);
 
-        console.log(this.collidingTraps.getLength());
-
-        //add state for game over checking
+        /*
+            Game General Settings:
+         */
+        //Set GameOver flag for level
         this.gameover = false;
 
-        //add timer for stage
+        //Set timer for level
         this.timer = this.time.delayedCall( CST.CONFIG.TIMER, this.HeroWin, null, this);
         this.timertext = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
+
     }
 
     update(time, delta) {
@@ -179,11 +207,63 @@ export default class GameScene extends Phaser.Scene {
         for (const object of this.overlappingTraps.getChildren()){
             object.update();
         }
+
+        for (const object of this.bombsGroup.getChildren()){
+            object.update();
+        }
     }
 
-    collidesWithPlatform(object1, object2){
+    /*
+        Collide/Overlap callback function
+     */
+    /*
+        function for everything colling with platform
 
+        object1 - player
+
+        object2 - platformLayer
+     */
+    interactWithPlatform(object1, object2){
+        let object = object1;
+        let tile = object2;
+        if (!object1 instanceof Phaser.GameObjects.Sprite){
+            object = object2;
+            tile = object1;
+        }
+        /*
+        //need to check tile.canCollide if using overlap
+        if (object instanceof BouncingBomb && tile.canCollide){
+            this.reBounce(object, tile);
+        }*/
+
+        if (object instanceof Cannonball || object instanceof MagicOrb){
+            object.destroy();
+        }
     }
+
+/*
+    reBounce(object, tile){
+        //console.log(object.body.velocity.x);
+        //console.log(object.body.velocity.y);
+        console.log(tile);
+        let tileCenterX = this.map.tileToWorldX(tile.x) + CST.CONFIG.TileSize/2;
+        let tileCenterY = this.map.tileToWorldY(tile.y) + CST.CONFIG.TileSize/2;
+        let Dx = Math.abs(tileCenterX - object.x);
+        let Dy = Math.abs(tileCenterY - object.y);
+
+        if (Dx < Dy){
+            console.log('bounce Y');
+            object.body.setVelocityY(-object.body.velocity.y);
+        }else if (Dy < Dx){
+            console.log('bounce X');
+            object.body.setVelocityX(-object.body.velocity.x);
+        }else{
+            object.body.setVelocityY(-object.body.velocity.y);
+            object.body.setVelocityX(-object.body.velocity.x);
+
+        }
+    }*/
+
 
     //if cannon balls hit each other, destroy
     cannonBallCollide(object1, object2){
@@ -202,7 +282,13 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+
+
     damagePlayer(object1, object2){
+        //console.log(object1.body.velocity.x);
+        //console.log(object1.body.velocity.y);
+        //console.log(object2.body.velocity.x);
+        //console.log(object2.body.velocity.y);
         if (object2 instanceof Spike){
             this.wizard.takeDamage(1);
         }
@@ -240,9 +326,7 @@ export default class GameScene extends Phaser.Scene {
         object2.destroy();
     }
 
-    destroyProjectile(object1, object2) {
-        object1.destroy();
-    }
+
 
     overlappingTrapAction(object1, object2){
         //if player and object2 (a trap) overlaps, freeze player (player trapped), trap destroyed 
