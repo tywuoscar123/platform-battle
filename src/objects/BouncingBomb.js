@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
+import { SAVES } from "../saves";
 
 export default class BouncingBomb extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture = 'bomb', frame = 0) {
@@ -16,7 +17,13 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         this.displayWidth = 32;
 
         this.body.setCollideWorldBounds(true, 1, 1);
-        this.body.setVelocity(-300, -20);
+
+        let magnitudeX = Math.pow(this.scene.wizard.x - this.x, 2);
+        let magnitudeY = Math.pow(this.scene.wizard.y - this.y , 2);
+        let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
+        let Vx = (this.scene.wizard.x - this.x)/magnitude * SAVES.BOMB.BombSpeed;
+        let Vy = (this.scene.wizard.y - this.y)/magnitude * SAVES.BOMB.BombSpeed;
+        this.body.setVelocity(Vx, Vy);
 
         this.body.mass = 500;
         this.DragCoefficient = 0.05;

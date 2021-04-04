@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import { CST } from "../CST";
 import Cannonball from '../objects/Cannonball';
 import PhysicsCal from "../PhysicsCal";
+import { SAVES } from "../saves";
+
 
 export default class Cannon extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture = 'cannon', frame = 0) {
@@ -73,7 +75,15 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
 
     //function for shooting
     cannonShoot(){
-        new Cannonball(this.scene, this.x, this.y, 1);
+        let magnitudeX = Math.pow(this.scene.wizard.x - this.x, 2);
+        let magnitudeY = Math.pow(this.scene.wizard.y - this.y , 2);
+        let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
+        let Vx = (this.scene.wizard.x - this.x)/magnitude * SAVES.CANNON.CannonSpeed;
+        let Vy = (this.scene.wizard.y - this.y)/magnitude * SAVES.CANNON.CannonSpeed;
+        console.log(Vx);
+        console.log(Vy);
+
+        new Cannonball(this.scene, this.x, this.y, 1, Vx, Vy);
     }
 
     destroy() {

@@ -9,7 +9,8 @@ export var SAVES = {
     },
     BOMB: {
         BombCoolDown: 3*1000,
-        BombDuration: 10*1000
+        BombDuration: 10*1000,
+        BombSpeed: 250
     },
     BEARTRAP: {
         BearTrapCoolDown: 3*1000,
@@ -18,7 +19,8 @@ export var SAVES = {
     },
     CANNON: {
         CannonCoolDown: 3*1000,
-        CannonDuration: 10*1000
+        CannonDuration: 10*1000,
+        CannonSpeed: 200
     },
     PLAYER: {
         InitialBullet: 10,
