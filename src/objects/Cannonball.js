@@ -17,7 +17,10 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
         this.body.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;
 
+
         this.body.setVelocity(direction * xVelocity, yVelocity);
+
+        this.body.mass = 250;
 
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;

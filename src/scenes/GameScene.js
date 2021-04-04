@@ -99,11 +99,11 @@ export default class GameScene extends Phaser.Scene {
         //create group for traps that will collides together
         this.collidingTraps = this.physics.add.group();
         this.physics.add.collider(this.collidingTraps, this.platformLayer, this.interactWithPlatform, null, this);
-        //this.physics.add.collider(this.collidingTraps, this.collidingTraps);
+        this.physics.add.collider(this.collidingTraps, this.collidingTraps, this.trapsCollide, null, this);
 
         this.overlappingTraps = this.physics.add.group();
         this.physics.add.collider(this.overlappingTraps, this.platformLayer);
-        //this.physics.add.collider(this.overlappingTraps, this.overlappingTraps);
+        this.physics.add.collider(this.overlappingTraps, this.overlappingTraps, this.trapsCollide, null, this);
 
         /*
         this.bombsGroup = this.physics.add.group();
@@ -113,6 +113,7 @@ export default class GameScene extends Phaser.Scene {
         this.enemyProjectiles = this.physics.add.group();
         this.physics.add.collider(this.enemyProjectiles, this.platformLayer, this.interactWithPlatform, null, this);
         this.physics.add.collider(this.enemyProjectiles, this.enemyProjectiles, this.cannonBallCollide, null, this);
+        this.physics.add.collider(this.enemyProjectiles, this.collidingTraps, this.cannonBallHitsTrap, null, this);
 
         this.playerProjectiles = this.physics.add.group();
         this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.interactWithPlatform, null, this);
@@ -132,8 +133,7 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.playerProjectiles, this.enemyProjectiles, this.playerHitsTrap, null, this);
 
         //collision among traps, not yet implemented
-
-
+        this.physics.add.collider(this.overlappingTraps, this.collidingTraps, this.trapsCollide, null, this);
         /*
             Additional Physics setting for level
          */
@@ -274,7 +274,18 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    cannonBallHitsTrap(object1, object2){
+        if(this.overlappingTraps.getChildren().includes(object2)){
+            return;
+        }
+        if(object1 instanceof Cannonball){
+            object1.destroy();
+        }
+    }
 
+    trapsCollide(object1, object2){
+        object2.destroy();
+    }
 
     damagePlayer(object1, object2){
         //console.log(object1.body.velocity.x);
