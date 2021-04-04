@@ -98,7 +98,7 @@ export default class GameScene extends Phaser.Scene {
 
         //create group for traps that will collides together
         this.collidingTraps = this.physics.add.group();
-        this.physics.add.collider(this.collidingTraps, this.platformLayer);
+        this.physics.add.collider(this.collidingTraps, this.platformLayer, this.interactWithPlatform, null, this);
         //this.physics.add.collider(this.collidingTraps, this.collidingTraps);
 
         this.overlappingTraps = this.physics.add.group();
@@ -207,10 +207,6 @@ export default class GameScene extends Phaser.Scene {
         for (const object of this.overlappingTraps.getChildren()){
             object.update();
         }
-
-        for (const object of this.bombsGroup.getChildren()){
-            object.update();
-        }
     }
 
     /*
@@ -224,45 +220,41 @@ export default class GameScene extends Phaser.Scene {
         object2 - platformLayer
      */
     interactWithPlatform(object1, object2){
+        //console.log('interact');
         let object = object1;
         let tile = object2;
         if (!object1 instanceof Phaser.GameObjects.Sprite){
             object = object2;
             tile = object1;
         }
-        /*
+
         //need to check tile.canCollide if using overlap
-        if (object instanceof BouncingBomb && tile.canCollide){
-            this.reBounce(object, tile);
-        }*/
+        if (object instanceof BouncingBomb){
+            this.reBounce(object);
+        }
 
         if (object instanceof Cannonball || object instanceof MagicOrb){
             object.destroy();
         }
     }
 
-/*
-    reBounce(object, tile){
-        //console.log(object.body.velocity.x);
-        //console.log(object.body.velocity.y);
-        console.log(tile);
-        let tileCenterX = this.map.tileToWorldX(tile.x) + CST.CONFIG.TileSize/2;
-        let tileCenterY = this.map.tileToWorldY(tile.y) + CST.CONFIG.TileSize/2;
-        let Dx = Math.abs(tileCenterX - object.x);
-        let Dy = Math.abs(tileCenterY - object.y);
 
-        if (Dx < Dy){
+    reBounce(object){
+        console.log(object.VxbeforeCollision);
+        console.log(object.VybeforeCollision);
+
+        //console.log('rebounce');
+        if (object.body.blocked.up || object.body.blocked.down){
             console.log('bounce Y');
-            object.body.setVelocityY(-object.body.velocity.y);
-        }else if (Dy < Dx){
+            object.body.setVelocityY(-1 * object.VybeforeCollision);
+        }else if (object.body.blocked.left || object.body.blocked.right){
             console.log('bounce X');
-            object.body.setVelocityX(-object.body.velocity.x);
-        }else{
-            object.body.setVelocityY(-object.body.velocity.y);
-            object.body.setVelocityX(-object.body.velocity.x);
-
+            object.body.setVelocityX(-1 * object.VxbeforeCollision);
         }
-    }*/
+
+        console.log(object.body.velocity.x);
+        console.log(object.body.velocity.y);
+    }
 
 
     //if cannon balls hit each other, destroy

@@ -17,10 +17,12 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
 
         this.body.setCollideWorldBounds(true, 1, 1);
         this.body.setVelocity(-300, -20);
-        this.body.setBounce(1, 1);
 
         this.body.mass = 500;
         this.DragCoefficient = 0.05;
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     update(args) {
@@ -29,6 +31,9 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     destroy() {
