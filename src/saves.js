@@ -29,12 +29,16 @@ export var SAVES = {
         AirRunningForce: 100,
         JumpSpeed: 350,
         Mana: 100,
+        MaxVx: 100,
+        MaxVy: 1000,
 
         SkillOneCoolDown: 2 * 1000,
         SkillOneCost: 10,
+        SkillOneMultiplier: 2,
 
         SkillTwoCoolDown: 2 * 1000,
         SkillTwoCost: 10,
+        SkillTwoMultiplier: 3,
 
         SkillThreeCoolDown: 2 * 1000,
         SkillThreeCost: 30,

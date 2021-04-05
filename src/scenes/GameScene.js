@@ -304,13 +304,15 @@ export default class GameScene extends Phaser.Scene {
         //console.log(object1.body.velocity.y);
         //console.log(object2.body.velocity.x);
         //console.log(object2.body.velocity.y);
-        if (object2 instanceof Spike){
+        /*if (object2 instanceof Spike){
             this.wizard.takeDamage(1);
         }
 
         if(object1 instanceof Player && object2 instanceof Cannonball){
             this.wizard.takeDamage(1);
-        }
+        }*/
+
+        this.wizard.takeDamage(30);
 
         let bounceX, bounceY;
         if (object1.x < object2.x){
