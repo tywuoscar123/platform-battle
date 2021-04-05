@@ -167,6 +167,9 @@ export default class GameScene extends Phaser.Scene {
         this.timer = this.time.delayedCall( CST.CONFIG.TIMER, this.HeroWin, null, this);
         this.timertext = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
 
+        //add text for player static
+        this.hptext = this.add.text(5, 35, 'Devil HP: ' + this.wizard.hp, { font: 'bold 12px system-ui' });
+        this.bullettext = this.add.text(5, 50, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 12px system-ui' });
     }
 
     update(time, delta) {
@@ -192,8 +195,10 @@ export default class GameScene extends Phaser.Scene {
         //update hero player select tile if clicked
         this.tracer.update();
 
-        //update remaining time
+        //update remaining time + devil stat
         this.timertext.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
+        this.hptext.setText('Devil HP: ' + this.wizard.hp);
+        this.bullettext.setText('Devil Remaining Bullet: ' + this.wizard.remainingBullet);
 
         //check player reaching goal
         if (this.wizard.x > this.goal.x && this.wizard.y > this.goal.y){
