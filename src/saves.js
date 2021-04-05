@@ -23,6 +23,7 @@ export var SAVES = {
         CannonSpeed: 200
     },
     PLAYER: {
+        InitialHP: 100,
         InitialBullet: 10,
         GroundRunningForce: 1000,
         AirRunningForce: 100,
@@ -36,9 +37,9 @@ export var SAVES = {
         SkillTwoCost: 10,
 
         SkillThreeCoolDown: 2 * 1000,
-        SkillThreeCost: 10,
+        SkillThreeCost: 30,
 
         SkillFourCoolDown: 2 * 1000,
-        SkillFourCost: 10,
+        SkillFourCost: 40
     }
 }

@@ -165,11 +165,17 @@ export default class GameScene extends Phaser.Scene {
 
         //Set timer for level
         this.timer = this.time.delayedCall( CST.CONFIG.TIMER, this.HeroWin, null, this);
-        this.timertext = this.add.text(5, 20, 'Remaining Time: ', { font: 'bold 12px system-ui' });
+        this.timertext = this.add.text(5, 0, 'Remaining Time: ', { font: 'bold 12px system-ui' });
 
         //add text for player static
-        this.hptext = this.add.text(5, 35, 'Devil HP: ' + this.wizard.hp, { font: 'bold 12px system-ui' });
-        this.bullettext = this.add.text(5, 50, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 12px system-ui' });
+        this.hpText = this.add.text(5, 20, 'Devil HP: ' + this.wizard.hp, { font: 'bold 10px system-ui' });
+        this.bulletText = this.add.text(5, 31, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 10px system-ui' });
+        this.manaText =  this.add.text(5, 42, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
+
+        this.skiilOneText =  this.add.text(5, 55, 'SuperJump - Cost: ' + SAVES.PLAYER.SkillOneCost, { font: 'bold 10px system-ui' });
+        this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SkillTwoCost, { font: 'bold 10px system-ui' });
+        this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.SkillThreeCost, { font: 'bold 10px system-ui' });
+        this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.SkillFourCost, { font: 'bold 10px system-ui' });
     }
 
     update(time, delta) {
@@ -197,8 +203,9 @@ export default class GameScene extends Phaser.Scene {
 
         //update remaining time + devil stat
         this.timertext.setText('Remaining Time: ' + this.timer.getRemainingSeconds().toFixed(1));
-        this.hptext.setText('Devil HP: ' + this.wizard.hp);
-        this.bullettext.setText('Devil Remaining Bullet: ' + this.wizard.remainingBullet);
+        this.hpText.setText('Devil HP: ' + this.wizard.hp);
+        this.bulletText.setText('Devil Remaining Bullet: ' + this.wizard.remainingBullet);
+        this.manaText.setText('Mana: ' + this.wizard.mana);
 
         //check player reaching goal
         if (this.wizard.x > this.goal.x && this.wizard.y > this.goal.y){
