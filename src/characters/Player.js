@@ -95,7 +95,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     update(args) {
         //console.log(this.body.velocity.x);
         //console.log(this.body.velocity.y);
-        if (Phaser.Input. Keyboard.JustDown(this.keys.one) && this.skillOneAvail && this.mana >= SAVES.PLAYER.SkillOneCost){
+        if (Phaser.Input. Keyboard.JustDown(this.keys.one)){
             this.superJump();
         }
 
@@ -207,6 +207,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * Call when player activate sill one
      */
     superJump(){
+        if (!this.skillOneAvail || this.mana < SAVES.PLAYER.SkillOneCost){
+            return;
+        }
+
         this.jumpSpeed *= 2;
         this.mana -= SAVES.PLAYER.SkillOneCost;
         this.skillOneAvail = false;
