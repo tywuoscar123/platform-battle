@@ -24,5 +24,21 @@ export var SAVES = {
     },
     PLAYER: {
         InitialBullet: 10,
+        GroundRunningForce: 1000,
+        AirRunningForce: 100,
+        JumpSpeed: 350,
+        Mana: 100,
+
+        SkillOneCoolDown: 2 * 1000,
+        SkillOneCost: 10,
+
+        SkillTwoCoolDown: 2 * 1000,
+        SkillTwoCost: 10,
+
+        SkillThreeCoolDown: 2 * 1000,
+        SkillThreeCost: 10,
+
+        SkillFourCoolDown: 2 * 1000,
+        SkillFourCost: 10,
     }
 }
