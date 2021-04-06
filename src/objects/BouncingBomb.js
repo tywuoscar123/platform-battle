@@ -23,7 +23,8 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
         let Vx = (this.scene.wizard.x - this.x)/magnitude * SAVES.BOMB.BombSpeed;
         let Vy = (this.scene.wizard.y - this.y)/magnitude * SAVES.BOMB.BombSpeed;
-        this.body.setVelocity(Vx, Vy);
+        //this.body.setVelocity(Vx, Vy);
+        this.body.setVelocity(-250, 0);
 
         this.body.mass = 500;
         this.DragCoefficient = 0.05;
