@@ -400,7 +400,7 @@ export default class GameScene extends Phaser.Scene {
         this.destroyScene();
         //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
-            winner: 'Hero',
+            winner: 'Devil',
             heroScore: 20,
             devilScore: 60
         });
