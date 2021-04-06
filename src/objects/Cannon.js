@@ -83,7 +83,8 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         console.log(Vx);
         console.log(Vy);
 
-        new Cannonball(this.scene, this.x, this.y, 1, Vx, Vy);
+        //new Cannonball(this.scene, this.x, this.y, 1, Vx, Vy);
+        new Cannonball(this.scene, this.x, this.y, 1);
     }
 
     destroy() {

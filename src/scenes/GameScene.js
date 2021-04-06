@@ -242,7 +242,7 @@ export default class GameScene extends Phaser.Scene {
 
         //need to check tile.canCollide if using overlap
         if (object instanceof BouncingBomb){
-            this.reBounce(object);
+            //this.reBounce(object);
         }
 
         if (object instanceof Cannonball || object instanceof MagicOrb){
