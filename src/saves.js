@@ -24,11 +24,11 @@ export var SAVES = {
     },
     PLAYER: {
         InitialHP: 100,
-        InitialBullet: 10,
+        InitialBullet: 9999,
         GroundRunningForce: 1000,
         AirRunningForce: 100,
         JumpSpeed: 350,
-        Mana: 100,
+        Mana: 9999,
         MaxVx: 100,
         MaxVy: 1000,
 

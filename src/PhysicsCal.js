@@ -18,7 +18,7 @@ export default class PhysicsCal {
 
     static calculateTotalExternalForceX(object){
         let Fx = 0;
-        Fx += PhysicsCal.calculateDragX(object);
+        //Fx += PhysicsCal.calculateDragX(object);
         Fx += PhysicsCal.calculateFriction(object);
         //console.log(Fx);
         return Fx;
@@ -55,7 +55,7 @@ export default class PhysicsCal {
     static calculateTotalExternalForceY(object){
         let Fy = 0;
         Fy += PhysicsCal.calculateGravitationalForce(object);
-        Fy += PhysicsCal.calculateDragY(object);
+        //Fy += PhysicsCal.calculateDragY(object);
         return Fy;
     }
 
