@@ -23,7 +23,7 @@ export var SAVES = {
         CannonSpeed: 200
     },
     PLAYER: {
-        InitialHP: 100,
+        InitialHP: 90,
         InitialBullet: 9999,
         GroundRunningForce: 1000,
         AirRunningForce: 100,
