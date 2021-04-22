@@ -2,7 +2,20 @@ import Phaser from "phaser";
 import { CST } from "../CST";
 import { SAVES } from "../saves";
 export default class Cannonball extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, direction, xVelocity = 150, yVelocity = 0 , texture = 'cannonball', frame = 0) {
+    /**
+     * Construct a Cannonball Object and add it into physical group.
+     *
+     * Assign physical attributes to object and initial velocity.
+     *
+     * @param {GameScene} scene - Scene this object belong to
+     * @param {number} x - initial x position
+     * @param {number} y - initial y position
+     * @param xVelocity - initial x velocity
+     * @param yVelocity - initial y velocity
+     * @param texture - sprite sheet key
+     * @param frame - default frame
+     */
+    constructor(scene, x, y, xVelocity = 150, yVelocity = 0 , texture = 'cannonball', frame = 0) {
         super(scene, x, y, texture, frame);
         //set sprite properties
         //this.group = group;
@@ -17,7 +30,7 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
         this.body.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;
 
-        this.body.setVelocity(direction * xVelocity, yVelocity);
+        this.body.setVelocity(xVelocity, yVelocity);
 
         this.body.mass = 250;
 
