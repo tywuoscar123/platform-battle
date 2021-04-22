@@ -49,7 +49,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.play('Idle', true);
 
         //set physical properties
-        this.body.setMaxVelocity(100, 1000);
+        this.body.setMaxVelocity(SAVES.PLAYER.MaxVx, SAVES.PLAYER.MaxVy);
         this.body.setBounce(0.1, 0.1);
         this.body.setCollideWorldBounds(true);
 
@@ -58,7 +58,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.DragCoefficient = 1.0;
 
         //custom attributes for player
-        this.hp = 3;
+        this.hp = SAVES.PLAYER.InitialHP;
         this.remainingBullet = SAVES.PLAYER.InitialBullet;
         this.jumpSpeed = SAVES.PLAYER.JumpSpeed;
         this.groundRunningForce = SAVES.PLAYER.GroundRunningForce;
@@ -95,8 +95,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
     update(args) {
         //console.log(this.body.velocity.x);
         //console.log(this.body.velocity.y);
+        //map skill buttons
         if (Phaser.Input. Keyboard.JustDown(this.keys.one)){
             this.superJump();
+        }
+        if (Phaser.Input. Keyboard.JustDown(this.keys.two)){
+            this.superSpeed();
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.keys.three)){
+            this.reload();
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.keys.four)){
+            this.heal();
         }
 
         //Check attack button pause, shot if bullet remains
@@ -155,7 +165,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         /*
         set corresponding animation according to velocity
          */
-        if (this.body.velocity.x  < 1){
+        if (this.body.velocity.x  !== 0){
             this.play('Run', true);
         }else{
             this.play('Idle', true);
@@ -178,7 +188,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * Reset player hp to full
      */
     resetStatus(){
-        this.hp = 3;
+        this.hp = SAVES.PLAYER.InitialHP;
     }
 
     /**
@@ -211,13 +221,61 @@ export default class Player extends Phaser.GameObjects.Sprite {
             return;
         }
 
-        this.jumpSpeed *= 2;
+        this.jumpSpeed *= SAVES.PLAYER.SkillOneMultiplier;
         this.mana -= SAVES.PLAYER.SkillOneCost;
         this.skillOneAvail = false;
 
         this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillOneCoolDown, ()=>{
             this.skillOneAvail = true;
-            this.jumpSpeed /= 2;
+            this.jumpSpeed = SAVES.PLAYER.JumpSpeed;
         }, this);
+    }
+
+    /*
+     * skill2, super speed
+     */
+
+    superSpeed(){
+        if (!this.skillTwoAvail || this.mana < SAVES.PLAYER.SkillTwoCost){
+            return;
+        }
+        this.body.setMaxVelocity(SAVES.PLAYER.MaxVx*SAVES.PLAYER.SkillTwoMultiplier, SAVES.PLAYER.MaxVy*SAVES.PLAYER.SkillTwoMultiplier);
+        this.groundRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
+        this.airRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
+        this.mana -= SAVES.PLAYER.SkillTwoCost;
+
+        this.skillTwoAvail = false;
+
+        this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillTwoCoolDown, ()=>{
+            this.body.setMaxVelocity(SAVES.PLAYER.MaxVx, SAVES.PLAYER.MaxVy);
+            this.skillTwoAvail = true;
+            this.groundRunningForce = SAVES.PLAYER.GroundRunningForce;
+            this.airRunningForce = SAVES.PLAYER.AirRunningForce;
+        }, this);
+    }
+
+    /*
+     * Skill 3, reload
+     */
+    reload(){
+        if (!this.skillThreeAvail || this.mana < SAVES.PLAYER.SkillThreeCost){
+            return;
+        }
+
+        this.mana -= SAVES.PLAYER.SkillThreeCost;
+        this.remainingBullet = SAVES.PLAYER.InitialBullet;
+        console.log(this.remainingBullet);
+    }
+
+    /*
+     * skill4, heal, gives full health to player
+     */
+    heal(){
+        if (!this.skillFourAvail || this.mana < SAVES.PLAYER.SkillFourCost){
+            return;
+        }
+        this.mana -= SAVES.PLAYER.SkillFourCost
+        this.hp = SAVES.PLAYER.InitialHP;
+        console.log(this.hp);
     }
 }
