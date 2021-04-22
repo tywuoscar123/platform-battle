@@ -1,10 +1,18 @@
 import { CST } from "../CST";
 export default class EndScene extends Phaser.Scene {
+    /**
+     * Set the key of the scene
+     */
     constructor() {
         super({
             key: CST.SCENES.END
         })
     }
+
+    /**
+     * Process data from GameScene
+     * @param data
+     */
     init(data){
         this.winner = data.winner;
         this.heroScore =  data.heroScore;
@@ -15,6 +23,9 @@ export default class EndScene extends Phaser.Scene {
 
     }
 
+    /**
+     * show winner and players score
+     */
     create() {
         //show results
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
@@ -27,6 +38,12 @@ export default class EndScene extends Phaser.Scene {
         this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
     }
 
+    /**
+     * Go back to menu scene if clicked
+     *
+     * @param time
+     * @param delta
+     */
     update(time, delta) {
         //go back to menu screen if clicked
         if (this.input.activePointer.isDown){

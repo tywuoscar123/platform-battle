@@ -2,6 +2,10 @@ import { CST } from "../CST";
 import Utils from "../Utils";
 
 export default class MenuScene extends Phaser.Scene {
+    /**
+     * Set key and properties of scene. <br/>
+     * Create util object for using utility functions
+     */
     constructor() {
         super({
             key: CST.SCENES.MENU
@@ -15,8 +19,11 @@ export default class MenuScene extends Phaser.Scene {
 
     }
 
+    /**
+     * Create main menu, add text and buttons
+     */
     create() {
-        //get screen coordinate
+        //get screen center coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 

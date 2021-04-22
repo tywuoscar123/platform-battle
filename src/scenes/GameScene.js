@@ -12,6 +12,10 @@ import Cannonball from '../objects/Cannonball';
 import {SAVES} from "../saves";
 
 export default class GameScene extends Phaser.Scene {
+    /**
+     * Set key and properties of scene. <br/>
+     * Create util object for using utility functions
+     */
     constructor() {
         super({
             key: CST.SCENES.GAME,
@@ -27,10 +31,16 @@ export default class GameScene extends Phaser.Scene {
         this.utilfunctions = new Utils(this);
     }
 
+    /**
+     * Set game world bounds
+     */
     init(){
         this.physics.world.setBounds(0, 0, CST.CONFIG.GameX, CST.CONFIG.GameY);
     }
 
+    /**
+     * load in game assets
+     */
     preload() {
         //load the map
         this.load.image('Castletiles', 'assets/CastlePrison/New_tiles.png');
@@ -50,6 +60,10 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
     }
 
+    /**
+     * Create Game map, object groups and UI. <br/>
+     * Set Physical Properties of scene.
+     */
     create() {
         /*
             Map Setting:
@@ -178,6 +192,12 @@ export default class GameScene extends Phaser.Scene {
         this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.SkillFourCost, { font: 'bold 10px system-ui' });
     }
 
+    /**
+     * Update the game, update every objects, update UI and Check game end conditions.
+     *
+     * @param time
+     * @param delta
+     */
     update(time, delta) {
         //no update if game over
         if (this.gameover === true){
@@ -190,6 +210,7 @@ export default class GameScene extends Phaser.Scene {
             this.scene.launch(CST.SCENES.PAUSE);
         })*/
 
+        //pause scene is esc key is pressed
         if(this.escKey.isDown){
             console.log("ESC PRESSED");
             this.scene.pause();
@@ -224,6 +245,7 @@ export default class GameScene extends Phaser.Scene {
     /*
         Collide/Overlap callback function
      */
+
     /*
         function for everything colling with platform
 
@@ -231,8 +253,16 @@ export default class GameScene extends Phaser.Scene {
 
         object2 - platformLayer
      */
+    /**
+     * Function for everything colling with platform. <br/>
+     * Handle collision reactions.
+     *
+     * @param object1
+     * @param object2
+     */
     interactWithPlatform(object1, object2){
         //console.log('interact');
+        //set object 1 to game object and object 2 to platform
         let object = object1;
         let tile = object2;
         if (!object1 instanceof Phaser.GameObjects.Sprite){
@@ -240,17 +270,25 @@ export default class GameScene extends Phaser.Scene {
             tile = object1;
         }
 
-        //need to check tile.canCollide if using overlap
+        //handle bouncing bomb
         if (object instanceof BouncingBomb){
             this.reBounce(object);
         }
 
+        //handle projectiles
         if (object instanceof Cannonball || object instanceof MagicOrb){
             object.destroy();
         }
+
+        //do nothing for other objects for now
     }
 
 
+    /**
+     * Function for objects bouncing of a surface
+     *
+     * @param object
+     */
     reBounce(object){
         console.log(object.VxbeforeCollision);
         console.log(object.VybeforeCollision);
@@ -269,7 +307,12 @@ export default class GameScene extends Phaser.Scene {
     }
 
 
-    //if cannon balls hit each other, destroy
+    /**
+     * Cannonballs collide with each other, destroy both
+     *
+     * @param object1
+     * @param object2
+     */
     cannonBallCollide(object1, object2){
         if(object1 instanceof Cannonball && object2 instanceof Cannonball){
             object1.destroy();
@@ -278,7 +321,12 @@ export default class GameScene extends Phaser.Scene {
 
     }
 
-    //if player hits trap with magic orb, destroy traps
+    /**
+     * Function for handling player-trap interactions
+     *
+     * @param object1
+     * @param object2
+     */
     playerHitsTrap(object1, object2){
         if(object1 instanceof MagicOrb){
             object1.destroy();
@@ -286,6 +334,12 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Function for handling cannonBall-trap interactions, destroy cannonball
+     *
+     * @param object1
+     * @param object2
+     */
     cannonBallHitsTrap(object1, object2){
         if(this.overlappingTraps.getChildren().includes(object2)){
             return;
@@ -295,10 +349,22 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Function for two traps colliding
+     *
+     * @param object1
+     * @param object2
+     */
     trapsCollide(object1, object2){
         object2.destroy();
     }
 
+    /**
+     * Function for handling player reaction when being damaged.
+     *
+     * @param object1
+     * @param object2
+     */
     damagePlayer(object1, object2){
         //console.log(object1.body.velocity.x);
         //console.log(object1.body.velocity.y);
@@ -312,8 +378,10 @@ export default class GameScene extends Phaser.Scene {
             this.wizard.takeDamage(1);
         }*/
 
+        //reduce player hp
         this.wizard.takeDamage(30);
 
+        //bounce player away
         let bounceX, bounceY;
         if (object1.x < object2.x){
             bounceX = -1;
@@ -336,15 +404,24 @@ export default class GameScene extends Phaser.Scene {
         console.log(bounceY * 100);
         //console.log(object2.x);
         //console.log(object2.y);
+
+        //reset devil player if death
         if (this.wizard.hp <= 0){
             this.wizard.resetStatus();
             this.restart();
         }
+
+        //destroy trap
         object2.destroy();
     }
 
 
-
+    /**
+     * Handle player-overlapping trap interactions
+     *
+     * @param object1
+     * @param object2
+     */
     overlappingTrapAction(object1, object2){
         //if player and object2 (a trap) overlaps, freeze player (player trapped), trap destroyed 
         if(object1 instanceof Player && object2 instanceof Beartrap){
@@ -353,11 +430,16 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Restart the devil player, reset position, velocity and play death transition
+     */
     restart() {
-        //reset the devil player position
+        //reset the devil player position and velocity
         this.wizard.body.setVelocity(0, 0);
         this.wizard.setX(this.spawnPt.x);
         this.wizard.setY(this.spawnPt.y);
+
+        //play death transition
         this.wizard.play('Idle', true);
         this.wizard.setAlpha(0);
         this.tweens.add({
@@ -370,6 +452,9 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.flash(500, 0,0,0);
     }
 
+    /**
+     * Handle Hero win, destroy current scene and move to end scene, pass scores to end scene.
+     */
     HeroWin() {
         //game end, hero wins, go to end scene
         console.log("Hero Wins");
@@ -383,6 +468,9 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
+    /**
+     * Handle Devil win, destroy current scene and move to end scene, pass scores to end scene.
+     */
     DevilWin() {
         //game end devil wins, go to end scene
         console.log("Devil Wins");
@@ -396,6 +484,9 @@ export default class GameScene extends Phaser.Scene {
         });
     }
 
+    /**
+     * Destroy the current game scene
+     */
     destroyScene(){
         //console.log(this.collidingTraps.getChildren().length);
         this.destroyGroup(this.collidingTraps);
@@ -405,6 +496,10 @@ export default class GameScene extends Phaser.Scene {
         this.wizard.destroy();
     }
 
+    /**
+     * Destroy and remove each object in a group
+     * @param group
+     */
     destroyGroup(group){
         let children = group.getChildren();
         for (let i = this.collidingTraps.getChildren().length - 1; i>=0; i--){
@@ -412,6 +507,9 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Create a spike at the selected position
+     */
     createSpike(){
         let newSpike = new Spike(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
         this.spikeButton.tint = 0x262626;
@@ -420,6 +518,7 @@ export default class GameScene extends Phaser.Scene {
 
         //console.log(this.physics.closest(newSpike));
 
+        //disable the button for coolDown
         this.spikeButton.disableInteractive();
         this.time.delayedCall(SAVES.SPIKE.SpikeCoolDown, function(){
             this.spikeButton.clearTint();
@@ -427,10 +526,14 @@ export default class GameScene extends Phaser.Scene {
         }, null, this);
     }
 
+    /**
+     * Create a bouncingBomb at the selected position
+     */
     createBomb() {
         let newBomb = new BouncingBomb(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
         this.bombButton.tint = 0x262626;
 
+        //disable the button for coolDown
         this.bombButton.disableInteractive();
         this.time.delayedCall(SAVES.BOMB.BombCoolDown, function(){
             this.bombButton.clearTint();
@@ -438,10 +541,14 @@ export default class GameScene extends Phaser.Scene {
         }, null, this);
     }
 
+    /**
+     * Create a BearTrap at the selected position
+     */
     createBearTrap() {
         let newBearTrap = new Beartrap(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
         this.bearTrapButton.tint = 0x262626;
 
+        //disable the button for coolDown
         this.bearTrapButton.disableInteractive();
         this.time.delayedCall(SAVES.BEARTRAP.BearTrapCoolDown, function(){
             this.bearTrapButton.clearTint();
@@ -449,10 +556,14 @@ export default class GameScene extends Phaser.Scene {
         }, null, this);
     }
 
+    /**
+     * Create a Cannon at the selected position
+     */
     createCannon() {
         let newCannon = new Cannon(this, this.tracer.x + CST.CONFIG.TileSize/2, this.tracer.y + CST.CONFIG.TileSize/2);
         this.cannonButton.tint = 0x262626;
 
+        //disable the button for coolDown
         this.cannonButton.disableInteractive();
         this.time.delayedCall(SAVES.CANNON.CannonCoolDown, function(){
             this.cannonButton.clearTint();
