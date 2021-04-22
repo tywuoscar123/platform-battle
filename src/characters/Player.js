@@ -6,8 +6,7 @@ import {SAVES} from "../saves";
 
 export default class Player extends Phaser.GameObjects.Sprite {
     /**
-     * Construct a player sprite add player into physics group.
-     *
+     * Construct a player sprite add player into physics group.<br/>
      * Assign physical attributes to player.
      *
      * Constructor
@@ -86,11 +85,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     /**
-     * Update player in game loop.
-     *
+     * Update player in game loop.<br/>
      * Check control and apply gravity, drag and friction.
      *
-     * @param args - any
+     * @param args - any arguments
      */
     update(args) {
         //console.log(this.body.velocity.x);

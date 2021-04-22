@@ -18,15 +18,17 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture = 'bomb', frame = 0) {
         super(scene, x, y, texture, frame);
 
-        //set sprite properties
+        //add to physical group
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.scene.collidingTraps.add(this);
 
+        //set display property
         this.setOrigin(0.5, 0.5);
         this.displayHeight = 32;
         this.displayWidth = 32;
 
+        //set Object property
         this.body.setCollideWorldBounds(true, 1, 1);
 
         let magnitudeX = Math.pow(this.scene.wizard.x - this.x, 2);
@@ -36,25 +38,38 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         let Vy = (this.scene.wizard.y - this.y)/magnitude * SAVES.BOMB.BombSpeed;
         this.body.setVelocity(Vx, Vy);
 
+        //set Physical property
         this.body.mass = 500;
         this.DragCoefficient = 0.05;
 
+        //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
 
+    /**
+     * Update the BouncingBomb in game loop. <br/>
+     * Apply gravity, drag and friction. <br/>
+     * Save current velocity for collision reaction.
+     *
+     * @param args - any arguments
+     */
     update(args) {
+        //update velocity according to physics
         let newVelocityX = PhysicsCal.calculateVelocityX(this, 0);
         let newVelocityY = PhysicsCal.calculateVelocityY(this, 0);
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
 
-        //save velocity if not colliding
+        //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
 
+    /**
+     * Destroy this sprite and set physical body to disable
+     */
     destroy() {
         if (this.body !== undefined){
             this.body.enable = false;

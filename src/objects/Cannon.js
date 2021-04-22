@@ -28,19 +28,17 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-        //this.group = group;
-
-        //set player properties
+        //add to physical group
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-
         this.scene.collidingTraps.add(this);
 
+        //set display property
         this.setOrigin(0.5, 0.5);
+        this.setScale(0.5, 0.5);
         this.body.setCollideWorldBounds(true);
         //this.displayWidth = CST.CONFIG.TileSize;
         //this.displayHeight = CST.CONFIG.TileSize;
-
 
         /* Sprite lifespan
         this.scene.time.delayedCall(CST.SPIKE.SpikeDuration, function(){
@@ -49,10 +47,8 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         }, null, this);
          */
 
-        this.setScale(0.5, 0.5);
-        //loop shooting animation
+        //loop shooting animation and shoot cannonballs
         this.play("shoot", true);
-        //this.cannonShoot(x,y);
         this.shootEvent = this.scene.time.addEvent({
             delay:2000,
             callback: this.cannonShoot,
@@ -60,32 +56,48 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
             loop: true
         });
 
+        //set physical property
         this.body.mass = 5000;
         this.DragCoefficient = 1.05;
 
+        //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
 
+    /**
+     * Update the Cannon in game loop. <br/>
+     * Apply gravity, drag and friction. <br/>
+     * Flip Cannon towards player. <br/>
+     * Save current velocity for collision reaction.
+     *
+     * @param args - any arguments
+     */
     update(args) {
+        //update velocity according to physics
         let newVelocityX = PhysicsCal.calculateVelocityX(this, 0);
         let newVelocityY = PhysicsCal.calculateVelocityY(this, 0);
 
         this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
         this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
 
+        //flip to player direction
         if (this.scene.wizard.x < this.x ){
             this.setFlipX(true);
         }else{
             this.setFlipX(false);
         }
 
+        //update current velocity log
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
 
-    //function for shooting
+    /**
+     * create cannonball object and shoot it towards player by passing in initial velocity
+     */
     cannonShoot(){
+        //calculate cannonball initial velocity according to player position
         let magnitudeX = Math.pow(this.scene.wizard.x - this.x, 2);
         let magnitudeY = Math.pow(this.scene.wizard.y - this.y , 2);
         let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
@@ -94,9 +106,13 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         console.log(Vx);
         console.log(Vy);
 
+        //create new cannonball
         new Cannonball(this.scene, this.x, this.y, Vx, Vy);
     }
 
+    /**
+     * Destroy this sprite and set physical body to disable, remove shooting event.
+     */
     destroy() {
         console.log('destroy');
         if (this.scene !== undefined) {
