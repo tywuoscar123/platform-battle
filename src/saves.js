@@ -1,3 +1,6 @@
+/**
+ * Data for Game Progress and game objects, which can change with gameplay
+ */
 export var SAVES = {
     SCORES:{
         devilScore: 100,

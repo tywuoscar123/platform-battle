@@ -1,3 +1,6 @@
+/**
+ * Control information and config for the game
+ */
 export const CST = {
     SCENES: {
         MENU: "MENU",
