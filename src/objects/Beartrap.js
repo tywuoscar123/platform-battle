@@ -3,6 +3,17 @@ import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 
 export default class Beartrap extends Phaser.GameObjects.Sprite{
+    /**
+     * Construct a Beartrap Object and add it into physical group.
+     *
+     * Assign physical attributes to object.
+     *
+     * @param {GameScene} scene - Scene this object belong to
+     * @param {number} x - initial x position
+     * @param {number} y - initial y position
+     * @param {string} texture - sprite sheet key
+     * @param {number} frame - default frame
+     */
     constructor(scene, x, y, texture = 'beartrap', frame = 0) {
         super(scene, x, y, texture, frame);
 

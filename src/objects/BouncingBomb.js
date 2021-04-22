@@ -4,6 +4,17 @@ import PhysicsCal from "../PhysicsCal";
 import { SAVES } from "../saves";
 
 export default class BouncingBomb extends Phaser.GameObjects.Sprite{
+    /**
+     * Construct a BouncingBomb Object and add it into physical group.
+     *
+     * Assign physical attributes to object and initial velocity.
+     *
+     * @param {GameScene} scene - Scene this object belong to
+     * @param {number} x - initial x position
+     * @param {number} y - initial y position
+     * @param {string} texture - sprite sheet key
+     * @param {number} frame - default frame
+     */
     constructor(scene, x, y, texture = 'bomb', frame = 0) {
         super(scene, x, y, texture, frame);
 

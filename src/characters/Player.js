@@ -6,16 +6,16 @@ import {SAVES} from "../saves";
 
 export default class Player extends Phaser.GameObjects.Sprite {
     /**
-     * Construct a player sprite
+     * Construct a player sprite add player into physics group.
      *
-     * add player into physics group
+     * Assign physical attributes to player.
      *
      * Constructor
-     * @param {GameScene} scene
-     * @param {number} x
-     * @param {number} y
-     * @param {string} texture
-     * @param {number} frame
+     * @param {GameScene} scene - Scene this object belong to
+     * @param {number} x - initial x position
+     * @param {number} y - initial y position
+     * @param {string} texture - sprite sheet key
+     * @param {number} frame - default frame
      */
     constructor(scene, x, y, texture = 'EvilWizard_Idle', frame = 0) {
         super(scene, x, y, texture, frame);

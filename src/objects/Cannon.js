@@ -6,6 +6,17 @@ import { SAVES } from "../saves";
 
 
 export default class Cannon extends Phaser.GameObjects.Sprite{
+    /**
+     * Construct a Cannon Object and add it into physical group.
+     *
+     * Assign physical attributes to object and creating shooting event.
+     *
+     * @param {GameScene} scene - Scene this object belong to
+     * @param {number} x - initial x position
+     * @param {number} y - initial y position
+     * @param {string} texture - sprite sheet key
+     * @param {number} frame - default frame
+     */
     constructor(scene, x, y, texture = 'cannon', frame = 0) {
         super(scene, x, y, texture, frame);
 
