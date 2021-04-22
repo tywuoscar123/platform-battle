@@ -177,6 +177,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} number - damage to be taken
      */
     takeDamage(number){
+        // set player tint to red for 0.2 second
         this.tint = 0xff0000;
         this.scene.time.delayedCall(200, function(){
             this.clearTint();
@@ -205,6 +206,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * Freeze (i.e. not allow control of) player for a fixed duration
      */
     freezePlayer(){
+        //disable control, set velocity to 0, remove freeze after a fixed duration
         this.freeze = true;
         this.body.setVelocityX(0);
         this.body.setVelocityY(0);
@@ -214,15 +216,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     /**
-     * Call when player activate sill one
+     * Skill 1, Super Jump, multiply player jump speed
      */
     superJump(){
+        //check skill 1 is cooling down or enough mana
         if (!this.skillOneAvail || this.mana < SAVES.PLAYER.SkillOneCost){
             return;
         }
 
+        //multiply jump speed in a fixed duration and reset it afterwards
         this.jumpSpeed *= SAVES.PLAYER.SkillOneMultiplier;
+
+        //reduce mana
         this.mana -= SAVES.PLAYER.SkillOneCost;
+
+        //disable skill during coolDown
         this.skillOneAvail = false;
 
         this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillOneCoolDown, ()=>{
@@ -231,19 +239,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }, this);
     }
 
-    /*
-     * skill2, super speed
+    /**
+     * skill2, super speed, multiply player move speed
      */
 
     superSpeed(){
+        //check skill 2 is cooling down or enough mana
         if (!this.skillTwoAvail || this.mana < SAVES.PLAYER.SkillTwoCost){
             return;
         }
+
+        //multiply move speed in a fixed duration and reset it afterwards
         this.body.setMaxVelocity(SAVES.PLAYER.MaxVx*SAVES.PLAYER.SkillTwoMultiplier, SAVES.PLAYER.MaxVy*SAVES.PLAYER.SkillTwoMultiplier);
         this.groundRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
         this.airRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
+
+        //reduce mana
         this.mana -= SAVES.PLAYER.SkillTwoCost;
 
+        //disable skill during coolDown
         this.skillTwoAvail = false;
 
         this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillTwoCoolDown, ()=>{
@@ -254,27 +268,36 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }, this);
     }
 
-    /*
-     * Skill 3, reload
+    /**
+     * Skill 3, Reload player bullet to full
      */
     reload(){
+        //check skill 3 is cooling down or enough mana
         if (!this.skillThreeAvail || this.mana < SAVES.PLAYER.SkillThreeCost){
             return;
         }
 
+        //reduce mana
         this.mana -= SAVES.PLAYER.SkillThreeCost;
+
+        //give player full bullet
         this.remainingBullet = SAVES.PLAYER.InitialBullet;
         console.log(this.remainingBullet);
     }
 
-    /*
-     * skill4, heal, gives full health to player
+    /**
+     * skill4, heal and gives full health to player
      */
     heal(){
+        //check skill 4 is cooling down or enough mana
         if (!this.skillFourAvail || this.mana < SAVES.PLAYER.SkillFourCost){
             return;
         }
+
+        //reduce mana
         this.mana -= SAVES.PLAYER.SkillFourCost
+
+        //give player full health
         this.hp = SAVES.PLAYER.InitialHP;
         console.log(this.hp);
     }
