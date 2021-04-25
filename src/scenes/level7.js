@@ -4,6 +4,7 @@ import {CST} from "../CST";
 export default class level7 extends GameScene{
     constructor(){
         super(CST.SCENES.LEVEL7);
+        this.level = 7;
     }
 
     init() {

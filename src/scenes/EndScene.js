@@ -1,4 +1,5 @@
 import { CST } from "../CST";
+import {SAVES} from "../saves";
 export default class EndScene extends Phaser.Scene {
     /**
      * Set the key of the scene
@@ -17,6 +18,7 @@ export default class EndScene extends Phaser.Scene {
         this.winner = data.winner;
         this.heroScore =  data.heroScore;
         this.devilScore =  data.devilScore;
+        this.level = data.level;
     }
 
     preload() {
@@ -36,6 +38,9 @@ export default class EndScene extends Phaser.Scene {
         this.add.text(screenCenterX, 250, this.winner + " Wins!", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
         this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
         this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        if (this.level > SAVES.PROGRESS.GameLevel){
+            SAVES.PROGRESS.GameLevel = this.level;
+        }
     }
 
     /**

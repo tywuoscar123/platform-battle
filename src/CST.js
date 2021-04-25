@@ -4,6 +4,7 @@
 export const CST = {
     SCENES: {
         MENU: "MENU",
+        LEVELS: "LEVELS",
         GAME: "GAME",
         LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
@@ -17,6 +18,7 @@ export const CST = {
         TileSize: 16,
         GroundY: 640 - 16,
         AirDensity: 1.22,
-        PixelPerMeter: 20
+        PixelPerMeter: 20,
+        NumLevels: 7
     }
 }

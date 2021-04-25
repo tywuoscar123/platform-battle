@@ -28,17 +28,27 @@ export default class MenuScene extends Phaser.Scene {
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
         //add title
-        this.add.text(screenCenterX, screenCenterY - 100, "Platform Battle: Devil vs Hero", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, screenCenterY - 180, "Platform Battle: Devil vs Hero", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         //add play button
         let playButton = this.utilfunctions.createTextButton(screenCenterX,
-            screenCenterY+100,
+            screenCenterY,
             "Play",
-            { font: "65px Arial", fill: "#ff0044"},
+            { font: "45px Arial", fill: "#ff0044"},
             "#ff0044",
             "#ffffff");
         playButton.on('pointerdown', function(){
             this.scene.start(CST.SCENES.LEVEL7);
             }, this);
+
+        let LevelSelect = this.utilfunctions.createTextButton(screenCenterX,
+            screenCenterY+80,
+            "Levels",
+            { font: "45px Arial", fill: "#ff0044"},
+            "#ff0044",
+            "#ffffff");
+        LevelSelect.on('pointerdown', function(){
+            this.scene.start(CST.SCENES.LEVELS);
+        }, this);
     }
 }

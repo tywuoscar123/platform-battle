@@ -456,7 +456,8 @@ export default class GameScene extends Phaser.Scene {
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 60,
-            devilScore: 20
+            devilScore: 20,
+            level: this.level
         });
     }
 
@@ -472,7 +473,8 @@ export default class GameScene extends Phaser.Scene {
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
             heroScore: 20,
-            devilScore: 60
+            devilScore: 60,
+            level: this.level
         });
     }
 
