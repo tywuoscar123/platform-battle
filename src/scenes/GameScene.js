@@ -16,9 +16,9 @@ export default class GameScene extends Phaser.Scene {
      * Set key and properties of scene. <br/>
      * Create util object for using utility functions
      */
-    constructor() {
+    constructor(key) {
         super({
-            key: CST.SCENES.GAME,
+            key: key,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -42,12 +42,7 @@ export default class GameScene extends Phaser.Scene {
      * load in game assets
      */
     preload() {
-        //load the map
-        this.load.image('Castletiles', 'assets/CastlePrison/New_tiles.png');
-        this.load.image('CastleBG', 'assets/CastlePrison/Background.png');
-
-        this.load.tilemapTiledJSON('CastlePrison', 'assets/tilemaps/CastlePrison.json');
-
+        //load assets
         this.load.atlas('EvilWizard_Idle', 'assets/Evil_Wizard/Idle.png', 'assets/Evil_Wizard/Idle.json');
         this.load.atlas('EvilWizard_Run', 'assets/Evil_Wizard/Move.png', 'assets/Evil_Wizard/Move.json');
 
@@ -69,11 +64,6 @@ export default class GameScene extends Phaser.Scene {
             Map Setting:
             create in the map in the scene
          */
-        this.map = this.add.tilemap('CastlePrison');
-        this.map.addTilesetImage('Castletiles');
-        this.map.addTilesetImage('CastleBG');
-        this.backgroundLayer = this.map.createLayer('Background', 'CastleBG');
-        this.platformLayer = this.map.createLayer('Platform', 'Castletiles');
         this.platformLayer.setCollisionByProperty({collides:  true});
         //set up spawn and goal pointer for devil player
         this.spawnPt = this.map.findObject('Objects', obj => obj.name === 'Spawn');
@@ -214,7 +204,9 @@ export default class GameScene extends Phaser.Scene {
         if(this.escKey.isDown){
             console.log("ESC PRESSED");
             this.scene.pause();
-            this.scene.launch(CST.SCENES.PAUSE);
+            this.scene.launch(CST.SCENES.PAUSE, {
+                sceneKey: this.scene.key
+            });
         }
 
         //update devil player position

@@ -6,11 +6,19 @@ export default class PauseScene extends Phaser.Scene {
      * Set the key of the scene
      */
     constructor(){
+        console.log("pause");
+
         super({
             key: CST.SCENES.PAUSE
         })
     }
-    init(){
+
+    /**
+     * Pass in key of level scene
+     * @param data - Key of the level scene
+     */
+    init(data){
+        this.sceneKey = data.sceneKey;
     }
 
     preload(){
@@ -39,7 +47,7 @@ export default class PauseScene extends Phaser.Scene {
             this.setFill("#ff0044");
         });
         resumeText.on('pointerdown', function() {
-            this.scene.resume(CST.SCENES.GAME);
+            this.scene.resume(this.sceneKey);
             this.scene.stop();
         }, this);
 
@@ -53,7 +61,7 @@ export default class PauseScene extends Phaser.Scene {
             this.setFill("#ff0044");
         });
         endText.on('pointerdown', function() {
-            this.scene.stop(CST.SCENES.GAME);
+            this.scene.stop(this.sceneKey);
             this.scene.launch(CST.SCENES.MENU);
             this.scene.stop();
         }, this);

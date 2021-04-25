@@ -38,7 +38,7 @@ export default class MenuScene extends Phaser.Scene {
             "#ff0044",
             "#ffffff");
         playButton.on('pointerdown', function(){
-            this.scene.start(CST.SCENES.GAME);
+            this.scene.start(CST.SCENES.LEVEL7);
             }, this);
     }
 }

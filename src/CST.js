@@ -5,6 +5,7 @@ export const CST = {
     SCENES: {
         MENU: "MENU",
         GAME: "GAME",
+        LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
         END: "END"
     },
