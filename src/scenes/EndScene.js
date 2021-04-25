@@ -38,8 +38,8 @@ export default class EndScene extends Phaser.Scene {
         this.add.text(screenCenterX, 250, this.winner + " Wins!", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
         this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
         this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        if (this.level > SAVES.PROGRESS.GameLevel){
-            SAVES.PROGRESS.GameLevel = this.level;
+        if (this.level >= SAVES.PROGRESS.GameLevel){
+            SAVES.PROGRESS.GameLevel = this.level + 1;
         }
     }
 
