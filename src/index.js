@@ -4,7 +4,8 @@ import MenuScene from "./scenes/MenuScene";
 import LevelSelectScene from "./scenes/LevelSelectScene";
 import GameScene from "./scenes/GameScene";
 import EndScene from "./scenes/EndScene";
-import PauseScene from "./scenes/PauseScene";
+import PauseScene from "./scenes/PauseScene"
+import level1 from "./scenes/level1";
 import level7 from "./scenes/level7";
 
 const config = {
@@ -15,7 +16,7 @@ const config = {
     physics: {
         default: 'arcade',
     },
-    scene: [ MenuScene, LevelSelectScene, level7, PauseScene ,EndScene]
+    scene: [ MenuScene, LevelSelectScene, level1, level7, PauseScene ,EndScene]
 };
 
 const game = new Phaser.Game(config);

@@ -6,6 +6,7 @@ export const CST = {
         MENU: "MENU",
         LEVELS: "LEVELS",
         GAME: "GAME",
+        LEVEL1: "LEVEL1",
         LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
         END: "END"

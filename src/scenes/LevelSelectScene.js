@@ -48,7 +48,7 @@ export default class LevelSelectScene extends Phaser.Scene {
                 levelButton.on('pointerdown', function() {
                     //Todo Change level selection callback after implementing other levels
                     //this.scene.launch(`LEVEL${i}`);
-                    this.scene.launch(`LEVEL7`);
+                    this.scene.launch(`LEVEL1`);
                     this.scene.stop();
                 }, this);
             }else{
