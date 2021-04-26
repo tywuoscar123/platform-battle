@@ -50,5 +50,16 @@ export default class MenuScene extends Phaser.Scene {
         LevelSelect.on('pointerdown', function(){
             this.scene.start(CST.SCENES.LEVELS);
         }, this);
+
+        //add buttons to level up screen
+        let skillButton = this.utilfunctions.createTextButton(screenCenterX,
+            screenCenterY + 160,
+            "Skills",
+            { font: "45px Arial", fill: "#ff0044"},
+            "#ff0044",
+            "#ffffff");
+        skillButton.on('pointerdown', function(){
+            this.scene.start(CST.SCENES.SKILLTREE);
+        }, this);
     }
 }

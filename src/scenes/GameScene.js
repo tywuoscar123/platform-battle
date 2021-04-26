@@ -183,10 +183,10 @@ export default class GameScene extends Phaser.Scene {
         this.bulletText = this.add.text(5, 31, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 10px system-ui' });
         this.manaText =  this.add.text(5, 42, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
 
-        this.skiilOneText =  this.add.text(5, 55, 'SuperJump - Cost: ' + SAVES.PLAYER.SkillOneCost, { font: 'bold 10px system-ui' });
+        this.skiilOneText =  this.add.text(5, 55, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 10px system-ui' });
         this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SkillTwoCost, { font: 'bold 10px system-ui' });
-        this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.SkillThreeCost, { font: 'bold 10px system-ui' });
-        this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.SkillFourCost, { font: 'bold 10px system-ui' });
+        this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.ReloadCost, { font: 'bold 10px system-ui' });
+        this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.HealCost, { font: 'bold 10px system-ui' });
     }
 
     /**
