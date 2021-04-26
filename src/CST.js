@@ -5,6 +5,9 @@ export const CST = {
     SCENES: {
         MENU: "MENU",
         LEVELS: "LEVELS",
+        SKILLTREE: "SKILLTREE",
+        DEVILSKILLS: "DEVILSKILLS",
+        HEROSKILLS: "HEROSKILLS",
         GAME: "GAME",
         LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
@@ -19,6 +22,7 @@ export const CST = {
         GroundY: 640 - 16,
         AirDensity: 1.22,
         PixelPerMeter: 20,
-        NumLevels: 7
+        NumLevels: 7,
+        MaxSkillLevel: 10
     }
 }

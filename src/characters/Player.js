@@ -65,10 +65,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.mana = SAVES.PLAYER.Mana;
 
-        this.skillOneAvail = true;
-        this.skillTwoAvail = true;
-        this.skillThreeAvail = true;
-        this.skillFourAvail = true;
+        this.superJumpAvail = true;
+        this.superSpeedAvail = true;
+        this.reloadAvail = true;
+        this.healAvail = true;
 
         //get the keyboard input for controlling player
         const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
@@ -218,21 +218,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     superJump(){
         //check skill 1 is cooling down or enough mana
-        if (!this.skillOneAvail || this.mana < SAVES.PLAYER.SkillOneCost){
+        if (!this.superJumpAvail || this.mana < SAVES.PLAYER.SuperJumpCost){
             return;
         }
 
         //multiply jump speed in a fixed duration and reset it afterwards
-        this.jumpSpeed *= SAVES.PLAYER.SkillOneMultiplier;
+        this.jumpSpeed *= SAVES.PLAYER.SuperJumpMultiplier;
 
         //reduce mana
-        this.mana -= SAVES.PLAYER.SkillOneCost;
+        this.mana -= SAVES.PLAYER.SuperJumpCost;
 
         //disable skill during coolDown
-        this.skillOneAvail = false;
+        this.superJumpAvail = false;
 
-        this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillOneCoolDown, ()=>{
-            this.skillOneAvail = true;
+        this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperJumpCoolDown, ()=>{
+            this.superJumpAvail = true;
             this.jumpSpeed = SAVES.PLAYER.JumpSpeed;
         }, this);
     }
@@ -243,24 +243,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     superSpeed(){
         //check skill 2 is cooling down or enough mana
-        if (!this.skillTwoAvail || this.mana < SAVES.PLAYER.SkillTwoCost){
+        if (!this.superSpeedAvail || this.mana < SAVES.PLAYER.SuperSpeedCost){
             return;
         }
 
         //multiply move speed in a fixed duration and reset it afterwards
-        this.body.setMaxVelocity(SAVES.PLAYER.MaxVx*SAVES.PLAYER.SkillTwoMultiplier, SAVES.PLAYER.MaxVy*SAVES.PLAYER.SkillTwoMultiplier);
-        this.groundRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
-        this.airRunningForce *= SAVES.PLAYER.SkillTwoMultiplier;
+        this.body.setMaxVelocity(SAVES.PLAYER.MaxVx*SAVES.PLAYER.SuperSpeedMultiplier, SAVES.PLAYER.MaxVy*SAVES.PLAYER.SuperSpeedMultiplier);
+        this.groundRunningForce *= SAVES.PLAYER.SuperSpeedMultiplier;
+        this.airRunningForce *= SAVES.PLAYER.SuperSpeedMultiplier;
 
         //reduce mana
-        this.mana -= SAVES.PLAYER.SkillTwoCost;
+        this.mana -= SAVES.PLAYER.SuperSpeedCost;
 
         //disable skill during coolDown
-        this.skillTwoAvail = false;
+        this.superSpeedAvail = false;
 
-        this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SkillTwoCoolDown, ()=>{
+        this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperSpeedCoolDown, ()=>{
             this.body.setMaxVelocity(SAVES.PLAYER.MaxVx, SAVES.PLAYER.MaxVy);
-            this.skillTwoAvail = true;
+            this.superSpeedAvail = true;
             this.groundRunningForce = SAVES.PLAYER.GroundRunningForce;
             this.airRunningForce = SAVES.PLAYER.AirRunningForce;
         }, this);
@@ -271,12 +271,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     reload(){
         //check skill 3 is cooling down or enough mana
-        if (!this.skillThreeAvail || this.mana < SAVES.PLAYER.SkillThreeCost){
+        if (!this.reloadAvail || this.mana < SAVES.PLAYER.ReloadCost){
             return;
         }
 
         //reduce mana
-        this.mana -= SAVES.PLAYER.SkillThreeCost;
+        this.mana -= SAVES.PLAYER.ReloadCost;
 
         //give player full bullet
         this.remainingBullet = SAVES.PLAYER.InitialBullet;
@@ -288,12 +288,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     heal(){
         //check skill 4 is cooling down or enough mana
-        if (!this.skillFourAvail || this.mana < SAVES.PLAYER.SkillFourCost){
+        if (!this.healAvail || this.mana < SAVES.PLAYER.HealCost){
             return;
         }
 
         //reduce mana
-        this.mana -= SAVES.PLAYER.SkillFourCost
+        this.mana -= SAVES.PLAYER.HealCost
 
         //give player full health
         this.hp = SAVES.PLAYER.InitialHP;
