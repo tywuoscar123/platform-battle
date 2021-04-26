@@ -51,6 +51,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setMaxVelocity(SAVES.PLAYER.MaxVx, SAVES.PLAYER.MaxVy);
         this.body.setBounce(0.1, 0.1);
         this.body.setCollideWorldBounds(true);
+        this.body.onWorldBounds = true;
 
         //custom physical properties
         this.body.mass = 50;

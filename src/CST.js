@@ -9,6 +9,7 @@ export const CST = {
         DEVILSKILLS: "DEVILSKILLS",
         HEROSKILLS: "HEROSKILLS",
         GAME: "GAME",
+        LEVEL1: "LEVEL1",
         LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
         END: "END"

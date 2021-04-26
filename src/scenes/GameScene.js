@@ -142,13 +142,20 @@ export default class GameScene extends Phaser.Scene {
             Additional Physics setting for level
          */
         //destroy projectiles on level edge
-        this.physics.world.on('worldbounds', function (body) {
+        this.physics.world.on('worldbounds', function (body, up, down, left, right) {
             console.log(body);
             let object = body.gameObject;
-            if (object instanceof Cannonball || object instanceof MagicOrb){
+
+            if (object instanceof Player && down){
+                this.restart();
+                return;
+            }
+
+            if (down || object instanceof Cannonball || object instanceof MagicOrb){
                 object.destroy();
             }
-        });
+
+        }, this);
 
         /*
              Create Sample objects
@@ -351,6 +358,10 @@ export default class GameScene extends Phaser.Scene {
         object2.destroy();
     }
 
+    pointMassCollisionReaction(object1, object2){
+
+    }
+
     /**
      * Function for handling player reaction when being damaged.
      *
@@ -471,7 +482,7 @@ export default class GameScene extends Phaser.Scene {
         this.destroyScene();
         //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
-            winner: 'Hero',
+            winner: 'Devil',
             heroScore: 20,
             devilScore: 60,
             level: this.level

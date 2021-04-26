@@ -4,7 +4,8 @@ import MenuScene from "./scenes/MenuScene";
 import LevelSelectScene from "./scenes/LevelSelectScene";
 import GameScene from "./scenes/GameScene";
 import EndScene from "./scenes/EndScene";
-import PauseScene from "./scenes/PauseScene";
+import PauseScene from "./scenes/PauseScene"
+import level1 from "./scenes/level1";
 import level7 from "./scenes/level7";
 import SkillTree from "./scenes/SkillTree";
 import DevilSkills from "./scenes/DevilSkills";
@@ -18,6 +19,7 @@ const config = {
     physics: {
         default: 'arcade',
     },
+
     scene: [ MenuScene, LevelSelectScene, SkillTree, DevilSkills, HeroSkills, level7, PauseScene ,EndScene]
 };
 

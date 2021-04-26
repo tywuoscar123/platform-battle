@@ -26,6 +26,7 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         this.displayWidth = CST.CONFIG.TileSize;
         this.displayHeight = CST.CONFIG.TileSize;
         this.body.setCollideWorldBounds(true, 0.1, 0.1);
+        this.body.onWorldBounds = true;
 
         //uncomment if set lifespan
         /* Sprite lifespan

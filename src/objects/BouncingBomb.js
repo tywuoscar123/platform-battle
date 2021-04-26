@@ -30,6 +30,7 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
 
         //set Object property
         this.body.setCollideWorldBounds(true, 1, 1);
+        this.body.onWorldBounds = true;
 
         let magnitudeX = Math.pow(this.scene.wizard.x - this.x, 2);
         let magnitudeY = Math.pow(this.scene.wizard.y - this.y , 2);
