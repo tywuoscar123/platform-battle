@@ -289,20 +289,20 @@ export default class GameScene extends Phaser.Scene {
      * @param object
      */
     reBounce(object){
-        console.log(object.VxbeforeCollision);
-        console.log(object.VybeforeCollision);
+        //console.log(object.VxbeforeCollision);
+        //console.log(object.VybeforeCollision);
 
         //console.log('rebounce');
         if (object.body.blocked.up || object.body.blocked.down){
-            console.log('bounce Y');
+            //console.log('bounce Y');
             object.body.setVelocityY(-1 * object.VybeforeCollision);
         }else if (object.body.blocked.left || object.body.blocked.right){
-            console.log('bounce X');
+            //console.log('bounce X');
             object.body.setVelocityX(-1 * object.VxbeforeCollision);
         }
 
-        console.log(object.body.velocity.x);
-        console.log(object.body.velocity.y);
+        //console.log(object.body.velocity.x);
+        //console.log(object.body.velocity.y);
     }
 
 
@@ -355,11 +355,64 @@ export default class GameScene extends Phaser.Scene {
      * @param object2
      */
     trapsCollide(object1, object2){
-        object2.destroy();
+        this.pointMassCollisionReaction(object1, object2);
+        //object2.destroy();
     }
 
+    /**
+     * Calculate and set reaction after 2 point masses collides
+     *
+     * @param object1 - first colliding object
+     * @param object2 - second colliding object
+     */
     pointMassCollisionReaction(object1, object2){
+        //console.log('-------------------------');
+        //console.log('collides');
 
+        //initialize variables for math equations for 2d collision
+        let v1Vector = new Phaser.Math.Vector2(object1.VxbeforeCollision, object1.VybeforeCollision);
+        let v2Vector = new Phaser.Math.Vector2(object2.VxbeforeCollision, object2.VybeforeCollision);
+        let v1 = v1Vector.length();
+        let v2 = v2Vector.length();
+
+        let m1 = object1.body.mass;
+        let m2 = object2.body.mass;
+
+        let theta1 = Math.atan2(object1.VybeforeCollision, object1.VxbeforeCollision);
+        let theta2 = Math.atan2(object2.VybeforeCollision, object2.VxbeforeCollision);
+        let phi = Math.atan2((object2.y - object1.y), (object2.x - object1.x));
+
+        //calculate object1 final velocity
+        let v1PrimeX = v1 * Math.cos(theta1 - phi) * (m1 - m2);
+        v1PrimeX += 2 * m2 * v2 * Math.cos(theta2 - phi);
+        v1PrimeX /= (m1 + m2);
+        v1PrimeX *= Math.cos(phi);
+        v1PrimeX += v1 * Math.sin(theta1 - phi) * Math.cos(phi + Math.PI/2);
+
+        let v1PrimeY = v1 * Math.cos(theta1 - phi) * (m1 - m2);
+        v1PrimeY += 2 * m2 * v2 * Math.cos(theta2 - phi);
+        v1PrimeY /= (m1 + m2);
+        v1PrimeY *= Math.sin(phi);
+        v1PrimeY += v1 * Math.sin(theta1 - phi) * Math.sin(phi + Math.PI/2);
+
+        object1.body.setVelocity(v1PrimeX, v1PrimeY);
+
+        //calculate object2 final velocity
+        let v2PrimeX = v2 * Math.cos(theta2 - phi) * (m2 - m1);
+        v2PrimeX += 2 * m1 * v1 * Math.cos(theta1 - phi);
+        v2PrimeX /= (m1 + m2);
+        v2PrimeX *= Math.cos(phi);
+        v2PrimeX += v2 * Math.sin(theta2 - phi) * Math.cos(phi + Math.PI/2);
+
+        let v2PrimeY = v2 * Math.cos(theta2 - phi) * (m2 - m1);
+        v2PrimeY += 2 * m1 * v1 * Math.cos(theta1 - phi);
+        v2PrimeY /= (m1 + m2);
+        v2PrimeY *= Math.sin(phi);
+        v2PrimeY += v2 * Math.sin(theta2 - phi) * Math.sin(phi + Math.PI/2);
+
+        object2.body.setVelocity(v2PrimeX, v2PrimeY);
+
+        //console.log('-------------------------');
     }
 
     /**

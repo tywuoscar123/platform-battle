@@ -83,6 +83,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
             three: 'THREE',
             four: 'FOUR',
         });
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     /**
@@ -169,6 +172,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }else{
             this.play('Idle', true);
         }
+
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     /**

@@ -31,6 +31,8 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
         this.body.onWorldBounds = true;
         this.body.setVelocity(direction * 200, 0);
 
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     /**
@@ -38,6 +40,8 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
      * @param args
      */
     update(args) {
+        this.VxbeforeCollision = this.body.velocity.x;
+        this.VybeforeCollision = this.body.velocity.y;
     }
 
     /**

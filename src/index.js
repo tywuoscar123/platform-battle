@@ -20,7 +20,7 @@ const config = {
         default: 'arcade',
     },
 
-    scene: [ MenuScene, LevelSelectScene, SkillTree, DevilSkills, HeroSkills, level7, PauseScene ,EndScene]
+    scene: [ MenuScene, LevelSelectScene, SkillTree, DevilSkills, HeroSkills, level1 ,level7, PauseScene ,EndScene]
 };
 
 const game = new Phaser.Game(config);
