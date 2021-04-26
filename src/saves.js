@@ -35,6 +35,8 @@ export var SAVES = {
         CannonSpeed: 200
     },
     PLAYER: {
+        PlayerLevel: 1,
+        PlayerUpgradeCost: 10,
         InitialHP: 100,
         InitialBullet: 10,
         GroundRunningForce: 1000,
@@ -45,22 +47,26 @@ export var SAVES = {
         MaxVy: 1000,
 
         SuperJumpLevel: 1,
+        SuperJumpUpgradeCost: 10,
         SuperJumpCoolDown: 2 * 1000,
         SuperJumpCost: 10,
         SuperJumpMultiplier: 2,
 
         SuperSpeedLevel: 1,
+        SuperSpeedUpgradeCost: 10,
         SuperSpeedCoolDown: 2 * 1000,
         SuperSpeedCost: 10,
         SuperSpeedMultiplier: 3,
 
         ReloadLevel: 1,
+        ReloadUpgradeCost: 10,
         ReloadCoolDown: 2 * 1000,
-        ReloadCost: 30,
+        ReloadCost: 40,
 
         HealLevel: 1,
+        HealUpgradeCost: 10,
         HealCoolDown: 2 * 1000,
-        HealCost: 40
+        HealCost: 50
 
         /*SkillOneCoolDown: 2 * 1000,
         SkillOneCost: 10,

@@ -57,7 +57,7 @@ export default class LevelSelectScene extends Phaser.Scene {
             "#ff0044",
             "#ffffff");
             bombUpgrade.on('pointerdown', function(){
-            //call level up function for 
+            //call level up function for bomb
             this.bombLevelUp();
             }, this);
         
@@ -70,7 +70,7 @@ export default class LevelSelectScene extends Phaser.Scene {
             "#ff0044",
             "#ffffff");
             bearTrapUpgrade.on('pointerdown', function(){
-            //call level up function for 
+            //call level up function for bear trap
             this.bearTrapLevelUp();
             }, this);
 
@@ -83,7 +83,7 @@ export default class LevelSelectScene extends Phaser.Scene {
             "#ff0044",
             "#ffffff");
             cannonUpgrade.on('pointerdown', function(){
-            //call level up function for 
+            //call level up function for cannon
             this.cannonLevelUp();
             }, this);
         //back button to menu
