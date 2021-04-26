@@ -3,7 +3,7 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
-export default class LevelSelectScene extends Phaser.Scene {
+export default class HeroSkills extends Phaser.Scene {
     constructor(){
         super({
             key: CST.SCENES.HEROSKILLS
@@ -19,7 +19,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create hero skills(traps) scene
      */
     create() {
         //get screen center coordinate

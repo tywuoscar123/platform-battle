@@ -3,7 +3,7 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
-export default class LevelSelectScene extends Phaser.Scene {
+export default class DevilSkills extends Phaser.Scene {
     constructor(){
         super({
             key: CST.SCENES.DEVILSKILLS
@@ -19,7 +19,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create Devil Skills scene
      */
      create() {
         //get screen center coordinate
@@ -127,8 +127,8 @@ export default class LevelSelectScene extends Phaser.Scene {
     }
 
     /**
-     * functions to upgrade traps
-     * IF skill is in max level or hero does not have enough points to upgrade, return
+     * functions to upgrade devil skills
+     * IF skill is in max level or devil does not have enough points to upgrade, return
      * else upgrade skill attributes and multiply upgrade cost by 2
      */
      playerLevelUp(){
