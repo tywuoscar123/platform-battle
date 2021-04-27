@@ -11,6 +11,7 @@ export const CST = {
         GAME: "GAME",
         LEVEL1: "LEVEL1",
         LEVEL2: "LEVEL2",
+        LEVEL3: "LEVEL3",
         LEVEL7: "LEVEL7",
         PAUSE: "PAUSE",
         END: "END"
