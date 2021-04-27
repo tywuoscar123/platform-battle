@@ -1,11 +1,11 @@
 import GameScene from "./GameScene";
 import {CST} from "../CST";
 
-export default class level1 extends GameScene{
+export default class level2 extends GameScene{
     constructor(){
-        super(CST.SCENES.LEVEL1);
-        this.level = 1;
-        this.frictionCoeffecient = 0.3;
+        super(CST.SCENES.LEVEL2);
+        this.level = 2;
+        this.frictionCoeffecient = 0.05;
     }
 
     init() {
@@ -14,19 +14,19 @@ export default class level1 extends GameScene{
 
     preload() {
         this.load.image('MultiLandscape', 'assets/MultiLandscape/tiles.png');
-        this.load.image('SunnyBG', 'assets/Backgrounds/sunnyBG.png');
+        this.load.image('BlueWinter', 'assets/Backgrounds/BlueWinter.png');
 
-        this.load.tilemapTiledJSON('Grassland', 'assets/tilemaps/Grassland.json');
+        this.load.tilemapTiledJSON('Iceland', 'assets/tilemaps/Iceland.json');
 
         super.preload();
     }
 
     create() {
-        this.map = this.add.tilemap('Grassland');
+        this.map = this.add.tilemap('Iceland');
         this.map.addTilesetImage('MultiLandscape');
-        this.map.addTilesetImage('SunnyBG');
+        this.map.addTilesetImage('BlueWinter');
 
-        this.backgroundLayer = this.map.createLayer('Background', 'SunnyBG');
+        this.backgroundLayer = this.map.createLayer('Background', 'BlueWinter');
         this.platformLayer = this.map.createLayer('Platform', 'MultiLandscape');
 
         super.create();

@@ -83,6 +83,6 @@ export var SAVES = {
         SkillFourCost: 40*/
     },
     PROGRESS: {
-        GameLevel: 1
+        GameLevel: 7
     }
 }

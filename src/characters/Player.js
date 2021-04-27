@@ -138,12 +138,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
             //Starting from this point, all measurement of distance, velocity and acceleration need to be calculated in meters
             // Force in Newton
-            //moving left and right, set corresponding walking force
+            //moving left and right, set corresponding walking force, which will be affected by coefficient of friction of the scene
             if (this.keys.a.isDown) {
-                Fx += -StepForce;
+                Fx += -StepForce * Math.min(this.scene.frictionCoeffecient*2 / 0.2, 1);
                 this.setFlipX(true);
             } else if (this.keys.d.isDown) {
-                Fx += StepForce;
+                Fx += StepForce * Math.min(this.scene.frictionCoeffecient*2 / 0.2, 1);
                 this.setFlipX(false);
             }
         }

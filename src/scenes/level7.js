@@ -5,6 +5,7 @@ export default class level7 extends GameScene{
     constructor(){
         super(CST.SCENES.LEVEL7);
         this.level = 7;
+        this.frictionCoeffecient = 0.2;
     }
 
     init() {
