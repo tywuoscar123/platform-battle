@@ -9,6 +9,7 @@ export default class level1 extends GameScene{
         super(CST.SCENES.LEVEL1);
         this.level = 1;
         this.frictionCoeffecient = 0.3;
+        this.customGravity = 500;
     }
 
     init() {

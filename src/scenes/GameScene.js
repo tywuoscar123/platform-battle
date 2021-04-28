@@ -24,12 +24,12 @@ export default class GameScene extends Phaser.Scene {
             physics: {
                 default: 'arcade',
                 arcade: {
-                    //gravity: { y: 500 },
                     debug: true
                 }
             }
         });
 
+        this.customGravity = 500;
         this.utilfunctions = new Utils(this);
     }
 

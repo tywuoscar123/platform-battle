@@ -110,7 +110,7 @@ export default class PhysicsCal {
      * @returns {number} gravitational force acting on the object in Newton
      */
     static calculateGravitationalForce(object){
-        return object.body.mass * CST.CONFIG.gravity/CST.CONFIG.PixelPerMeter;
+        return object.body.mass * object.scene.customGravity/CST.CONFIG.PixelPerMeter;
     }
 
 
