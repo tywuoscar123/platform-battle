@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"Cave.json"
+         "target":"..\/..\/..\/platform-battle\/assets\/tilemaps\/Cave.json"
         }
     },
  "height":40,
@@ -62,6 +62,66 @@
                  "width":0,
                  "x":1222.83,
                  "y":584.634
+                }, 
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"hpPotion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":648.662559077525,
+                 "y":132.393041842971
+                }, 
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"hpPotion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1223.2103531042,
+                 "y":117.823472644941
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"manaPotion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":76.6486031722465,
+                 "y":546.675574691312
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"manaPotion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1231.44532699874,
+                 "y":342.701605918888
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"manaPotion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":703.140078687551,
+                 "y":570.74703684458
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -70,10 +130,10 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":3,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.6.0",
+ "tiledversion":"1.5.0",
  "tileheight":16,
  "tilesets":[
         {
@@ -10635,6 +10695,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":"1.6",
+ "version":1.5,
  "width":80
 }
