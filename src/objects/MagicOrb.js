@@ -27,6 +27,7 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
 
         //set physical property
         this.body.mass = 0;
+        this.DragCoefficient = 0.5;
 
         this.body.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;

@@ -10,6 +10,8 @@ import Beartrap from '../objects/Beartrap';
 import MagicOrb from '../objects/MagicOrb';
 import Cannonball from '../objects/Cannonball';
 import {SAVES} from "../saves";
+import manaPotion from "../objects/manaPotion";
+import hpPotion from "../objects/hpPotion";
 
 export default class GameScene extends Phaser.Scene {
     /**
@@ -53,6 +55,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json' );
         this.load.image('magicOrb', 'assets/Attack/Magic_orb.png');
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
+        this.load.image('hpPotion', 'assets/Potion/hpPotion.png');
+        this.load.image('manaPotion', 'assets/Potion/manaPotion.png');
     }
 
     /**
@@ -122,14 +126,18 @@ export default class GameScene extends Phaser.Scene {
         this.playerProjectiles = this.physics.add.group();
         this.physics.add.collider(this.playerProjectiles, this.platformLayer, this.interactWithPlatform, null, this);
 
+        this.collectables = this.physics.add.group();
+        this.physics.world.addCollider(this.collectables, this.platformLayer);
+
 
         /*
             Add collisions between objects, Assign callbacks
          */
-        //collision/overlap between player and traps/enemy attackers
+        //collision/overlap between player and traps/collectables
         this.physics.add.overlap(this.wizard, this.collidingTraps, this.damagePlayer, null, this);
         this.physics.add.overlap(this.wizard, this.enemyProjectiles, this.damagePlayer, null, this);
         this.physics.add.overlap(this.wizard, this.overlappingTraps, this.overlappingTrapAction, null, this);
+        this.physics.add.overlap(this.wizard, this.collectables, this.collects, null, this);
 
         //collision between player projectiles and traps/enemy attackers
         this.physics.add.collider(this.playerProjectiles, this.collidingTraps, this.playerHitsTrap, null, this);
@@ -138,6 +146,21 @@ export default class GameScene extends Phaser.Scene {
 
         //collision among traps, not yet implemented
         this.physics.add.collider(this.overlappingTraps, this.collidingTraps, this.trapsCollide, null, this);
+
+
+        /*
+         * Create Potions according to tile map
+         */
+        let manaPotionLocations = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'manaPotion');
+        for (let location of manaPotionLocations){
+            new manaPotion(this, location.x, location.y);
+        }
+
+        let hpPotionLocations = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'hpPotion');
+        for (let location of hpPotionLocations){
+            new hpPotion(this, location.x, location.y);
+        }
+
         /*
             Additional Physics setting for level
          */
@@ -184,7 +207,7 @@ export default class GameScene extends Phaser.Scene {
         this.manaText =  this.add.text(5, 42, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
 
         this.skiilOneText =  this.add.text(5, 55, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 10px system-ui' });
-        this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SkillTwoCost, { font: 'bold 10px system-ui' });
+        this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SuperSpeedCost, { font: 'bold 10px system-ui' });
         this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.ReloadCost, { font: 'bold 10px system-ui' });
         this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.HealCost, { font: 'bold 10px system-ui' });
 
@@ -255,6 +278,10 @@ export default class GameScene extends Phaser.Scene {
         }
 
         for (const object of this.overlappingTraps.getChildren()){
+            object.update();
+        }
+
+        for (const object of this.collectables.getChildren()){
             object.update();
         }
     }
@@ -493,6 +520,17 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    collects(object1, object2) {
+        let potion = object2 instanceof  Player? object1: object2;
+        if (potion instanceof manaPotion){
+            this.wizard.mana += 50;
+        }
+        else if (potion instanceof hpPotion){
+            this.wizard.hp += 50;
+        }
+        object2.destroy();
+    }
+
     /**
      * Restart the devil player, reset position, velocity and play death transition
      */
@@ -558,6 +596,7 @@ export default class GameScene extends Phaser.Scene {
         this.destroyGroup(this.overlappingTraps);
         this.destroyGroup(this.enemyProjectiles);
         this.destroyGroup(this.playerProjectiles);
+        this.destroyGroup(this.collectables);
         this.wizard.destroy();
     }
 

@@ -1,46 +1,35 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
-import { SAVES } from "../saves";
-export default class Cannonball extends Phaser.GameObjects.Sprite{
+import PhysicsCal from "../PhysicsCal";
+import {SAVES} from "../saves";
+
+export default class hpPotion extends Phaser.GameObjects.Sprite{
     /**
-     * Construct a Cannonball Object and add it into physical group.
-     *
-     * Assign physical attributes to object and initial velocity.
+     * Construct a hpPotion Object and add it into physical group. <br/>
+     * Assign physical attributes to object.
      *
      * @param {GameScene} scene - Scene this object belong to
      * @param {number} x - initial x position
      * @param {number} y - initial y position
-     * @param {number} xVelocity - initial x velocity
-     * @param {number} yVelocity - initial y velocity
      * @param {string} texture - sprite sheet key
      * @param {number} frame - default frame
      */
-    constructor(scene, x, y, xVelocity = 150, yVelocity = 0 , texture = 'cannonball', frame = 0) {
+    constructor(scene, x, y, texture = 'hpPotion', frame = 0) {
         super(scene, x, y, texture, frame);
-        //set sprite properties
-        //this.group = group;
 
         //add to physical group
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.scene.enemyProjectiles.add(this);
+        this.scene.collectables.add(this);
 
-        //set display property
+        //set display and object property
         this.setOrigin(0.5, 0.5);
-        this.body.setCircle(this.displayWidth/2);
-        this.setScale(0.5, 0.5);
-
-        //set Object property
         this.body.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;
 
-        //set Physical property
-        this.body.setVelocity(xVelocity, yVelocity);
-
-        this.body.mass = 250;
+        //set physical property
+        this.body.mass = 20;
         this.DragCoefficient = 0.5;
-
-        this.damage = SAVES.CANNON.CannonBallDamage;
 
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
@@ -48,11 +37,21 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
     }
 
     /**
+     * Update the Beartrap in game loop. <br/>
+     * Apply gravity, drag and friction. <br/>
      * Save current velocity for collision reaction.
+     *
      * @param args - any arguments
      */
     update(args) {
-        //log current velocity for collision reaction
+        //update velocity according to physics
+        let newVelocityX = PhysicsCal.calculateVelocityX(this, 0);
+        let newVelocityY = PhysicsCal.calculateVelocityY(this, 0);
+
+        this.body.setVelocityX(newVelocityX * CST.CONFIG.PixelPerMeter);
+        this.body.setVelocityY(newVelocityY * CST.CONFIG.PixelPerMeter);
+
+        //update current velocity log
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;
     }
@@ -66,5 +65,4 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
         }
         super.destroy();
     }
-
 }
