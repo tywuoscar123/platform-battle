@@ -25,8 +25,8 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
 
         //set display property
         this.setOrigin(0.5, 0.5);
-        this.displayHeight = 32;
-        this.displayWidth = 32;
+        this.body.setCircle(this.displayWidth/2);
+        this.setScale(0.5, 0.5);
 
         //set Object property
         this.body.setCollideWorldBounds(true, 1, 1);
@@ -42,6 +42,8 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
         //set Physical property
         this.body.mass = 500;
         this.DragCoefficient = 0.05;
+
+        this.damage = SAVES.BOMB.BombDamage;
 
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;

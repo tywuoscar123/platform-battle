@@ -238,7 +238,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //disable skill during coolDown
         this.superJumpAvail = false;
 
-        this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperJumpCoolDown, ()=>{
+        this.superJumpEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperJumpDuration, ()=>{
             this.superJumpAvail = true;
             this.jumpSpeed = SAVES.PLAYER.JumpSpeed;
         }, this);
@@ -265,7 +265,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //disable skill during coolDown
         this.superSpeedAvail = false;
 
-        this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperSpeedCoolDown, ()=>{
+        this.superSpeedEvent = this.scene.time.delayedCall(SAVES.PLAYER.SuperSpeedDuration, ()=>{
             this.body.setMaxVelocity(SAVES.PLAYER.MaxVx, SAVES.PLAYER.MaxVy);
             this.superSpeedAvail = true;
             this.groundRunningForce = SAVES.PLAYER.GroundRunningForce;

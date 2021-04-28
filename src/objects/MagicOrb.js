@@ -22,6 +22,7 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
 
         //set display property
         this.setOrigin(0.5, 0.5);
+        this.body.setCircle(this.displayWidth/2);
         this.setScale(0.2, 0.2);
 
         //set physical property

@@ -62,6 +62,8 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         this.body.mass = 5000;
         this.DragCoefficient = 1.05;
 
+        this.damage = SAVES.CANNON.CannonDamage;
+
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
         this.VybeforeCollision = this.body.velocity.y;

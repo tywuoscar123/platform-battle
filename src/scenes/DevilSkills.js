@@ -151,7 +151,7 @@ export default class DevilSkills extends Phaser.Scene {
         SAVES.PLAYER.SuperJumpUpgradeCost *= 2;
         SAVES.PLAYER.SuperJumpLevel++;
         SAVES.PLAYER.SuperJumpMultiplier += 0.5;
-        SAVES.PLAYER.SuperJumpCoolDown += 250;
+        SAVES.PLAYER.SuperJumpDuration += 250;
         //add condition to disable upgrade button when level is max?
     }
 
@@ -162,7 +162,7 @@ export default class DevilSkills extends Phaser.Scene {
         SAVES.SCORES.devilScore -= SAVES.PLAYER.SuperSpeedUpgradeCost;
         SAVES.PLAYER.SuperSpeedUpgradeCost *= 2;
         SAVES.PLAYER.SuperSpeedLevel++;
-        SAVES.PLAYER.SuperSpeedCoolDown += 250;
+        SAVES.PLAYER.SuperSpeedDuration += 250;
         SAVES.PLAYER.SuperSpeedMultiplier += 0.5;
     }
 

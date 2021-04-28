@@ -27,6 +27,7 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
 
         //set display property
         this.setOrigin(0.5, 0.5);
+        this.body.setCircle(this.displayWidth/2);
         this.setScale(0.5, 0.5);
 
         //set Object property
@@ -37,6 +38,8 @@ export default class Cannonball extends Phaser.GameObjects.Sprite{
         this.body.setVelocity(xVelocity, yVelocity);
 
         this.body.mass = 250;
+
+        this.damage = SAVES.CANNON.CannonBallDamage;
 
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;

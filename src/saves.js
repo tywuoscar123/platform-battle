@@ -9,30 +9,34 @@ export var SAVES = {
     SPIKE: { 
         SpikeLevel: 1,
         SpikeUpgradeCost: 10,
-        SpikeCoolDown: 3*1000,
-        SpikeDuration: 10*1000
-
+        SpikeCoolDown: 2*1000,
+        SpikeDuration: 10*1000,
+        SpikeDamage: 20
     },
     BOMB: {
         BombLevel: 1,
         BombUpgradeCost: 10,
         BombCoolDown: 3*1000,
         BombDuration: 10*1000,
-        BombSpeed: 250
+        BombSpeed: 250,
+        BombDamage: 40
     },
     BEARTRAP: {
         BearTrapLevel: 1,
         BearTrapUpgradeCost: 10,
         BearTrapCoolDown: 3*1000,
         BearTrapDuration: 10*1000,
-        BearTrapFreezeTime: 3*1000
+        BearTrapFreezeTime: 3*1000,
+        BearTrapDamage: 0
     },
     CANNON: {
         CannonLevel: 1,
         CannonUpgradeCost: 10,
-        CannonCoolDown: 3*1000,
+        CannonCoolDown: 5*1000,
         CannonDuration: 10*1000,
-        CannonSpeed: 200
+        CannonSpeed: 200,
+        CannonDamage: 5,
+        CannonBallDamage: 20
     },
     PLAYER: {
         PlayerLevel: 1,
@@ -48,13 +52,13 @@ export var SAVES = {
 
         SuperJumpLevel: 1,
         SuperJumpUpgradeCost: 10,
-        SuperJumpCoolDown: 2 * 1000,
+        SuperJumpDuration: 2 * 1000,
         SuperJumpCost: 10,
         SuperJumpMultiplier: 2,
 
         SuperSpeedLevel: 1,
         SuperSpeedUpgradeCost: 10,
-        SuperSpeedCoolDown: 2 * 1000,
+        SuperSpeedDuration: 2 * 1000,
         SuperSpeedCost: 10,
         SuperSpeedMultiplier: 3,
 

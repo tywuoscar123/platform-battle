@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
+import {SAVES} from "../saves";
 
 export default class Spike extends Phaser.GameObjects.Sprite{
     /**
@@ -39,6 +40,8 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         //set physical properties
         this.body.mass = 1000;
         this.DragCoefficient = 2.0;
+
+        this.damage = SAVES.SPIKE.SpikeDamage;
 
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;

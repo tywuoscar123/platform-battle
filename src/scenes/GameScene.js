@@ -151,7 +151,7 @@ export default class GameScene extends Phaser.Scene {
                 return;
             }
 
-            if (down || object instanceof Cannonball || object instanceof MagicOrb){
+            if (object instanceof Cannonball || object instanceof MagicOrb || down){
                 object.destroy();
             }
 
@@ -187,6 +187,24 @@ export default class GameScene extends Phaser.Scene {
         this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SkillTwoCost, { font: 'bold 10px system-ui' });
         this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.ReloadCost, { font: 'bold 10px system-ui' });
         this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.HealCost, { font: 'bold 10px system-ui' });
+
+        //add pause button for hero player
+        let pauseButton = this.utilfunctions.createTextButton(
+            1340,
+            20,
+            "PAUSE",
+            { font: "24px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+        pauseButton.on('pointerdown', function() {
+            this.scene.pause();
+            this.scene.launch(CST.SCENES.PAUSE, {
+                sceneKey: this.scene.key
+            });
+        }, this);
+
+
     }
 
     /**
@@ -294,10 +312,10 @@ export default class GameScene extends Phaser.Scene {
 
         //console.log('rebounce');
         if (object.body.blocked.up || object.body.blocked.down){
-            //console.log('bounce Y');
+            console.log('bounce Y');
             object.body.setVelocityY(-1 * object.VybeforeCollision);
         }else if (object.body.blocked.left || object.body.blocked.right){
-            //console.log('bounce X');
+            console.log('bounce X');
             object.body.setVelocityX(-1 * object.VxbeforeCollision);
         }
 
@@ -313,11 +331,7 @@ export default class GameScene extends Phaser.Scene {
      * @param object2
      */
     cannonBallCollide(object1, object2){
-        if(object1 instanceof Cannonball && object2 instanceof Cannonball){
-            object1.destroy();
-            object2.destroy();
-        }
-
+        this.pointMassCollisionReaction(object1, object2);
     }
 
     /**
@@ -345,6 +359,7 @@ export default class GameScene extends Phaser.Scene {
         }
         if(object1 instanceof Cannonball){
             object1.destroy();
+            object2.body.setVelocity(object2.VxbeforeCollision, object2.VybeforeCollision);
         }
     }
 
@@ -422,20 +437,14 @@ export default class GameScene extends Phaser.Scene {
      * @param object2
      */
     damagePlayer(object1, object2){
-        //console.log(object1.body.velocity.x);
-        //console.log(object1.body.velocity.y);
-        //console.log(object2.body.velocity.x);
-        //console.log(object2.body.velocity.y);
-        /*if (object2 instanceof Spike){
-            this.wizard.takeDamage(1);
+        if (!(object1 instanceof Player)){
+            let temp = object1;
+            object1 = object2;
+            object2 = temp;
         }
 
-        if(object1 instanceof Player && object2 instanceof Cannonball){
-            this.wizard.takeDamage(1);
-        }*/
-
         //reduce player hp
-        this.wizard.takeDamage(30);
+        this.wizard.takeDamage(object2.damage);
 
         //bounce player away
         let bounceX, bounceY;
@@ -447,9 +456,9 @@ export default class GameScene extends Phaser.Scene {
             bounceX = 0;
         }
 
-        if (object1.x < object2.y){
+        if (object1.y < object2.y){
             bounceY = -1;
-        }else if (object1.x > object2.y){
+        }else if (object1.y > object2.y){
             bounceY = 1;
         }else{
             bounceY = 0;
@@ -458,8 +467,6 @@ export default class GameScene extends Phaser.Scene {
         this.wizard.body.setVelocity(bounceX * 200, bounceY * 100);
         console.log(bounceX * 200);
         console.log(bounceY * 100);
-        //console.log(object2.x);
-        //console.log(object2.y);
 
         //reset devil player if death
         if (this.wizard.hp <= 0){

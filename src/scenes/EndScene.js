@@ -54,7 +54,7 @@ export default class EndScene extends Phaser.Scene {
     update(time, delta) {
         //go back to menu screen if clicked
         if (this.input.activePointer.isDown){
-            this.scene.start(CST.SCENES.MENU);
+            this.scene.start(CST.SCENES.LEVELS);
         }
     }
 }

@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
+import {SAVES} from "../saves";
 
 export default class Beartrap extends Phaser.GameObjects.Sprite{
     /**
@@ -24,7 +25,7 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-        //add to phusical group
+        //add to physical group
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.scene.overlappingTraps.add(this);
@@ -40,6 +41,8 @@ export default class Beartrap extends Phaser.GameObjects.Sprite{
         //set physical property
         this.body.mass = 1000;
         this.DragCoefficient = 1.3;
+
+        this.damage = SAVES.BEARTRAP.BearTrapDamage;
 
         //log current velocity for collision reaction
         this.VxbeforeCollision = this.body.velocity.x;
