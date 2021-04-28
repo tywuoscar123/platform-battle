@@ -1,10 +1,11 @@
 /**
  * Control information and config for the game
  */
-export const CST = {
+export var CST = {
     SCENES: {
         MENU: "MENU",
         LEVELS: "LEVELS",
+        SETTINGS: "SETTINGS",
         SKILLTREE: "SKILLTREE",
         DEVILSKILLS: "DEVILSKILLS",
         HEROSKILLS: "HEROSKILLS",

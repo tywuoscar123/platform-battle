@@ -37,7 +37,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
                 let levelButton = this.utilfunctions.createTextButton(
-                    screenCenterX,
+                    screenCenterX - 80,
                     screenCenterY - buttonOffsetY + y,
                     `Level ${i}`,
                     { font: "40px Arial", fill: "#ff0044" },
@@ -50,9 +50,13 @@ export default class LevelSelectScene extends Phaser.Scene {
                     this.scene.launch(`LEVEL${i}`);
                     this.scene.stop();
                 }, this);
+
+                this.add.text(screenCenterX + 40, screenCenterY - buttonOffsetY + y, `- Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "40px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
+
             }else{
-                this.add.text(screenCenterX, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "40px Arial", fill: "#303030" }).setOrigin(0.5);
+                this.add.text(screenCenterX - 80, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "40px Arial", fill: "#303030" }).setOrigin(0.5);
             }
+
         }
 
         let backButton = this.utilfunctions.createTextButton(

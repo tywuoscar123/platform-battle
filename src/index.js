@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import MenuScene from "./scenes/MenuScene";
 import LevelSelectScene from "./scenes/LevelSelectScene";
+import SettingScene from "./scenes/SettingScene";
 import GameScene from "./scenes/GameScene";
 import EndScene from "./scenes/EndScene";
 import PauseScene from "./scenes/PauseScene"
@@ -22,7 +23,7 @@ const config = {
         default: 'arcade',
     },
 
-    scene: [ MenuScene, LevelSelectScene, SkillTree, DevilSkills, HeroSkills, level1 ,level2, level3, level7, PauseScene ,EndScene]
+    scene: [ MenuScene, LevelSelectScene, SkillTree, SettingScene,DevilSkills, HeroSkills, level1, level2, level3, level7, PauseScene ,EndScene]
 };
 
 const game = new Phaser.Game(config);

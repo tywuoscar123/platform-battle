@@ -41,6 +41,8 @@ export default class EndScene extends Phaser.Scene {
         if (this.level >= SAVES.PROGRESS.GameLevel){
             SAVES.PROGRESS.GameLevel = this.level + 1;
         }
+
+        SAVES.PROGRESS.StagesWinner[this.level - 1] = this.winner;
     }
 
     /**
