@@ -198,18 +198,19 @@ export default class GameScene extends Phaser.Scene {
         this.gameover = false;
 
         //Set timer for level
+        let devilUIOffsetX = 15;
         this.timer = this.time.delayedCall( CST.CONFIG.TIMER, this.HeroWin, null, this);
         this.timertext = this.add.text(5, 0, 'Remaining Time: ', { font: 'bold 12px system-ui' });
 
         //add text for player static
-        this.hpText = this.add.text(5, 20, 'Devil HP: ' + this.wizard.hp, { font: 'bold 10px system-ui' });
-        this.bulletText = this.add.text(5, 31, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 10px system-ui' });
-        this.manaText =  this.add.text(5, 42, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
+        this.hpText = this.add.text(5, 20, 'Devil HP: ' + this.wizard.hp, { font: 'bold 12px system-ui' });
+        this.bulletText = this.add.text(5, 20 + devilUIOffsetX, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 12px system-ui' });
+        this.manaText =  this.add.text(5, 20 + devilUIOffsetX * 2, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
 
-        this.skiilOneText =  this.add.text(5, 55, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 10px system-ui' });
-        this.skiilTwoText =  this.add.text(5, 66, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SuperSpeedCost, { font: 'bold 10px system-ui' });
-        this.skiilThreeText =  this.add.text(5, 77, 'Reload Bullet - Cost: ' + SAVES.PLAYER.ReloadCost, { font: 'bold 10px system-ui' });
-        this.skiilFourText =  this.add.text(5, 88, 'Heal - Cost: ' + SAVES.PLAYER.HealCost, { font: 'bold 10px system-ui' });
+        this.skiilOneText =  this.add.text(5, 20 + devilUIOffsetX * 3, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 12px system-ui' });
+        this.skiilTwoText =  this.add.text(5, 20 + devilUIOffsetX * 4, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SuperSpeedCost, { font: 'bold 12px system-ui' });
+        this.skiilThreeText =  this.add.text(5, 20 + devilUIOffsetX * 5, 'Reload Bullet - Cost: ' + SAVES.PLAYER.ReloadCost, { font: 'bold 12px system-ui' });
+        this.skiilFourText =  this.add.text(5, 20 + devilUIOffsetX * 6, 'Heal - Cost: ' + SAVES.PLAYER.HealCost, { font: 'bold 12px system-ui' });
 
         //add pause button for hero player
         let pauseButton = this.utilfunctions.createTextButton(

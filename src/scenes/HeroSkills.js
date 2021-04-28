@@ -103,7 +103,7 @@ export default class HeroSkills extends Phaser.Scene {
     }
 
     //update screen to show current skill level
-    update(args){
+    update(time, delta){
         this.spikeLevel.setText("Spike level " + SAVES.SPIKE.SpikeLevel + " - ");
         this.bombLevel.setText("Bomb level " + SAVES.BOMB.BombLevel + " - ");
         this.bearTrapLevel.setText("Bear Trap level " + SAVES.BEARTRAP.BearTrapLevel + " - ");

@@ -37,7 +37,7 @@ export default class manaPotion extends Phaser.GameObjects.Sprite{
     }
 
     /**
-     * Update the Beartrap in game loop. <br/>
+     * Update the manaPotion in game loop. <br/>
      * Apply gravity, drag and friction. <br/>
      * Save current velocity for collision reaction.
      *

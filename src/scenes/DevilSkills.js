@@ -19,7 +19,7 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     /**
-     * Create Devil Skills scene
+     * Create Devil Skills scene for upgrading devil skills, add buttons
      */
      create() {
         //get screen center coordinate
@@ -117,7 +117,7 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     //update screen to show current skill level
-    update(args){
+    update(time, delta){
         this.playerLevel.setText("Player level " + SAVES.PLAYER.PlayerLevel + " - ");
         this.superJumpLevel.setText("Super Jump level " + SAVES.PLAYER.SuperJumpLevel + " - ");
         this.superSpeedLevel.setText("Super Speed level " + SAVES.PLAYER.SuperSpeedLevel + " - ");
@@ -167,7 +167,7 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     reloadLevelUp(){
-        if(SAVES.PLAYER.ReloadLevelLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.ReloadUpgradeCost){
+        if(SAVES.PLAYER.ReloadLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.ReloadUpgradeCost){
             return;
         }
         SAVES.SCORES.devilScore -= SAVES.PLAYER.ReloadUpgradeCost;

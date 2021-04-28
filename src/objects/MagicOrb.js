@@ -38,7 +38,7 @@ export default class MagicOrb extends Phaser.GameObjects.Sprite{
     }
 
     /**
-     * Update the magic
+     * Save magic orb velocity
      * @param args
      */
     update(args) {

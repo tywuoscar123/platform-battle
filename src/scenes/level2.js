@@ -2,6 +2,9 @@ import GameScene from "./GameScene";
 import {CST} from "../CST";
 
 export default class level2 extends GameScene{
+    /**
+     * Create level and set level specific parameters
+     */
     constructor(){
         super(CST.SCENES.LEVEL2);
         this.level = 2;

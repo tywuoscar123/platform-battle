@@ -37,9 +37,8 @@ export default class hpPotion extends Phaser.GameObjects.Sprite{
     }
 
     /**
-     * Update the Beartrap in game loop. <br/>
+     * Update the hpPotion in game loop. <br/>
      * Apply gravity, drag and friction. <br/>
-     * Save current velocity for collision reaction.
      *
      * @param args - any arguments
      */
