@@ -20,6 +20,8 @@ export default class level1 extends GameScene{
         this.load.image('MultiLandscape', 'assets/MultiLandscape/tiles.png');
         this.load.image('SunnyBG', 'assets/Backgrounds/sunnyBG.png');
 
+        this.load.audio("bgm", "assets/Sfx/bgmMix1.mp3");
+
         this.load.tilemapTiledJSON('Grassland', 'assets/tilemaps/Grassland.json');
 
         super.preload();
@@ -29,6 +31,9 @@ export default class level1 extends GameScene{
         this.map = this.add.tilemap('Grassland');
         this.map.addTilesetImage('MultiLandscape');
         this.map.addTilesetImage('SunnyBG');
+
+        this.bgm = this.sound.add("bgm");
+        this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', 'SunnyBG');
         this.platformLayer = this.map.createLayer('Platform', 'MultiLandscape');

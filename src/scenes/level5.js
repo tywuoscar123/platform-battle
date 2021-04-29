@@ -22,6 +22,10 @@ export default class level5 extends GameScene{
         this.load.image('sandytiles', 'assets/dust/sandytiles.png');
 
         this.load.tilemapTiledJSON('dust', 'assets/tilemaps/dust.json');
+        
+        //load audio
+        this.load.audio('dustBgm', "assets/Sfx/dust2Bgm.mp3");
+
         super.preload();
     }
 
@@ -31,6 +35,10 @@ export default class level5 extends GameScene{
         this.map.addTilesetImage('othertiles');
         this.map.addTilesetImage('sandytiles');
 
+        //add audio
+        this.dustBgm = this.sound.add("dustBgm");
+        this.dustBgm.play();
+        
         this.backgroundLayer = this.map.createLayer('Background', 'background');
         this.platformLayer = this.map.createLayer('Platform', ['othertiles', 'sandytiles']);
         super.create();

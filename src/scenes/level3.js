@@ -19,6 +19,9 @@ export default class level3 extends GameScene{
     preload() {
         this.load.image('CaveTiles', 'assets/Cave/CaveTiles.png');
         this.load.image('CaveBG', 'assets/Cave/CaveBG.png');
+        
+        //load audio
+        this.load.audio('caveBgm', "assets/Sfx/dungeonBgm.mp3")
 
         this.load.tilemapTiledJSON('Cave', 'assets/tilemaps/Cave.json');
 
@@ -34,6 +37,9 @@ export default class level3 extends GameScene{
         this.platformLayer = this.map.createLayer('Platform', 'CaveTiles');
 
         super.create();
+
+        this.caveBgm = this.sound.add("caveBgm");
+        this.caveBgm.play();
     }
 
     update(time, delta) {

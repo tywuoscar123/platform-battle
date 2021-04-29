@@ -57,6 +57,17 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
         this.load.image('hpPotion', 'assets/Potion/hpPotion.png');
         this.load.image('manaPotion', 'assets/Potion/manaPotion.png');
+    
+        //load SFX assets
+        this.load.audio("spikeSfx", "assets/Sfx/spike.mp3");
+        this.load.audio("bearTrapSfx", "assets/Sfx/beartrap.mp3");
+        this.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3");
+        this.load.audio("playerDmgSfx", "assets/Sfx/take_damage.mp3");
+        this.load.audio("abilitySfx", "assets/Sfx/ability.mp3");
+        this.load.audio("healSfx", "assets/Sfx/healing.mp3");
+        this.load.audio('manaUpSfx', "assets/Sfx/manaUp.mp3");
+        this.load.audio('hitMarker', "assets/Sfx/hitmarker.mp3");
+        this.load.audio('playerShot', "assets/Sfx/playerShot.mp3");
     }
 
     /**
@@ -73,7 +84,18 @@ export default class GameScene extends Phaser.Scene {
         this.spawnPt = this.map.findObject('Objects', obj => obj.name === 'Spawn');
         this.goal = this.map.findObject('Objects', obj => obj.name === 'Goal');
 
-
+        /*
+            Audio setup:
+            Add audio to variables so they can be called later
+         */
+        this.spikeSfx = this.sound.add('spikeSfx');
+        this.bearTrapSfx = this.sound.add('bearTrapSfx');
+        this.playerAtkSfx = this.sound.add('playerAtkSfx');
+        this.abilitySfx = this.sound.add("abilitySfx");
+        this.healSfx = this.sound.add("healSfx");
+        this.manaUpSfx = this.sound.add("manaUpSfx");
+        this.hitMarker = this.sound.add("hitMarker");
+        this.playerShot = this.sound.add("playerShot");
         /*
             Input Settings:
             add spawn traps buttons for the hero players
@@ -370,6 +392,7 @@ export default class GameScene extends Phaser.Scene {
      */
     playerHitsTrap(object1, object2){
         if(object1 instanceof MagicOrb){
+            this.hitMarker.play();
             object1.destroy();
             object2.destroy();
         }
@@ -471,6 +494,12 @@ export default class GameScene extends Phaser.Scene {
             object2 = temp;
         }
 
+        if(object2 instanceof Spike || object2 instanceof BouncingBomb){
+            this.spikeSfx.play();
+        }
+        if(object2 instanceof Cannonball){
+            this.playerShot.play();
+        }
         //reduce player hp
         this.wizard.takeDamage(object2.damage);
 
@@ -524,9 +553,11 @@ export default class GameScene extends Phaser.Scene {
     collects(object1, object2) {
         let potion = object2 instanceof  Player? object1: object2;
         if (potion instanceof manaPotion){
+            this.manaUpSfx.play();
             this.wizard.mana += 50;
         }
         else if (potion instanceof hpPotion){
+            this.healSfx.play();
             this.wizard.hp += 50;
         }
         object2.destroy();
