@@ -59,7 +59,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('manaPotion', 'assets/Potion/manaPotion.png');
     
         //load SFX assets
-        this.load.audio("spikeSfx", "assets/Sfx/spike.mp3");
+        this.load.audio("spikeSfx", "assets/Sfx/spike.mp3");    
         this.load.audio("bearTrapSfx", "assets/Sfx/beartrap.mp3");
         this.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3");
         this.load.audio("playerDmgSfx", "assets/Sfx/take_damage.mp3");
@@ -246,7 +246,8 @@ export default class GameScene extends Phaser.Scene {
         pauseButton.on('pointerdown', function() {
             this.scene.pause();
             this.scene.launch(CST.SCENES.PAUSE, {
-                sceneKey: this.scene.key
+                sceneKey: this.scene.key,
+                gameScene: this,
             });
         }, this);
 
@@ -276,7 +277,8 @@ export default class GameScene extends Phaser.Scene {
             console.log("ESC PRESSED");
             this.scene.pause();
             this.scene.launch(CST.SCENES.PAUSE, {
-                sceneKey: this.scene.key
+                sceneKey: this.scene.key,
+                gameScene: this
             });
         }
 
@@ -629,6 +631,7 @@ export default class GameScene extends Phaser.Scene {
         this.destroyGroup(this.enemyProjectiles);
         this.destroyGroup(this.playerProjectiles);
         this.destroyGroup(this.collectables);
+        this.bgm.stop();
         this.wizard.destroy();
     }
 

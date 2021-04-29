@@ -93,7 +93,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //preload audio 
     preload(args){
         this.scene.load.audio("bearTrapSfx", "assets/Sfx/beartrap.mp3");
-        this.scene.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3");
+        this.scene.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3", );
         this.scene.load.audio("abilitySfx", "assets/Sfx/ability.mp3");
         this.scene.load.audio("healSfx", "assets/Sfx/healing.mp3");
         this.scene.load.audio('manaUpSfx', "assets/Sfx/manaUp.mp3");

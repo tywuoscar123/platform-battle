@@ -38,8 +38,8 @@ export default class level3 extends GameScene{
 
         super.create();
 
-        this.caveBgm = this.sound.add("caveBgm");
-        this.caveBgm.play();
+        this.bgm = this.sound.add("caveBgm", {volume: 0.2});
+        this.bgm.play();
     }
 
     update(time, delta) {
