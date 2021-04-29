@@ -206,7 +206,7 @@ export default class GameScene extends Phaser.Scene {
         //add text for player static
         this.hpText = this.add.text(5, 20, 'Devil HP: ' + this.wizard.hp, { font: 'bold 12px system-ui' });
         this.bulletText = this.add.text(5, 20 + devilUIOffsetX, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 12px system-ui' });
-        this.manaText =  this.add.text(5, 20 + devilUIOffsetX * 2, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
+        this.manaText =  this.add.text(5, 20 + devilUIOffsetX * 2, 'Mana: ' + this.wizard.mana, { font: 'bold 12px system-ui' });
 
         this.skiilOneText =  this.add.text(5, 20 + devilUIOffsetX * 3, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 12px system-ui' });
         this.skiilTwoText =  this.add.text(5, 20 + devilUIOffsetX * 4, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SuperSpeedCost, { font: 'bold 12px system-ui' });
