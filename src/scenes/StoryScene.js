@@ -30,7 +30,7 @@ export default class StoryScene extends Phaser.Scene {
         //add title
         let title = this.add.text(screenCenterX, 80, this.title, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
-        let graphics = this.make.graphics();
+        let graphics = this.make.graphics({});
 
         graphics.fillStyle(0xffffff);
         graphics.fillRect(300, 160, 800, 400);
