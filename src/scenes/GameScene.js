@@ -515,7 +515,6 @@ export default class GameScene extends Phaser.Scene {
         }else{
             bounceX = 0;
         }
-
         if (object1.y < object2.y){
             bounceY = -1;
         }else if (object1.y > object2.y){

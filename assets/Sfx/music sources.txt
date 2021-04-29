@@ -2,4 +2,6 @@ dungeon bgm: https://www.youtube.com/watch?v=TXTs2UAPN04&list=RDTXTs2UAPN04&star
 desert bgm: https://www.youtube.com/watch?v=7CaoOAgagxM&
 night bgm: https://www.youtube.com/watch?v=hrgzWEgCCFg&list=PLwJjxqYuirCLkq42mGw4XKGQlpZSfxsYd&index=2
 dust2 bgm: https://www.youtube.com/watch?v=t1luIMhw-Ks
-bgm mix1 : https://www.youtube.com/watch?v=mK_qinhMAWI
+bgm mix1/level1Bgm : https://www.youtube.com/watch?v=mK_qinhMAWI
+icy bgm/level2Bgm: https://www.youtube.com/watch?v=OuRvOCf9mJ4&list=PLwJjxqYuirCLkq42mGw4XKGQlpZSfxsYd&index=3
+level7Bgm: https://www.youtube.com/watch?v=5cT2HJ-afmY
