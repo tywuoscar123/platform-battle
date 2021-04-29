@@ -4,8 +4,6 @@ export default class explosion extends Phaser.GameObjects.Sprite{
     /**
      * Construct a explosion effect without any physics
      *
-     * Assign physical attributes to object and initial velocity.
-     *
      * @param {GameScene} scene - Scene this object belong to
      * @param {number} x - initial x position
      * @param {number} y - initial y position
@@ -31,7 +29,7 @@ export default class explosion extends Phaser.GameObjects.Sprite{
 
         this.play('explosion', true);
 
-        this.scene.time.delayedCall(1, () => {
+        this.scene.time.delayedCall(1000, () => {
             this.destroy();
         }, this)
     }
