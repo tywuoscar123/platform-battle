@@ -20,6 +20,7 @@ export default class LevelSelectScene extends Phaser.Scene {
 
     /**
      * Create level select scene
+     * At the same time, create buttons for viewing stories
      */
     create() {
         //get center screen coordinate
@@ -37,7 +38,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
                 let levelButton = this.utilfunctions.createTextButton(
-                    screenCenterX - 300,
+                    screenCenterX - 340,
                     screenCenterY - buttonOffsetY + y,
                     `Level ${i}`,
                     { font: "35px Arial", fill: "#ff0044" },
@@ -51,34 +52,34 @@ export default class LevelSelectScene extends Phaser.Scene {
                     this.scene.stop();
                 }, this);
 
-                this.add.text(screenCenterX - 160, screenCenterY - buttonOffsetY + y, `- Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
+                this.add.text(screenCenterX - 200, screenCenterY - buttonOffsetY + y, `Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
 
             }else{
-                this.add.text(screenCenterX - 300, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
+                this.add.text(screenCenterX - 340, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
             }
 
         }
 
-        this.add.text(screenCenterX + 270, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX + 240, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         //add story buttons
-        let introButton = this.utilfunctions.createTextButton(
-            screenCenterX + 280,
+        let prologueButton = this.utilfunctions.createTextButton(
+            screenCenterX + 360,
             screenCenterY - buttonOffsetY,
-            "<Intro>",
+            "<Prologue>",
             { font: "30px Arial", fill: "#ff0044" },
             "#ff0044",
             "#ffffff"
         );
 
-        introButton.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Intro"});
+        prologueButton.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {title: "Prologue", content: CST.STORY.Prologue});
             this.scene.stop();
         }, this);
 
         //devil story line buttons
         let devilStoryOne = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 120,
             "<Devil 1>",
             { font: "30px Arial", fill: "#ff0044" },
@@ -87,12 +88,12 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         devilStoryOne.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil One"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - 1", content: CST.STORY.Devil1});
             this.scene.stop();
         }, this);
 
         let devilStoryTwo = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 240,
             "<Devil 2>",
             { font: "30px Arial", fill: "#ff0044" },
@@ -101,12 +102,12 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         devilStoryTwo.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil Two"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - 2", content: CST.STORY.Devil2});
             this.scene.stop();
         }, this);
 
         let devilStoryThree = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 360,
             "<Devil End>",
             { font: "30px Arial", fill: "#ff0044" },
@@ -115,7 +116,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         devilStoryThree.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil End"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - End", content: CST.STORY.DevilEnd});
             this.scene.stop();
         }, this);
 
@@ -130,7 +131,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         heroStoryOne.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero One"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - 1", content: CST.STORY.Hero1});
             this.scene.stop();
         }, this);
 
@@ -144,7 +145,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         heroStoryTwo.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero Two"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - 2", content: CST.STORY.Hero2});
             this.scene.stop();
         }, this);
 
@@ -158,7 +159,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         );
 
         heroStoryThree.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero End"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - End", content: CST.STORY.HeroEnd});
             this.scene.stop();
         }, this);
 
