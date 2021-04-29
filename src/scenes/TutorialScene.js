@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for showing How to play information
+ */
 export default class TutorialScene extends Phaser.Scene {
     constructor(){
         super({
@@ -19,7 +22,7 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create tutorial scene to show how to play
      */
     create() {
         //get center screen coordinate

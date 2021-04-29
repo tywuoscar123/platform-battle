@@ -4,6 +4,9 @@ import {CST} from "../CST";
 import MagicOrb from "../objects/MagicOrb";
 import {SAVES} from "../saves";
 
+/**
+ * A player sprite controlled by the Devil player
+ */
 export default class Player extends Phaser.GameObjects.Sprite {
     /**
      * Construct a player sprite add player into physics group.<br/>

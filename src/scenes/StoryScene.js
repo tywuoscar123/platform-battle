@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 import { CST } from "../CST";
 import Utils from "../Utils";
 
+/**
+ * Scene for displaying story
+ */
 export default class StoryScene extends Phaser.Scene {
     constructor(){
         super({
@@ -20,7 +23,7 @@ export default class StoryScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create a story scene by accepting title and content from external call
      */
     create() {
         //get center screen coordinate
@@ -30,9 +33,8 @@ export default class StoryScene extends Phaser.Scene {
         //add title
         let title = this.add.text(screenCenterX, 80, this.title, { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
+        //create a draggable text box
         let graphics = this.make.graphics({});
-
-        graphics.fillStyle(0xffffff);
         graphics.fillRect(300, 160, 800, 400);
 
         let mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
@@ -41,7 +43,6 @@ export default class StoryScene extends Phaser.Scene {
 
         text.setMask(mask);
 
-        //  The rectangle they can 'drag' within
         let zone = this.add.zone(300, 160, 800, 400).setOrigin(0).setInteractive();
 
         zone.on('pointermove', function (pointer) {

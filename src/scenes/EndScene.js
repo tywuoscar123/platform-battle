@@ -1,5 +1,9 @@
 import { CST } from "../CST";
 import {SAVES} from "../saves";
+
+/**
+ * Scene for showing level result
+ */
 export default class EndScene extends Phaser.Scene {
     /**
      * Set the key of the scene

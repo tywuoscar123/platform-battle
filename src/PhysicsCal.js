@@ -1,5 +1,10 @@
 import {CST} from "./CST";
 
+/**
+ * Class for calculating velocity and forces of an object. <br/>
+ * Responsible for calculating gravity, drag and friction. <br/>
+ * Also take account of external force by accepting argument.
+ */
 export default class PhysicsCal {
     /*
     every sprite class need to set mass and drag coefficient before using this class

@@ -4,6 +4,9 @@ import PhysicsCal from "../PhysicsCal";
 import { SAVES } from "../saves";
 import explosion from "./explosion";
 
+/**
+ * A bomb sprite that will bouncing around in the level and explode when hitting the devil
+ */
 export default class BouncingBomb extends Phaser.GameObjects.Sprite{
     /**
      * Construct a BouncingBomb Object and add it into physical group.

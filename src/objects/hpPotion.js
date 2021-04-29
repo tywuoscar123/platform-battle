@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 import {SAVES} from "../saves";
 
+/**
+ * A hp Potion sprite that can be collected by devil and heal itself
+ */
 export default class hpPotion extends Phaser.GameObjects.Sprite{
     /**
      * Construct a hpPotion Object and add it into physical group. <br/>

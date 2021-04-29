@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 import {SAVES} from "../saves";
 
+/**
+ * A spike sprite that will damage the devil if it collides with the spike
+ */
 export default class Spike extends Phaser.GameObjects.Sprite{
     /**
      * Construct a Spike Object and add it into physical group. <br/>

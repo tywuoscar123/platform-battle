@@ -1,6 +1,9 @@
 import { CST } from "../CST";
 import Utils from "../Utils";
 
+/**
+ * Starting Scene for the game. Contain buttons to go to different sub-menus
+ */
 export default class MenuScene extends Phaser.Scene {
     /**
      * Set key and properties of scene. <br/>

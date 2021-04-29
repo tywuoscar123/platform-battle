@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for upgrading devil skills
+ */
 export default class DevilSkills extends Phaser.Scene {
     constructor(){
         super({

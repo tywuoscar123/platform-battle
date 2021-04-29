@@ -1,6 +1,9 @@
 import Phaser from "phaser";
 import { CST } from "./CST";
 
+/**
+ * A rectangle in the level scene to show the selected location of the hero player
+ */
 export default class MouseTracer {
     /**
      * Construct a mouse tracer as a while square on the screen for trap location selection

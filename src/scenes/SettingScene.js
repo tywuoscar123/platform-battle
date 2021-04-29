@@ -19,7 +19,7 @@ export default class SettingScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create Setting scene
      */
     create() {
         //get center screen coordinate

@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for selecting hero or devil skill trees
+ */
 export default class LevelSelectScene extends Phaser.Scene {
     constructor(){
         super({

@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 import {SAVES} from "../saves";
 
+/**
+ * A Beartrap sprite that will freeze the dveil for a duration of time
+ */
 export default class Beartrap extends Phaser.GameObjects.Sprite{
     /**
      * Construct a Beartrap Object and add it into physical group. <br/>

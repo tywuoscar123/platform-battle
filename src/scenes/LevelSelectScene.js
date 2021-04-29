@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for selecting level to play, and story unlocked
+ */
 export default class LevelSelectScene extends Phaser.Scene {
     constructor(){
         super({

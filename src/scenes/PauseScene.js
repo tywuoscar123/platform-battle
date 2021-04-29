@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import { CST } from "../CST";
 
+/**
+ * Scene as Pause Screen of the game
+ */
 export default class PauseScene extends Phaser.Scene {
     /**
      * Set the key of the scene
