@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 import { SAVES } from "../saves";
+import explosion from "./explosion";
 
 export default class BouncingBomb extends Phaser.GameObjects.Sprite{
     /**
@@ -74,6 +75,9 @@ export default class BouncingBomb extends Phaser.GameObjects.Sprite{
      * Destroy this sprite and set physical body to disable
      */
     destroy() {
+        if (this.scene !== undefined){
+            new explosion(this.scene, this.x, this.y);
+        }
         if (this.body !== undefined){
             this.body.enable = false;
         }
