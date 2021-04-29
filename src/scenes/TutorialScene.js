@@ -29,7 +29,7 @@ export default class TutorialScene extends Phaser.Scene {
         let buttonOffsetY = 130;
 
         //add title
-        let title = this.add.text(screenCenterX, 80, "Tutorial", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        let title = this.add.text(screenCenterX, 80, "How to Play", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
 
 

@@ -44,7 +44,7 @@ export default class StoryScene extends Phaser.Scene {
             "#ffffff"
         );
         backButton.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.MENU);
+            this.scene.launch(CST.SCENES.LEVELS);
             this.scene.stop();
         }, this);
     }

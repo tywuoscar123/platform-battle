@@ -27,18 +27,20 @@ export default class MenuScene extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
-        let buttonOffsetY = 80;
-        let menuY = screenCenterY - 30;
+        let buttonOffsetY = 60;
+        let menuY = screenCenterY - 50;
 
         //add title
         this.add.text(screenCenterX, screenCenterY - 180, "Platform Battle: Devil vs Hero", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
+
+        let buttonStyle = { font: "35px Arial", fill: "#ff0044"};
 
         //add play button
         let playButton = this.utilfunctions.createTextButton(
             screenCenterX,
             menuY,
             "Play",
-            { font: "45px Arial", fill: "#ff0044"},
+            buttonStyle,
             "#ff0044",
             "#ffffff");
         playButton.on('pointerdown', function(){
@@ -49,7 +51,7 @@ export default class MenuScene extends Phaser.Scene {
             screenCenterX,
             menuY+buttonOffsetY,
             "Levels",
-            { font: "45px Arial", fill: "#ff0044"},
+            buttonStyle,
             "#ff0044",
             "#ffffff");
         LevelSelect.on('pointerdown', function(){
@@ -61,7 +63,7 @@ export default class MenuScene extends Phaser.Scene {
             screenCenterX,
             menuY + buttonOffsetY*2,
             "Skills",
-            { font: "45px Arial", fill: "#ff0044"},
+            buttonStyle,
             "#ff0044",
             "#ffffff");
         skillButton.on('pointerdown', function(){
@@ -73,11 +75,22 @@ export default class MenuScene extends Phaser.Scene {
             screenCenterX,
             menuY + buttonOffsetY*3,
             "Settings",
-            { font: "45px Arial", fill: "#ff0044"},
+            buttonStyle,
             "#ff0044",
             "#ffffff");
         settingButton.on('pointerdown', function(){
             this.scene.start(CST.SCENES.SETTINGS);
+        }, this);
+
+        let tutorialButton = this.utilfunctions.createTextButton(
+            screenCenterX,
+            menuY + buttonOffsetY*4,
+            "How to Play",
+            buttonStyle,
+            "#ff0044",
+            "#ffffff");
+        tutorialButton.on('pointerdown', function(){
+            this.scene.start(CST.SCENES.TUTORIAL);
         }, this);
     }
 }
