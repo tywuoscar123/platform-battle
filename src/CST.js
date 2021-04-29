@@ -10,6 +10,8 @@ export var CST = {
         DEVILSKILLS: "DEVILSKILLS",
         HEROSKILLS: "HEROSKILLS",
         GAME: "GAME",
+        STORY: "STORY",
+        TUTORIAL: "TUTORIAL",
         LEVEL1: "LEVEL1",
         LEVEL2: "LEVEL2",
         LEVEL3: "LEVEL3",

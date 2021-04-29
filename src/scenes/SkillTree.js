@@ -19,7 +19,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     }
 
     /**
-     * Create level select scene
+     * Create Scene for selecting character skill tree
      */
     create() {
                 //get screen center coordinate

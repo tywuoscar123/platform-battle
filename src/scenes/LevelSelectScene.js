@@ -37,10 +37,10 @@ export default class LevelSelectScene extends Phaser.Scene {
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
                 let levelButton = this.utilfunctions.createTextButton(
-                    screenCenterX - 80,
+                    screenCenterX - 300,
                     screenCenterY - buttonOffsetY + y,
                     `Level ${i}`,
-                    { font: "40px Arial", fill: "#ff0044" },
+                    { font: "35px Arial", fill: "#ff0044" },
                     "#ff0044",
                     "#ffffff"
                 );
@@ -51,13 +51,117 @@ export default class LevelSelectScene extends Phaser.Scene {
                     this.scene.stop();
                 }, this);
 
-                this.add.text(screenCenterX + 40, screenCenterY - buttonOffsetY + y, `- Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "40px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
+                this.add.text(screenCenterX - 160, screenCenterY - buttonOffsetY + y, `- Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
 
             }else{
-                this.add.text(screenCenterX - 80, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "40px Arial", fill: "#303030" }).setOrigin(0.5);
+                this.add.text(screenCenterX - 300, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
             }
 
         }
+
+        this.add.text(screenCenterX + 270, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
+
+        //add story buttons
+        let introButton = this.utilfunctions.createTextButton(
+            screenCenterX + 280,
+            screenCenterY - buttonOffsetY,
+            "<Intro>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        introButton.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Intro"});
+            this.scene.stop();
+        }, this);
+
+        //devil story line buttons
+        let devilStoryOne = this.utilfunctions.createTextButton(
+            screenCenterX + 300,
+            screenCenterY - buttonOffsetY + 120,
+            "<Devil 1>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        devilStoryOne.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Devil One"});
+            this.scene.stop();
+        }, this);
+
+        let devilStoryTwo = this.utilfunctions.createTextButton(
+            screenCenterX + 300,
+            screenCenterY - buttonOffsetY + 240,
+            "<Devil 2>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        devilStoryTwo.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Devil Two"});
+            this.scene.stop();
+        }, this);
+
+        let devilStoryThree = this.utilfunctions.createTextButton(
+            screenCenterX + 300,
+            screenCenterY - buttonOffsetY + 360,
+            "<Devil End>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        devilStoryThree.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Devil End"});
+            this.scene.stop();
+        }, this);
+
+        //hero storyline buttons
+        let heroStoryOne = this.utilfunctions.createTextButton(
+            screenCenterX + 460,
+            screenCenterY - buttonOffsetY + 120,
+            "<Hero 1>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        heroStoryOne.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Hero One"});
+            this.scene.stop();
+        }, this);
+
+        let heroStoryTwo = this.utilfunctions.createTextButton(
+            screenCenterX + 460,
+            screenCenterY - buttonOffsetY + 240,
+            "<Hero 2>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        heroStoryTwo.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Hero Two"});
+            this.scene.stop();
+        }, this);
+
+        let heroStoryThree = this.utilfunctions.createTextButton(
+            screenCenterX + 460,
+            screenCenterY - buttonOffsetY + 360,
+            "<Hero End>",
+            { font: "30px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+
+        heroStoryThree.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {story: "Hero End"});
+            this.scene.stop();
+        }, this);
+
 
         let backButton = this.utilfunctions.createTextButton(
             80,

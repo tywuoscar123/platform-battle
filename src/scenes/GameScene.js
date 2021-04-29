@@ -51,6 +51,7 @@ export default class GameScene extends Phaser.Scene {
         //load additional assets
         this.load.image('spike', 'assets/Traps/spike.png');
         this.load.image('bomb', 'assets/Traps/bomb.png');
+        this.load.atlas('explosion', 'assets/Traps/explosion.png', 'assets/Traps/explosion.json');
         this.load.atlas('cannon', 'assets/Traps/cannon_asset/cannon.png', 'assets/Traps/cannon_asset/Cannon.json');
         this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json' );
         this.load.image('magicOrb', 'assets/Attack/Magic_orb.png');
@@ -227,7 +228,7 @@ export default class GameScene extends Phaser.Scene {
         //add text for player static
         this.hpText = this.add.text(5, 20, 'Devil HP: ' + this.wizard.hp, { font: 'bold 12px system-ui' });
         this.bulletText = this.add.text(5, 20 + devilUIOffsetX, 'Devil Remaining Bullet: ' + this.wizard.remainingBullet, { font: 'bold 12px system-ui' });
-        this.manaText =  this.add.text(5, 20 + devilUIOffsetX * 2, 'Mana: ' + this.wizard.mana, { font: 'bold 10px system-ui' });
+        this.manaText =  this.add.text(5, 20 + devilUIOffsetX * 2, 'Mana: ' + this.wizard.mana, { font: 'bold 12px system-ui' });
 
         this.skiilOneText =  this.add.text(5, 20 + devilUIOffsetX * 3, 'SuperJump - Cost: ' + SAVES.PLAYER.SuperJumpCost, { font: 'bold 12px system-ui' });
         this.skiilTwoText =  this.add.text(5, 20 + devilUIOffsetX * 4, 'SuperSpeed - Cost: ' + SAVES.PLAYER.SuperSpeedCost, { font: 'bold 12px system-ui' });
@@ -523,9 +524,15 @@ export default class GameScene extends Phaser.Scene {
             bounceY = 0;
         }
 
-        this.wizard.body.setVelocity(bounceX * 200, bounceY * 100);
-        console.log(bounceX * 200);
-        console.log(bounceY * 100);
+        //assign new velocity to player
+        if (object2 instanceof BouncingBomb){
+            console.log('explode');
+            this.explosionReaction(this.wizard, object2);
+        }else{
+            this.wizard.body.setVelocity(bounceX * 200, bounceY * 100);
+        }
+        console.log(this.wizard.body.velocity.x);
+        console.log(this.wizard.body.velocity.y);
 
         //reset devil player if death
         if (this.wizard.hp <= 0){
@@ -537,6 +544,20 @@ export default class GameScene extends Phaser.Scene {
         object2.destroy();
     }
 
+    /**
+     * Handle player collision with bomb, assign new velocity to player
+     *
+     * @param player - the player sprite
+     * @param bomb - the Bouncing bomb sprite
+     */
+    explosionReaction(player, bomb){
+        let magnitudeX = Math.pow(player.x - bomb.x, 2);
+        let magnitudeY = Math.pow(player.y - bomb.y, 2);
+        let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
+        let Vx = (player.x - bomb.x)/magnitude * SAVES.BOMB.BombKnockBackSpeed;
+        let Vy = (player.y - bomb.y)/magnitude * SAVES.BOMB.BombKnockBackSpeed;
+        player.body.setVelocity(Vx, Vy);
+    }
 
     /**
      * Handle player-overlapping trap interactions
@@ -552,6 +573,12 @@ export default class GameScene extends Phaser.Scene {
         }
     }
 
+    /**
+     * Handle player collision with collectables
+     *
+     * @param object1
+     * @param object2
+     */
     collects(object1, object2) {
         let potion = object2 instanceof  Player? object1: object2;
         if (potion instanceof manaPotion){

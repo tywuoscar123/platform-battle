@@ -19,7 +19,8 @@ export var SAVES = {
         BombCoolDown: 3*1000,
         BombDuration: 10*1000,
         BombSpeed: 250,
-        BombDamage: 40
+        BombDamage: 40,
+        BombKnockBackSpeed: 500
     },
     BEARTRAP: {
         BearTrapLevel: 1,
