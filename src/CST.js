@@ -32,6 +32,7 @@ export var CST = {
         AirDensity: 1.22,
         PixelPerMeter: 20,
         NumLevels: 7,
-        MaxSkillLevel: 10
+        MaxSkillLevel: 10,
+        AUDIO: "on"
     }
 }

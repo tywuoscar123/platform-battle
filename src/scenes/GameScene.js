@@ -69,6 +69,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.audio('manaUpSfx', "assets/Sfx/manaUp.mp3");
         this.load.audio('hitMarker', "assets/Sfx/hitmarker.mp3");
         this.load.audio('playerShot', "assets/Sfx/playerShot.mp3");
+        this.load.audio('explodeSfx', "assets/Sfx/explosionSfx.mp3");
+        this.load.audio("endLevelSfx", "assets/Sfx/endLevelSfx.mp3");
     }
 
     /**
@@ -97,6 +99,34 @@ export default class GameScene extends Phaser.Scene {
         this.manaUpSfx = this.sound.add("manaUpSfx");
         this.hitMarker = this.sound.add("hitMarker");
         this.playerShot = this.sound.add("playerShot");
+        this.explodeSfx = this.sound.add("explodeSfx", {volume: 0.4});
+        this.endLevelSfx = this.sound.add("endLevelSfx", {volume: 0.2});
+
+        if(CST.CONFIG.AUDIO === "off"){
+            this.spikeSfx.setMute(true);
+            this.bearTrapSfx.setMute(true);
+            this.playerAtkSfx.setMute(true);
+            this.abilitySfx.setMute(true);
+            this.healSfx.setMute(true);
+            this.manaUpSfx.setMute(true);
+            this.hitMarker.setMute(true);
+            this.playerShot.setMute(true);
+            this.explodeSfx.setMute(true);
+            this.endLevelSfx.setMute(true);
+            this.bgm.setMute(true);
+        }else {
+            this.spikeSfx.setMute(false);
+            this.bearTrapSfx.setMute(false);
+            this.playerAtkSfx.setMute(false);
+            this.abilitySfx.setMute(false);
+            this.healSfx.setMute(false);
+            this.manaUpSfx.setMute(false);
+            this.hitMarker.setMute(false);
+            this.playerShot.setMute(false);
+            this.explodeSfx.setMute(false);
+            this.endLevelSfx.setMute(false);
+            this.bgm.setMute(false);
+        }
         /*
             Input Settings:
             add spawn traps buttons for the hero players
@@ -497,12 +527,13 @@ export default class GameScene extends Phaser.Scene {
             object2 = temp;
         }
 
-        if(object2 instanceof Spike || object2 instanceof BouncingBomb){
+        if(object2 instanceof Spike){
             this.spikeSfx.play();
-        }
-        if(object2 instanceof Cannonball){
+        }else if(object2 instanceof Cannonball){
             this.playerShot.play();
-        }
+        }else if(object2 instanceof BouncingBomb){
+            this.explodeSfx.play();
+        };
         //reduce player hp
         this.wizard.takeDamage(object2.damage);
 
@@ -618,6 +649,7 @@ export default class GameScene extends Phaser.Scene {
      */
     HeroWin() {
         //game end, hero wins, go to end scene
+        this.endLevelSfx.play();
         console.log("Hero Wins");
         this.gameover = true;
         this.destroyScene();
@@ -635,6 +667,7 @@ export default class GameScene extends Phaser.Scene {
      */
     DevilWin() {
         //game end devil wins, go to end scene
+        this.endLevelSfx.play();
         console.log("Devil Wins");
         this.gameover = true;
         this.destroyScene();

@@ -16,6 +16,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     }
 
     preload(){
+
     }
 
     /**

@@ -31,8 +31,6 @@ export default class TutorialScene extends Phaser.Scene {
         //add title
         let title = this.add.text(screenCenterX, 80, "How to Play", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
-
-
         //button to return to menu
         let backButton = this.utilfunctions.createTextButton(
             80,

@@ -21,7 +21,7 @@ export default class level2 extends GameScene{
         this.load.image('BlueWinter', 'assets/Backgrounds/BlueWinter.png');
 
         this.load.tilemapTiledJSON('Iceland', 'assets/tilemaps/Iceland.json');
-        this.load.audio("bgm", "assets/Sfx/level2Bgm.mp3");
+        this.load.audio("level2Bgm", "assets/Sfx/level2Bgm.mp3");
         super.preload();
     }
 
@@ -30,7 +30,7 @@ export default class level2 extends GameScene{
         this.map.addTilesetImage('MultiLandscape');
         this.map.addTilesetImage('BlueWinter');
 
-        this.bgm = this.sound.add("bgm", {volume: 0.2});
+        this.bgm = this.sound.add("level2Bgm", {volume: 0.2});
         this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', 'BlueWinter');
