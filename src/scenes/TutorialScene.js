@@ -29,6 +29,9 @@ export default class TutorialScene extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
+
         let buttonOffsetY = 130;
 
         //add title
@@ -41,9 +44,9 @@ export default class TutorialScene extends Phaser.Scene {
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.MENU);

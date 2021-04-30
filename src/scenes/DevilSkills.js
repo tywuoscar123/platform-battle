@@ -19,6 +19,7 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     preload(){
+        this.load.image('ruin', 'assets/menuBG/ruin.png');
     }
 
     /**
@@ -28,6 +29,14 @@ export default class DevilSkills extends Phaser.Scene {
         //get screen center coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+        //add background image
+        let BG = this.add.image(screenCenterX,screenCenterY,'ruin');
+        BG.displayWidth = this.sys.canvas.width;
+        BG.displayHeight = this.sys.canvas.height;
+
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
 
         //add title
         this.add.text(screenCenterX, screenCenterY - 250, "Hero Skills", { font: "55px Arial", fill: "#ffffff" }).setOrigin(0.5);
@@ -42,9 +51,9 @@ export default class DevilSkills extends Phaser.Scene {
         let playerUpgradeButton = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY - 160,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             playerUpgradeButton.on('pointerdown', function(){
             //call level up function for player
             this.playerLevelUp();
@@ -56,9 +65,9 @@ export default class DevilSkills extends Phaser.Scene {
         let superJumpUpgradeButton = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY - 80,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             superJumpUpgradeButton.on('pointerdown', function(){
             //call level up function for super jump
             this.superJumpLevelUp();
@@ -70,9 +79,9 @@ export default class DevilSkills extends Phaser.Scene {
         let superSpeedUpgrade = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             superSpeedUpgrade.on('pointerdown', function(){
             //call level up function for super speed
             this.superSpeedLevelUp();
@@ -83,9 +92,9 @@ export default class DevilSkills extends Phaser.Scene {
         let reloadUpgrade = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY + 80,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             reloadUpgrade.on('pointerdown', function(){
             //call level up function for reload
             this.reloadLevelUp();
@@ -96,9 +105,9 @@ export default class DevilSkills extends Phaser.Scene {
         let healUpgrade = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY + 160,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             healUpgrade.on('pointerdown', function(){
             //call level up function for heal
             this.healLevelUp();
@@ -108,9 +117,9 @@ export default class DevilSkills extends Phaser.Scene {
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.SKILLTREE);

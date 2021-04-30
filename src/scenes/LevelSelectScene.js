@@ -22,6 +22,8 @@ export default class LevelSelectScene extends Phaser.Scene {
      * Unlock the story according to the winners
      */
     preload(){
+        this.load.image('ruin', 'assets/menuBG/ruin.png');
+
         if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Devil'){
             SAVES.PROGRESS.DevilStory1 = true;
         }else if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Hero'){
@@ -50,6 +52,11 @@ export default class LevelSelectScene extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
+        //add background image
+        let BG = this.add.image(screenCenterX,screenCenterY,'ruin');
+        BG.displayWidth = this.sys.canvas.width;
+        BG.displayHeight = this.sys.canvas.height;
+
         //add title
         this.add.text(screenCenterX, 80, "Levels", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
@@ -57,6 +64,9 @@ export default class LevelSelectScene extends Phaser.Scene {
         //set buttons to interactive only if game progress reach the level
         //use a for loop to create button for each level, assign call back according to i (index)
         let buttonOffsetY = 130;
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
+        let disableColor = "#727272"
 
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
@@ -64,9 +74,9 @@ export default class LevelSelectScene extends Phaser.Scene {
                     screenCenterX - 340,
                     screenCenterY - buttonOffsetY + y,
                     `Level ${i}`,
-                    { font: "35px Arial", fill: "#ff0044" },
-                    "#ff0044",
-                    "#ffffff"
+                    { font: "35px Arial", fill: originalColor },
+                    originalColor,
+                    overColor
                 );
 
                 levelButton.on('pointerdown', function() {
@@ -76,7 +86,7 @@ export default class LevelSelectScene extends Phaser.Scene {
                 }, this);
 
             }else{
-                this.add.text(screenCenterX - 340, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
+                this.add.text(screenCenterX - 340, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: disableColor }).setOrigin(0.5);
             }
 
             this.add.text(screenCenterX - 200, screenCenterY - buttonOffsetY + y, `Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
@@ -89,9 +99,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 360,
             screenCenterY - buttonOffsetY,
             "<Prologue>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         prologueButton.on('pointerdown', function() {
@@ -104,9 +114,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 120,
             "<Devil 1>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryOne.on('pointerdown', function() {
@@ -118,9 +128,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 240,
             "<Devil 2>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryTwo.on('pointerdown', function() {
@@ -132,9 +142,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 360,
             "<Devil End>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryThree.on('pointerdown', function() {
@@ -147,9 +157,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 120,
             "<Hero 1>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryOne.on('pointerdown', function() {
@@ -161,9 +171,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 240,
             "<Hero 2>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryTwo.on('pointerdown', function() {
@@ -175,9 +185,9 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 360,
             "<Hero End>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryThree.on('pointerdown', function() {
@@ -189,41 +199,41 @@ export default class LevelSelectScene extends Phaser.Scene {
         //handle story unlock, disable the button if not unlocked yet
         if (SAVES.PROGRESS.DevilStory1 !== true){
             devilStoryOne.disableInteractive();
-            devilStoryOne.setColor("#303030");
+            devilStoryOne.setColor(disableColor);
         }
 
         if (SAVES.PROGRESS.DevilStory2 !== true){
             devilStoryTwo.disableInteractive();
-            devilStoryTwo.setColor("#303030");
+            devilStoryTwo.setColor(disableColor);
         }
 
         if (SAVES.PROGRESS.DevilStoryEnd !== true){
             devilStoryThree.disableInteractive();
-            devilStoryThree.setColor("#303030");
+            devilStoryThree.setColor(disableColor);
         }
 
         if (SAVES.PROGRESS.HeroStory1 !== true){
             heroStoryOne.disableInteractive();
-            heroStoryOne.setColor("#303030");
+            heroStoryOne.setColor(disableColor);
         }
 
         if (SAVES.PROGRESS.HeroStory2 !== true){
             heroStoryTwo.disableInteractive();
-            heroStoryTwo.setColor("#303030");
+            heroStoryTwo.setColor(disableColor);
         }
 
         if (SAVES.PROGRESS.HeroStoryEnd !== true){
             heroStoryThree.disableInteractive();
-            heroStoryThree.setColor("#303030");
+            heroStoryThree.setColor(disableColor);
         }
 
         let backButton = this.utilfunctions.createTextButton(
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.MENU);

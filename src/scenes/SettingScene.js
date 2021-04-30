@@ -16,6 +16,7 @@ export default class SettingScene extends Phaser.Scene {
     }
 
     preload(){
+        this.load.image('ruin', 'assets/menuBG/ruin.png');
     }
 
     /**
@@ -25,6 +26,14 @@ export default class SettingScene extends Phaser.Scene {
         //get center screen coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+        //add background image
+        let BG = this.add.image(screenCenterX,screenCenterY,'ruin');
+        BG.displayWidth = this.sys.canvas.width;
+        BG.displayHeight = this.sys.canvas.height;
+
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
 
         let buttonOffsetY = 130;
 
@@ -39,9 +48,9 @@ export default class SettingScene extends Phaser.Scene {
             screenCenterX +60,
             screenCenterY - buttonOffsetY,
             `1 minutes`,
-            { font: "25px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         oneMinute.on('pointerdown', function(){
             CST.CONFIG.TIMER = 60 * 1000;
@@ -52,9 +61,9 @@ export default class SettingScene extends Phaser.Scene {
             screenCenterX +200,
             screenCenterY - buttonOffsetY,
             `2 minutes`,
-            { font: "25px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         twoMinutes.on('pointerdown', function(){
@@ -66,9 +75,9 @@ export default class SettingScene extends Phaser.Scene {
             screenCenterX + 340,
             screenCenterY - buttonOffsetY,
             `3 minutes`,
-            { font: "25px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         threeMinutes.on('pointerdown', function(){
@@ -83,9 +92,9 @@ export default class SettingScene extends Phaser.Scene {
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.MENU);
