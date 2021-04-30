@@ -88,7 +88,13 @@ export var SAVES = {
         SkillFourCost: 40*/
     },
     PROGRESS: {
-        GameLevel: 7,
-        StagesWinner: ['','','','','','','']
+        GameLevel: 1,
+        StagesWinner: ['','','','','','',''],
+        DevilStory1: false,
+        DevilStory2: false,
+        DevilStoryEnd: false,
+        HeroStory1: false,
+        HeroStory2: false,
+        HeroStoryEnd: false
     }
 }

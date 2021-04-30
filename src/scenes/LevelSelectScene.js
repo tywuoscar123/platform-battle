@@ -18,7 +18,27 @@ export default class LevelSelectScene extends Phaser.Scene {
     init(){
     }
 
+    /**
+     * Unlock the story according to the winners
+     */
     preload(){
+        if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Devil'){
+            SAVES.PROGRESS.DevilStory1 = true;
+        }else if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Hero'){
+            SAVES.PROGRESS.HeroStory1 = true;
+        }
+
+        if (SAVES.PROGRESS.GameLevel > 5 && this.checkStoryUnlock(5) === 'Devil'){
+            SAVES.PROGRESS.DevilStory2 = true;
+        }else if (SAVES.PROGRESS.GameLevel > 5 && this.checkStoryUnlock(5) === 'Hero'){
+            SAVES.PROGRESS.HeroStory2 = true;
+        }
+
+        if (SAVES.PROGRESS.GameLevel > 7 && this.checkStoryUnlock(7) === 'Devil'){
+            SAVES.PROGRESS.DevilStoryEnd = true;
+        }else if (SAVES.PROGRESS.GameLevel > 7 && this.checkStoryUnlock(7) === 'Hero'){
+            SAVES.PROGRESS.HeroStoryEnd = true;
+        }
     }
 
     /**
@@ -55,12 +75,11 @@ export default class LevelSelectScene extends Phaser.Scene {
                     this.scene.stop();
                 }, this);
 
-                this.add.text(screenCenterX - 200, screenCenterY - buttonOffsetY + y, `Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
-
             }else{
                 this.add.text(screenCenterX - 340, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
             }
 
+            this.add.text(screenCenterX - 200, screenCenterY - buttonOffsetY + y, `Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
         }
 
         this.add.text(screenCenterX + 240, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
@@ -167,6 +186,37 @@ export default class LevelSelectScene extends Phaser.Scene {
         }, this);
 
 
+        //handle story unlock, disable the button if not unlocked yet
+        if (SAVES.PROGRESS.DevilStory1 !== true){
+            devilStoryOne.disableInteractive();
+            devilStoryOne.setColor("#303030");
+        }
+
+        if (SAVES.PROGRESS.DevilStory2 !== true){
+            devilStoryTwo.disableInteractive();
+            devilStoryTwo.setColor("#303030");
+        }
+
+        if (SAVES.PROGRESS.DevilStoryEnd !== true){
+            devilStoryThree.disableInteractive();
+            devilStoryThree.setColor("#303030");
+        }
+
+        if (SAVES.PROGRESS.HeroStory1 !== true){
+            heroStoryOne.disableInteractive();
+            heroStoryOne.setColor("#303030");
+        }
+
+        if (SAVES.PROGRESS.HeroStory2 !== true){
+            heroStoryTwo.disableInteractive();
+            heroStoryTwo.setColor("#303030");
+        }
+
+        if (SAVES.PROGRESS.HeroStoryEnd !== true){
+            heroStoryThree.disableInteractive();
+            heroStoryThree.setColor("#303030");
+        }
+
         let backButton = this.utilfunctions.createTextButton(
             80,
             600,
@@ -179,5 +229,30 @@ export default class LevelSelectScene extends Phaser.Scene {
             this.scene.launch(CST.SCENES.MENU);
             this.scene.stop();
         }, this);
+    }
+
+    /**
+     * Check which player win more levels in the specific range
+     *
+     * @param {number} level - level to be checked
+     */
+    checkStoryUnlock(level){
+        let DevilWin = 0;
+        let HeroWin = 0;
+        for (let i=0; i<level; i++){
+            if (SAVES.PROGRESS.StagesWinner[i] === 'Devil'){
+                DevilWin += 1;
+            }else if (SAVES.PROGRESS.StagesWinner[i] === 'Hero'){
+                HeroWin += 1;
+            }
+        }
+
+        if (DevilWin > HeroWin){
+            return 'Devil';
+        }else if (DevilWin < HeroWin){
+            return 'Hero';
+        }else{
+            return '';
+        }
     }
 }
