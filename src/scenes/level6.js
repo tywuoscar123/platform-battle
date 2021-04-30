@@ -24,6 +24,8 @@ export default class level6 extends GameScene{
         this.load.image('MultiLandscape', 'assets/starryNight/MultiLandscape.png');
         this.load.image('platforms', 'assets/starryNight/tiles.png');
 
+        this.load.audio('nightBgm', "assets/Sfx/nightBgm.mp3");
+
         this.load.tilemapTiledJSON('starryNight', 'assets/tilemaps/starryNight.json');
         super.preload();
     }
@@ -33,6 +35,9 @@ export default class level6 extends GameScene{
         this.map.addTilesetImage('Background');
         this.map.addTilesetImage('MultiLandscape');
         this.map.addTilesetImage('platforms');
+
+        this.bgm = this.sound.add("nightBgm", {volume: 0.2, loop: true});
+        this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', 'Background');
         this.platformLayer = this.map.createLayer('Platform', ['MultiLandscape', 'platforms']);

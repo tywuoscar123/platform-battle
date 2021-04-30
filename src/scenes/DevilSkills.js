@@ -19,6 +19,8 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     preload(){
+        //load audio
+        this.load.audio("levelUpSfx", "assets/Sfx/levelUpSfx.mp3");
         this.load.image('ruin', 'assets/menuBG/ruin.png');
     }
 
@@ -26,6 +28,12 @@ export default class DevilSkills extends Phaser.Scene {
      * Create Devil Skills scene for upgrading devil skills, add buttons
      */
      create() {
+        this.levelUpSfx = this.sound.add("levelUpSfx", {volume: 0.5});
+        if(CST.CONFIG.AUDIO === "off"){
+            this.sound.mute = true;
+        }else {
+            this.sound.mute = false;
+        }
         //get screen center coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
@@ -147,6 +155,8 @@ export default class DevilSkills extends Phaser.Scene {
         if(SAVES.PLAYER.PlayerLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.PlayerUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
+
         SAVES.SCORES.devilScore -= SAVES.PLAYER.PlayerUpgradeCost;
         SAVES.PLAYER.PlayerUpgradeCost *= 2;
         SAVES.PLAYER.PlayerLevel++;
@@ -171,6 +181,8 @@ export default class DevilSkills extends Phaser.Scene {
         if(SAVES.PLAYER.SuperSpeedLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.SuperSpeedUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
+
         SAVES.SCORES.devilScore -= SAVES.PLAYER.SuperSpeedUpgradeCost;
         SAVES.PLAYER.SuperSpeedUpgradeCost *= 2;
         SAVES.PLAYER.SuperSpeedLevel++;
@@ -182,6 +194,8 @@ export default class DevilSkills extends Phaser.Scene {
         if(SAVES.PLAYER.ReloadLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.ReloadUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
+
         SAVES.SCORES.devilScore -= SAVES.PLAYER.ReloadUpgradeCost;
         SAVES.PLAYER.ReloadUpgradeCost *= 2;
         SAVES.PLAYER.ReloadLevel++;
@@ -191,6 +205,8 @@ export default class DevilSkills extends Phaser.Scene {
         if(SAVES.PLAYER.HealLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.HealUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
+
         SAVES.SCORES.devilScore -= SAVES.PLAYER.HealUpgradeCost;
         SAVES.PLAYER.HealUpgradeCost *= 2;
         SAVES.PLAYER.HealLevel++;

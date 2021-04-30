@@ -74,6 +74,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.reloadAvail = true;
         this.healAvail = true;
 
+        this.playBearTrapSfx = true;
+
         //get the keyboard input for controlling player
         const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
         this.keys = this.scene.input.keyboard.addKeys({
@@ -91,6 +93,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.VybeforeCollision = this.body.velocity.y;
     }
 
+    //preload audio 
+    preload(args){
+        this.scene.load.audio("bearTrapSfx", "assets/Sfx/beartrap.mp3");
+        this.scene.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3", );
+        this.scene.load.audio("abilitySfx", "assets/Sfx/ability.mp3");
+        this.scene.load.audio("healSfx", "assets/Sfx/healing.mp3");
+        this.scene.load.audio('manaUpSfx', "assets/Sfx/manaUp.mp3");
+    }
+
+    //assign audio to variables so they can be called later
+    create(args){
+        this.scene.bearTrapSfx = this.scene.sound.add('bearTrapSfx');
+        this.scene.playerAtkSfx = this.scene.sound.add('playerAtkSfx');
+        this.scene.abilitySfx = this.scene.sound.add("abilitySfx");
+        this.scene.healSfx = this.scene.sound.add("healSfx");
+        this.scene.manaUpSfx = this.scene.sound.add("manaUpSfx");
+    }
+    
     /**
      * Update player in game loop.<br/>
      * Check control and apply gravity, drag and friction.
@@ -102,9 +122,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //console.log(this.body.velocity.y);
         //map skill buttons
         if (Phaser.Input. Keyboard.JustDown(this.keys.one)){
+            this.scene.abilitySfx.play();
             this.superJump();
         }
         if (Phaser.Input. Keyboard.JustDown(this.keys.two)){
+            this.scene.abilitySfx.play();
             this.superSpeed();
         }
         if(Phaser.Input.Keyboard.JustDown(this.keys.three)){
@@ -117,6 +139,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //Check attack button pause, shot if bullet remains
         if (Phaser.Input. Keyboard.JustDown(this.keys.space) && this.remainingBullet > 0){
             let spawnDistance = this.displayWidth / 2;
+            this.scene.playerAtkSfx.play();
             if (!this.flipX){
                 new MagicOrb(this.scene, this.x + spawnDistance, this.y, 1);
             }else{
@@ -215,11 +238,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     freezePlayer(){
         //disable control, set velocity to 0, remove freeze after a fixed duration
+        if(this.playBearTrapSfx){
+            this.scene.bearTrapSfx.play();
+            //sets variable to false so sound won't keep on playing
+            this.playBearTrapSfx = false;
+        }
         this.freeze = true;
         this.body.setVelocityX(0);
         this.body.setVelocityY(0);
         this.freezeEvent = this.scene.time.delayedCall(SAVES.BEARTRAP.BearTrapFreezeTime, ()=>{
             this.freeze = false;
+            //set variable to true after player is unfrozen so sound will play when player steps on another trap
+            this.playBearTrapSfx = true;
         }, this);
     }
 
@@ -284,6 +314,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if (!this.reloadAvail || this.mana < SAVES.PLAYER.ReloadCost){
             return;
         }
+        //play audio
+        this.scene.manaUpSfx.play()
 
         //reduce mana
         this.mana -= SAVES.PLAYER.ReloadCost;
@@ -301,7 +333,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if (!this.healAvail || this.mana < SAVES.PLAYER.HealCost){
             return;
         }
-
+        //play audio
+        this.scene.healSfx.play();
         //reduce mana
         this.mana -= SAVES.PLAYER.HealCost
 

@@ -22,6 +22,8 @@ export default class PauseScene extends Phaser.Scene {
      */
     init(data){
         this.sceneKey = data.sceneKey;
+        this.gameScene = data.gameScene;
+        console.log(data.gameScene);
     }
 
     preload(){
@@ -67,9 +69,12 @@ export default class PauseScene extends Phaser.Scene {
             this.setFill(originalColor);
         });
         endText.on('pointerdown', function() {
+            this.gameScene.destroyScene();   
             this.scene.stop(this.sceneKey);
             this.scene.launch(CST.SCENES.MENU);
             this.scene.stop();
         }, this);
     }
+
+    
 }

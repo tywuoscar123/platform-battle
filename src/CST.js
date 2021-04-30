@@ -32,7 +32,8 @@ export var CST = {
         AirDensity: 1.22,
         PixelPerMeter: 20,
         NumLevels: 7,
-        MaxSkillLevel: 10
+        MaxSkillLevel: 10,
+        AUDIO: "on",
     },
     STORY:{
         Prologue: ['In a remote village, a descendant of an ancient hero lives his peaceful life there. Little does he know that there is a seal of an ancient devil hidden in the church which the hero defects 1000 years ago.\n',

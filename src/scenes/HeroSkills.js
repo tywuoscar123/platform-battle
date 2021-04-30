@@ -19,6 +19,8 @@ export default class HeroSkills extends Phaser.Scene {
     }
 
     preload(){
+        //load audio
+        this.load.audio("levelUpSfx", "assets/Sfx/levelUpSfx.mp3");
         this.load.image('ruin', 'assets/menuBG/ruin.png');
     }
 
@@ -26,6 +28,12 @@ export default class HeroSkills extends Phaser.Scene {
      * Create hero skills(traps) scene
      */
     create() {
+        this.levelUpSfx = this.sound.add("levelUpSfx", {volume: 0.5});
+        if(CST.CONFIG.AUDIO === "off"){
+            this.sound.mute = true;
+        }else {
+            this.sound.mute = false;
+        }
         //get screen center coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
@@ -116,6 +124,7 @@ export default class HeroSkills extends Phaser.Scene {
 
     //update screen to show current skill level
     update(time, delta){
+
         this.spikeLevel.setText("Spike level " + SAVES.SPIKE.SpikeLevel + " - ");
         this.bombLevel.setText("Bomb level " + SAVES.BOMB.BombLevel + " - ");
         this.bearTrapLevel.setText("Bear Trap level " + SAVES.BEARTRAP.BearTrapLevel + " - ");
@@ -132,6 +141,7 @@ export default class HeroSkills extends Phaser.Scene {
         if(SAVES.SPIKE.SpikeLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.SPIKE.SpikeUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.SPIKE.SpikeUpgradeCost;
         SAVES.SPIKE.SpikeUpgradeCost *= 2;
         SAVES.SPIKE.SpikeLevel++;
@@ -144,6 +154,7 @@ export default class HeroSkills extends Phaser.Scene {
         if(SAVES.BOMB.BombLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.BOMB.BombUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.BOMB.BombUpgradeCost;
         SAVES.BOMB.BombUpgradeCost *= 2;
         SAVES.BOMB.BombLevel++;
@@ -155,6 +166,7 @@ export default class HeroSkills extends Phaser.Scene {
         if(SAVES.BEARTRAP.BearTrapLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.BEARTRAP.BearTrapUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.BEARTRAP.BearTrapUpgradeCost;
         SAVES.BEARTRAP.BearTrapUpgradeCost *= 2;
         SAVES.BEARTRAP.BearTrapLevel++;
@@ -164,6 +176,7 @@ export default class HeroSkills extends Phaser.Scene {
         if(SAVES.CANNON.CannonLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.CANNON.CannonUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.CANNON.CannonUpgradeCost;
         SAVES.CANNON.CannonUpgradeCost *= 2;
         SAVES.CANNON.CannonLevel++;

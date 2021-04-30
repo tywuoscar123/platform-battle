@@ -24,6 +24,8 @@ export default class level4 extends GameScene{
         this.load.image('background3', 'assets/sky/background3.png');
         this.load.image('MultiLandscape', 'assets/sky/tiles.png');
 
+        this.load.audio('level4Bgm', "assets/Sfx/level4Bgm.mp3")
+
         this.load.tilemapTiledJSON('sky', 'assets/tilemaps/sky.json');
 
         super.preload();
@@ -34,6 +36,9 @@ export default class level4 extends GameScene{
         this.map.addTilesetImage('background2');
         this.map.addTilesetImage('background3');
         this.map.addTilesetImage('MultiLandscape');
+
+        this.bgm = this.sound.add("level4Bgm", {volume: 0.2, loop: true});
+        this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', ['background2', 'background3']);
         this.platformLayer = this.map.createLayer('Platform', 'MultiLandscape');

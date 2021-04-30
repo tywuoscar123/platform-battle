@@ -24,6 +24,8 @@ export default class level7 extends GameScene{
         this.load.image('CastleBG', 'assets/CastlePrison/Background.png');
         this.load.tilemapTiledJSON('CastlePrison', 'assets/tilemaps/CastlePrison.json');
 
+        this.load.audio('level7Bgm', "assets/Sfx/level7Bgm.mp3");
+
         super.preload();
     }
 
@@ -33,6 +35,9 @@ export default class level7 extends GameScene{
         this.map.addTilesetImage('CastleBG');
         this.backgroundLayer = this.map.createLayer('Background', 'CastleBG');
         this.platformLayer = this.map.createLayer('Platform', 'Castletiles');
+
+        this.bgm = this.sound.add("level7Bgm", {volume: 0.3, loop: true});
+        this.bgm.play();
 
         super.create();
     }

@@ -62,6 +62,19 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
         this.load.image('hpPotion', 'assets/Potion/hpPotion.png');
         this.load.image('manaPotion', 'assets/Potion/manaPotion.png');
+    
+        //load SFX assets
+        this.load.audio("spikeSfx", "assets/Sfx/spike.mp3");    
+        this.load.audio("bearTrapSfx", "assets/Sfx/beartrap.mp3");
+        this.load.audio("playerAtkSfx", "assets/Sfx/player_attack.mp3");
+        this.load.audio("playerDmgSfx", "assets/Sfx/take_damage.mp3");
+        this.load.audio("abilitySfx", "assets/Sfx/ability.mp3");
+        this.load.audio("healSfx", "assets/Sfx/healing.mp3");
+        this.load.audio('manaUpSfx', "assets/Sfx/manaUp.mp3");
+        this.load.audio('hitMarker', "assets/Sfx/hitmarker.mp3");
+        this.load.audio('playerShot', "assets/Sfx/playerShot.mp3");
+        this.load.audio('explodeSfx', "assets/Sfx/explosionSfx.mp3");
+        this.load.audio("endLevelSfx", "assets/Sfx/endLevelSfx.mp3");
     }
 
     /**
@@ -78,7 +91,27 @@ export default class GameScene extends Phaser.Scene {
         this.spawnPt = this.map.findObject('Objects', obj => obj.name === 'Spawn');
         this.goal = this.map.findObject('Objects', obj => obj.name === 'Goal');
 
+        /*
+            Audio setup:
+            Add audio to variables so they can be called later
+         */
+        this.spikeSfx = this.sound.add('spikeSfx');
+        this.bearTrapSfx = this.sound.add('bearTrapSfx');
+        this.playerAtkSfx = this.sound.add('playerAtkSfx');
+        this.abilitySfx = this.sound.add("abilitySfx");
+        this.healSfx = this.sound.add("healSfx");
+        this.manaUpSfx = this.sound.add("manaUpSfx");
+        this.hitMarker = this.sound.add("hitMarker");
+        this.playerShot = this.sound.add("playerShot");
+        this.explodeSfx = this.sound.add("explodeSfx", {volume: 0.4});
+        this.endLevelSfx = this.sound.add("endLevelSfx", {volume: 0.2});
 
+        //check if audio is set to mute or not, if muted then 
+        if(CST.CONFIG.AUDIO === "off"){
+            this.sound.mute = true;
+        }else {
+            this.sound.mute = false;
+        }
         /*
             Input Settings:
             add spawn traps buttons for the hero players
@@ -229,7 +262,8 @@ export default class GameScene extends Phaser.Scene {
         pauseButton.on('pointerdown', function() {
             this.scene.pause();
             this.scene.launch(CST.SCENES.PAUSE, {
-                sceneKey: this.scene.key
+                sceneKey: this.scene.key,
+                gameScene: this,
             });
         }, this);
 
@@ -259,7 +293,8 @@ export default class GameScene extends Phaser.Scene {
             console.log("ESC PRESSED");
             this.scene.pause();
             this.scene.launch(CST.SCENES.PAUSE, {
-                sceneKey: this.scene.key
+                sceneKey: this.scene.key,
+                gameScene: this
             });
         }
 
@@ -375,6 +410,7 @@ export default class GameScene extends Phaser.Scene {
      */
     playerHitsTrap(object1, object2){
         if(object1 instanceof MagicOrb){
+            this.hitMarker.play();
             object1.destroy();
             object2.destroy();
         }
@@ -476,6 +512,13 @@ export default class GameScene extends Phaser.Scene {
             object2 = temp;
         }
 
+        if(object2 instanceof Spike){
+            this.spikeSfx.play();
+        }else if(object2 instanceof Cannonball){
+            this.playerShot.play();
+        }else if(object2 instanceof BouncingBomb){
+            this.explodeSfx.play();
+        };
         //reduce player hp
         this.wizard.takeDamage(object2.damage);
 
@@ -488,7 +531,6 @@ export default class GameScene extends Phaser.Scene {
         }else{
             bounceX = 0;
         }
-
         if (object1.y < object2.y){
             bounceY = -1;
         }else if (object1.y > object2.y){
@@ -555,9 +597,11 @@ export default class GameScene extends Phaser.Scene {
     collects(object1, object2) {
         let potion = object2 instanceof  Player? object1: object2;
         if (potion instanceof manaPotion){
+            this.manaUpSfx.play();
             this.wizard.mana += 50;
         }
         else if (potion instanceof hpPotion){
+            this.healSfx.play();
             this.wizard.hp += 50;
         }
         object2.destroy();
@@ -590,6 +634,7 @@ export default class GameScene extends Phaser.Scene {
      */
     HeroWin() {
         //game end, hero wins, go to end scene
+        this.endLevelSfx.play();
         console.log("Hero Wins");
         this.gameover = true;
         this.destroyScene();
@@ -607,6 +652,7 @@ export default class GameScene extends Phaser.Scene {
      */
     DevilWin() {
         //game end devil wins, go to end scene
+        this.endLevelSfx.play();
         console.log("Devil Wins");
         this.gameover = true;
         this.destroyScene();
@@ -629,6 +675,7 @@ export default class GameScene extends Phaser.Scene {
         this.destroyGroup(this.enemyProjectiles);
         this.destroyGroup(this.playerProjectiles);
         this.destroyGroup(this.collectables);
+        this.bgm.stop();
         this.wizard.destroy();
     }
 

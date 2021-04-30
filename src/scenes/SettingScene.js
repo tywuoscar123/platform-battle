@@ -85,6 +85,21 @@ export default class SettingScene extends Phaser.Scene {
             timerText.setText(`Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`);
         }, this);
 
+        //new setting to enable or disable audio
+        let audioText = this.add.text(screenCenterX - 320, screenCenterY - buttonOffsetY + 80, `Audio -  ${CST.CONFIG.AUDIO}`, { font: "25px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        //add button to toggle audio on or off
+        let toggleButton = this.utilfunctions.createTextButton(
+            screenCenterX +60,
+            screenCenterY - buttonOffsetY + 80,
+            `Toggle`,
+            { font: "25px Arial", fill: "#ff0044" },
+            "#ff0044",
+            "#ffffff"
+        );
+        toggleButton.on('pointerdown', function(){
+            CST.CONFIG.AUDIO === "on" ? CST.CONFIG.AUDIO = "off" : CST.CONFIG.AUDIO = "on";
+            audioText.setText(`Audio -  ${CST.CONFIG.AUDIO}`);
+        }, this);
 
 
         //button to return to menu
