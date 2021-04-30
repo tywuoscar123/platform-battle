@@ -18,11 +18,8 @@ export default class SkillTree extends Phaser.Scene {
     }
 
     preload(){
-<<<<<<< HEAD
 
-=======
         this.load.image('ruin', 'assets/menuBG/ruin.png');
->>>>>>> master
     }
 
     /**
