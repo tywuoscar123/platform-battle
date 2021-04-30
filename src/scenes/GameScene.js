@@ -102,30 +102,11 @@ export default class GameScene extends Phaser.Scene {
         this.explodeSfx = this.sound.add("explodeSfx", {volume: 0.4});
         this.endLevelSfx = this.sound.add("endLevelSfx", {volume: 0.2});
 
+        //check if audio is set to mute or not, if muted then 
         if(CST.CONFIG.AUDIO === "off"){
-            this.spikeSfx.setMute(true);
-            this.bearTrapSfx.setMute(true);
-            this.playerAtkSfx.setMute(true);
-            this.abilitySfx.setMute(true);
-            this.healSfx.setMute(true);
-            this.manaUpSfx.setMute(true);
-            this.hitMarker.setMute(true);
-            this.playerShot.setMute(true);
-            this.explodeSfx.setMute(true);
-            this.endLevelSfx.setMute(true);
-            this.bgm.setMute(true);
+            this.sound.mute = true;
         }else {
-            this.spikeSfx.setMute(false);
-            this.bearTrapSfx.setMute(false);
-            this.playerAtkSfx.setMute(false);
-            this.abilitySfx.setMute(false);
-            this.healSfx.setMute(false);
-            this.manaUpSfx.setMute(false);
-            this.hitMarker.setMute(false);
-            this.playerShot.setMute(false);
-            this.explodeSfx.setMute(false);
-            this.endLevelSfx.setMute(false);
-            this.bgm.setMute(false);
+            this.sound.mute = false;
         }
         /*
             Input Settings:

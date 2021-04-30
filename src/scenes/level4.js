@@ -34,7 +34,7 @@ export default class level4 extends GameScene{
         this.map.addTilesetImage('background3');
         this.map.addTilesetImage('MultiLandscape');
 
-        this.bgm = this.sound.add("level4Bgm", {volume: 0.2});
+        this.bgm = this.sound.add("level4Bgm", {volume: 0.2, loop: true});
         this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', ['background2', 'background3']);

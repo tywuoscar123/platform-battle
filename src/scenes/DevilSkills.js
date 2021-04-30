@@ -26,9 +26,9 @@ export default class DevilSkills extends Phaser.Scene {
      create() {
         this.levelUpSfx = this.sound.add("levelUpSfx", {volume: 0.5});
         if(CST.CONFIG.AUDIO === "off"){
-            this.levelUpSfx.setMute(true);
+            this.sound.mute = true;
         }else {
-            this.levelUpSfx.setMute(false);
+            this.sound.mute = false;
         }
         //get screen center coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;

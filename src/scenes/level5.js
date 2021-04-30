@@ -36,7 +36,7 @@ export default class level5 extends GameScene{
         this.map.addTilesetImage('sandytiles');
 
         //add audio
-        this.bgm = this.sound.add("dustBgm", {volume: 0.15});
+        this.bgm = this.sound.add("dustBgm", {volume: 0.15, loop: true});
         this.bgm.play();
         
         this.backgroundLayer = this.map.createLayer('Background', 'background');

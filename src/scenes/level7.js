@@ -33,7 +33,7 @@ export default class level7 extends GameScene{
         this.backgroundLayer = this.map.createLayer('Background', 'CastleBG');
         this.platformLayer = this.map.createLayer('Platform', 'Castletiles');
 
-        this.bgm = this.sound.add("level7Bgm", {volume: 0.3});
+        this.bgm = this.sound.add("level7Bgm", {volume: 0.3, loop: true});
         this.bgm.play();
 
         super.create();
