@@ -92,9 +92,9 @@ export default class SettingScene extends Phaser.Scene {
             screenCenterX +60,
             screenCenterY - buttonOffsetY + 80,
             `Toggle`,
-            { font: "25px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         toggleButton.on('pointerdown', function(){
             CST.CONFIG.AUDIO === "on" ? CST.CONFIG.AUDIO = "off" : CST.CONFIG.AUDIO = "on";

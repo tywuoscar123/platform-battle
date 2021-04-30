@@ -169,6 +169,8 @@ export default class DevilSkills extends Phaser.Scene {
         if(SAVES.PLAYER.SuperJumpLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.SuperJumpUpgradeCost){
             return;
         }
+        this.levelUpSfx.play();
+
         SAVES.SCORES.devilScore -= SAVES.PLAYER.SuperJumpUpgradeCost;
         SAVES.PLAYER.SuperJumpUpgradeCost *= 2;
         SAVES.PLAYER.SuperJumpLevel++;
