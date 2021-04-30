@@ -1,6 +1,9 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 
+/**
+ * A magic orb sprite that can be shoot by devil to destroy traps
+ */
 export default class MagicOrb extends Phaser.GameObjects.Sprite{
     /**
      * Construct a MagicOrb as the player attack.

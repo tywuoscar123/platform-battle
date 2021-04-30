@@ -13,6 +13,10 @@ import {SAVES} from "../saves";
 import manaPotion from "../objects/manaPotion";
 import hpPotion from "../objects/hpPotion";
 
+/**
+ * Base class for each level scene. <br/>
+ * Act as controller for each level
+ */
 export default class GameScene extends Phaser.Scene {
     /**
      * Set key and properties of scene. <br/>

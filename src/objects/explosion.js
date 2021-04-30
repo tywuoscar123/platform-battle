@@ -1,5 +1,8 @@
 import Phaser from "phaser";
 
+/**
+ * An explosion sprite without physical body to show explosion effect
+ */
 export default class explosion extends Phaser.GameObjects.Sprite{
     /**
      * Construct a explosion effect without any physics

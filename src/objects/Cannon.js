@@ -4,7 +4,9 @@ import Cannonball from '../objects/Cannonball';
 import PhysicsCal from "../PhysicsCal";
 import { SAVES } from "../saves";
 
-
+/**
+ * A cannon sprite that will continuously shoot out cannonball
+ */
 export default class Cannon extends Phaser.GameObjects.Sprite{
     /**
      * Construct a Cannon Object and add it into physical group.

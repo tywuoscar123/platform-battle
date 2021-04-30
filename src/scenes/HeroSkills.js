@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for upgrading devil skills
+ */
 export default class HeroSkills extends Phaser.Scene {
     constructor(){
         super({
@@ -18,6 +21,7 @@ export default class HeroSkills extends Phaser.Scene {
     preload(){
         //load audio
         this.load.audio("levelUpSfx", "assets/Sfx/levelUpSfx.mp3");
+        this.load.image('ruin', 'assets/menuBG/ruin.png');
     }
 
     /**
@@ -34,6 +38,14 @@ export default class HeroSkills extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
+        //add background image
+        let BG = this.add.image(screenCenterX,screenCenterY,'ruin');
+        BG.displayWidth = this.sys.canvas.width;
+        BG.displayHeight = this.sys.canvas.height;
+
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
+
         //add title
         this.add.text(screenCenterX, screenCenterY - 250, "Hero Skills", { font: "55px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
@@ -47,9 +59,9 @@ export default class HeroSkills extends Phaser.Scene {
         let spikeUpgradeButton = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY - 120,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             spikeUpgradeButton.on('pointerdown', function(){
             //call level up function for spike
             this.spikeLevelUp();
@@ -61,9 +73,9 @@ export default class HeroSkills extends Phaser.Scene {
         let bombUpgrade = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY - 40,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             bombUpgrade.on('pointerdown', function(){
             //call level up function for bomb
             this.bombLevelUp();
@@ -74,9 +86,9 @@ export default class HeroSkills extends Phaser.Scene {
         let bearTrapUpgrade = this.utilfunctions.createTextButton(screenCenterX + 130,
             screenCenterY + 40,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             bearTrapUpgrade.on('pointerdown', function(){
             //call level up function for bear trap
             this.bearTrapLevelUp();
@@ -87,9 +99,9 @@ export default class HeroSkills extends Phaser.Scene {
         let cannonUpgrade = this.utilfunctions.createTextButton(screenCenterX + 130,
             screenCenterY + 120,
             "Upgrade",
-            { font: "30px Arial", fill: "#ff0044"},
-            "#ff0044",
-            "#ffffff");
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor);
             cannonUpgrade.on('pointerdown', function(){
             //call level up function for cannon
             this.cannonLevelUp();
@@ -99,9 +111,9 @@ export default class HeroSkills extends Phaser.Scene {
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.SKILLTREE);

@@ -1,6 +1,9 @@
 import GameScene from "./GameScene";
 import {CST} from "../CST";
 
+/**
+ * Scene for level 3
+ */
 export default class level3 extends GameScene{
     /**
      * Create level and set level specific parameters

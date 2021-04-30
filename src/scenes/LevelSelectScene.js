@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import {SAVES} from "../saves";
 import Utils from "../Utils";
 
+/**
+ * Scene for selecting level to play, and story unlocked
+ */
 export default class LevelSelectScene extends Phaser.Scene {
     constructor(){
         super({
@@ -15,16 +18,44 @@ export default class LevelSelectScene extends Phaser.Scene {
     init(){
     }
 
+    /**
+     * Unlock the story according to the winners
+     */
     preload(){
+        this.load.image('ruin', 'assets/menuBG/ruin.png');
+
+        if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Devil'){
+            SAVES.PROGRESS.DevilStory1 = true;
+        }else if (SAVES.PROGRESS.GameLevel > 3 && this.checkStoryUnlock(3) === 'Hero'){
+            SAVES.PROGRESS.HeroStory1 = true;
+        }
+
+        if (SAVES.PROGRESS.GameLevel > 5 && this.checkStoryUnlock(5) === 'Devil'){
+            SAVES.PROGRESS.DevilStory2 = true;
+        }else if (SAVES.PROGRESS.GameLevel > 5 && this.checkStoryUnlock(5) === 'Hero'){
+            SAVES.PROGRESS.HeroStory2 = true;
+        }
+
+        if (SAVES.PROGRESS.GameLevel > 7 && this.checkStoryUnlock(7) === 'Devil'){
+            SAVES.PROGRESS.DevilStoryEnd = true;
+        }else if (SAVES.PROGRESS.GameLevel > 7 && this.checkStoryUnlock(7) === 'Hero'){
+            SAVES.PROGRESS.HeroStoryEnd = true;
+        }
     }
 
     /**
      * Create level select scene
+     * At the same time, create buttons for viewing stories
      */
     create() {
         //get center screen coordinate
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+        //add background image
+        let BG = this.add.image(screenCenterX,screenCenterY,'ruin');
+        BG.displayWidth = this.sys.canvas.width;
+        BG.displayHeight = this.sys.canvas.height;
 
         //add title
         this.add.text(screenCenterX, 80, "Levels", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
@@ -33,16 +64,19 @@ export default class LevelSelectScene extends Phaser.Scene {
         //set buttons to interactive only if game progress reach the level
         //use a for loop to create button for each level, assign call back according to i (index)
         let buttonOffsetY = 130;
+        let originalColor = "#00ff00";
+        let overColor = "#ffffff";
+        let disableColor = "#727272"
 
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
                 let levelButton = this.utilfunctions.createTextButton(
-                    screenCenterX - 300,
+                    screenCenterX - 340,
                     screenCenterY - buttonOffsetY + y,
                     `Level ${i}`,
-                    { font: "35px Arial", fill: "#ff0044" },
-                    "#ff0044",
-                    "#ffffff"
+                    { font: "35px Arial", fill: originalColor },
+                    originalColor,
+                    overColor
                 );
 
                 levelButton.on('pointerdown', function() {
@@ -51,71 +85,70 @@ export default class LevelSelectScene extends Phaser.Scene {
                     this.scene.stop();
                 }, this);
 
-                this.add.text(screenCenterX - 160, screenCenterY - buttonOffsetY + y, `- Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
-
             }else{
-                this.add.text(screenCenterX - 300, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: "#303030" }).setOrigin(0.5);
+                this.add.text(screenCenterX - 340, screenCenterY - buttonOffsetY + y, `Level ${i}`, { font: "35px Arial", fill: disableColor }).setOrigin(0.5);
             }
 
+            this.add.text(screenCenterX - 200, screenCenterY - buttonOffsetY + y, `Winner: ${SAVES.PROGRESS.StagesWinner[i-1]}`, { font: "35px Arial", fill: "#ffffff" }).setOrigin(0, 0.5);
         }
 
-        this.add.text(screenCenterX + 270, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX + 240, screenCenterY - buttonOffsetY - 50, "Story:", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         //add story buttons
-        let introButton = this.utilfunctions.createTextButton(
-            screenCenterX + 280,
+        let prologueButton = this.utilfunctions.createTextButton(
+            screenCenterX + 360,
             screenCenterY - buttonOffsetY,
-            "<Intro>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            "<Prologue>",
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
-        introButton.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Intro"});
+        prologueButton.on('pointerdown', function() {
+            this.scene.launch(CST.SCENES.STORY, {title: "Prologue", content: CST.STORY.Prologue});
             this.scene.stop();
         }, this);
 
         //devil story line buttons
         let devilStoryOne = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 120,
             "<Devil 1>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryOne.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil One"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - 1", content: CST.STORY.Devil1});
             this.scene.stop();
         }, this);
 
         let devilStoryTwo = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 240,
             "<Devil 2>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryTwo.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil Two"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - 2", content: CST.STORY.Devil2});
             this.scene.stop();
         }, this);
 
         let devilStoryThree = this.utilfunctions.createTextButton(
-            screenCenterX + 300,
+            screenCenterX + 260,
             screenCenterY - buttonOffsetY + 360,
             "<Devil End>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         devilStoryThree.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Devil End"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Devil - End", content: CST.STORY.DevilEnd});
             this.scene.stop();
         }, this);
 
@@ -124,13 +157,13 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 120,
             "<Hero 1>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryOne.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero One"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - 1", content: CST.STORY.Hero1});
             this.scene.stop();
         }, this);
 
@@ -138,13 +171,13 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 240,
             "<Hero 2>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryTwo.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero Two"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - 2", content: CST.STORY.Hero2});
             this.scene.stop();
         }, this);
 
@@ -152,28 +185,84 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 460,
             screenCenterY - buttonOffsetY + 360,
             "<Hero End>",
-            { font: "30px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "30px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
 
         heroStoryThree.on('pointerdown', function() {
-            this.scene.launch(CST.SCENES.STORY, {story: "Hero End"});
+            this.scene.launch(CST.SCENES.STORY, {title: "Hero - End", content: CST.STORY.HeroEnd});
             this.scene.stop();
         }, this);
 
+
+        //handle story unlock, disable the button if not unlocked yet
+        if (SAVES.PROGRESS.DevilStory1 !== true){
+            devilStoryOne.disableInteractive();
+            devilStoryOne.setColor(disableColor);
+        }
+
+        if (SAVES.PROGRESS.DevilStory2 !== true){
+            devilStoryTwo.disableInteractive();
+            devilStoryTwo.setColor(disableColor);
+        }
+
+        if (SAVES.PROGRESS.DevilStoryEnd !== true){
+            devilStoryThree.disableInteractive();
+            devilStoryThree.setColor(disableColor);
+        }
+
+        if (SAVES.PROGRESS.HeroStory1 !== true){
+            heroStoryOne.disableInteractive();
+            heroStoryOne.setColor(disableColor);
+        }
+
+        if (SAVES.PROGRESS.HeroStory2 !== true){
+            heroStoryTwo.disableInteractive();
+            heroStoryTwo.setColor(disableColor);
+        }
+
+        if (SAVES.PROGRESS.HeroStoryEnd !== true){
+            heroStoryThree.disableInteractive();
+            heroStoryThree.setColor(disableColor);
+        }
 
         let backButton = this.utilfunctions.createTextButton(
             80,
             600,
             "< BACK",
-            { font: "32px Arial", fill: "#ff0044" },
-            "#ff0044",
-            "#ffffff"
+            { font: "32px Arial", fill: originalColor},
+            originalColor,
+            overColor
         );
         backButton.on('pointerdown', function() {
             this.scene.launch(CST.SCENES.MENU);
             this.scene.stop();
         }, this);
+    }
+
+    /**
+     * Check which player win more levels in the specific range
+     *
+     * @param {number} level - level to be checked
+     */
+    checkStoryUnlock(level){
+        let DevilWin = 0;
+        let HeroWin = 0;
+        for (let i=0; i<level; i++){
+            if (SAVES.PROGRESS.StagesWinner[i] === 'Devil'){
+                DevilWin += 1;
+            }else if (SAVES.PROGRESS.StagesWinner[i] === 'Hero'){
+                HeroWin += 1;
+            }
+        }
+
+        if (DevilWin > HeroWin){
+            return 'Devil';
+        }else if (DevilWin < HeroWin){
+            return 'Hero';
+        }else{
+            return '';
+        }
     }
 }

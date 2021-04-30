@@ -1,6 +1,10 @@
 import Phaser from "phaser";
 import { CST } from "../CST";
 import { SAVES } from "../saves";
+
+/**
+ * A cannonball sprite the will be shoot towards the player
+ */
 export default class Cannonball extends Phaser.GameObjects.Sprite{
     /**
      * Construct a Cannonball Object and add it into physical group.

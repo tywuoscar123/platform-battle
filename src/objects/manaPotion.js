@@ -3,6 +3,9 @@ import { CST } from "../CST";
 import PhysicsCal from "../PhysicsCal";
 import {SAVES} from "../saves";
 
+/**
+ * A mana Potion sprite that can be collected by devil and recover mana for using skills
+ */
 export default class manaPotion extends Phaser.GameObjects.Sprite{
     /**
      * Construct a manaPotion Object and add it into physical group. <br/>
