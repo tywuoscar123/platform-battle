@@ -3,8 +3,8 @@
  */
 export var SAVES = {
     SCORES:{
-        devilScore: 100,
-        heroScore: 100,
+        devilScore: 0,
+        heroScore: 0,
     },
     SPIKE: { 
         SpikeLevel: 1,

@@ -641,8 +641,8 @@ export default class GameScene extends Phaser.Scene {
         //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
             winner: 'Hero',
-            heroScore: 60,
-            devilScore: 20,
+            heroScore: this.level * 10 * 2,
+            devilScore: this.level * 10,
             level: this.level
         });
     }
@@ -659,8 +659,8 @@ export default class GameScene extends Phaser.Scene {
         //console.log("destroyed");
         this.scene.start(CST.SCENES.END, {
             winner: 'Devil',
-            heroScore: 20,
-            devilScore: 60,
+            heroScore: this.level * 10,
+            devilScore: this.level * 10 * 2,
             level: this.level
         });
     }

@@ -35,18 +35,20 @@ export default class EndScene extends Phaser.Scene {
     create() {
         //show results
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
-        //const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+        const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
-        this.add.text(screenCenterX, 150, "Result", { font: "75px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 80, "Result", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
-        this.add.text(screenCenterX, 250, this.winner + " Wins!", { font: "65px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 450, "Devil's Score = " + this.devilScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
-        this.add.text(screenCenterX, 350, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 200, this.winner + " Wins!", { font: "100px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 340, "Devil's Score = " + this.devilScore, { font: "45px Arial", fill: "#ff0000" }).setOrigin(0.5);
+        this.add.text(screenCenterX, 440, "Hero's Score = " + this.heroScore, { font: "45px Arial", fill: "#00ff00" }).setOrigin(0.5);
         this.add.text(screenCenterX, 600, "Left click anywhere to continue", { font: "20px Arial", fill: "#ffffff" }).setOrigin(0.5);
         if (this.level >= SAVES.PROGRESS.GameLevel){
             SAVES.PROGRESS.GameLevel = this.level + 1;
         }
 
+        SAVES.SCORES.devilScore += this.devilScore;
+        SAVES.SCORES.heroScore += this.heroScore;
         SAVES.PROGRESS.StagesWinner[this.level - 1] = this.winner;
     }
 
