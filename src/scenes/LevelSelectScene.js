@@ -67,6 +67,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         let originalColor = "#00ff00";
         let overColor = "#ffffff";
         let disableColor = "#727272"
+        let devilColor = "#ff0000"
 
         for (let i = 1, y=0; i <= CST.CONFIG.NumLevels; i++, y+=60){
             if (SAVES.PROGRESS.GameLevel >= i){
@@ -114,8 +115,8 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 120,
             "<Devil 1>",
-            { font: "30px Arial", fill: originalColor},
-            originalColor,
+            { font: "30px Arial", fill: devilColor},
+            devilColor,
             overColor
         );
 
@@ -128,8 +129,8 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 240,
             "<Devil 2>",
-            { font: "30px Arial", fill: originalColor},
-            originalColor,
+            { font: "30px Arial", fill: devilColor},
+            devilColor,
             overColor
         );
 
@@ -142,8 +143,8 @@ export default class LevelSelectScene extends Phaser.Scene {
             screenCenterX + 260,
             screenCenterY - buttonOffsetY + 360,
             "<Devil End>",
-            { font: "30px Arial", fill: originalColor},
-            originalColor,
+            { font: "30px Arial", fill: devilColor},
+            devilColor,
             overColor
         );
 
