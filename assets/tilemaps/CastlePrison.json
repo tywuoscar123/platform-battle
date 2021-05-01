@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/WebstormProjects\/platform-battle_new\/assets\/tilemaps\/CastlePrison.json"
+         "target":"..\/..\/..\/maps\/WebstormProjects\/platform-battle_new\/assets\/tilemaps\/CastlePrison.json"
         }
     },
  "height":40,
@@ -122,6 +122,66 @@
                  "width":0,
                  "x":615.344,
                  "y":580.144
+                }, 
+                {
+                 "height":0,
+                 "id":32,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":457,
+                 "y":607
+                }, 
+                {
+                 "height":0,
+                 "id":33,
+                 "name":"cannon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":447,
+                 "y":423
+                }, 
+                {
+                 "height":0,
+                 "id":34,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":262,
+                 "y":488
+                }, 
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":184,
+                 "y":411
+                }, 
+                {
+                 "height":0,
+                 "id":36,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":459,
+                 "y":249
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -130,16 +190,16 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":32,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.5.0",
+ "tiledversion":"1.6.0",
  "tileheight":16,
  "tilesets":[
         {
          "columns":36,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Castle\/New tiles.png",
+         "image":"..\/..\/..\/maps\/used maps\/Castle\/New tiles.png",
          "imageheight":400,
          "imagewidth":576,
          "margin":0,
@@ -8259,7 +8319,7 @@
         {
          "columns":23,
          "firstgid":901,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Castle\/Background.png",
+         "image":"..\/..\/..\/maps\/used maps\/Castle\/Background.png",
          "imageheight":272,
          "imagewidth":368,
          "margin":0,
@@ -11791,6 +11851,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":1.5,
+ "version":"1.6",
  "width":80
 }

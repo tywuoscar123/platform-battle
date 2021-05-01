@@ -201,9 +201,10 @@ export default class DevilSkills extends Phaser.Scene {
         this.levelUpSfx.play();
 
         SAVES.SCORES.devilScore -= SAVES.PLAYER.PlayerUpgradeCost;
-        SAVES.PLAYER.PlayerUpgradeCost *= 2;
+        SAVES.PLAYER.PlayerUpgradeCost += 10;
         SAVES.PLAYER.PlayerLevel++;
-        SAVES.PLAYER.InitialHP += 5;
+
+        SAVES.PLAYER.InitialHP += 10;
         SAVES.PLAYER.InitialBullet += 1;
         SAVES.PLAYER.Mana += 10; 
     }
@@ -215,9 +216,9 @@ export default class DevilSkills extends Phaser.Scene {
         this.levelUpSfx.play();
 
         SAVES.SCORES.devilScore -= SAVES.PLAYER.SuperJumpUpgradeCost;
-        SAVES.PLAYER.SuperJumpUpgradeCost *= 2;
+        SAVES.PLAYER.SuperJumpUpgradeCost += 10;
         SAVES.PLAYER.SuperJumpLevel++;
-        SAVES.PLAYER.SuperJumpMultiplier += 0.5;
+        SAVES.PLAYER.SuperJumpMultiplier += 0.2;
         SAVES.PLAYER.SuperJumpDuration += 250;
         //add condition to disable upgrade button when level is max?
     }
@@ -229,10 +230,10 @@ export default class DevilSkills extends Phaser.Scene {
         this.levelUpSfx.play();
 
         SAVES.SCORES.devilScore -= SAVES.PLAYER.SuperSpeedUpgradeCost;
-        SAVES.PLAYER.SuperSpeedUpgradeCost *= 2;
+        SAVES.PLAYER.SuperSpeedUpgradeCost += 10;
         SAVES.PLAYER.SuperSpeedLevel++;
-        SAVES.PLAYER.SuperSpeedDuration += 250;
-        SAVES.PLAYER.SuperSpeedMultiplier += 0.5;
+        SAVES.PLAYER.SuperSpeedDuration += 100;
+        SAVES.PLAYER.SuperSpeedMultiplier += 0.2;
     }
 
     reloadLevelUp(){
@@ -242,10 +243,11 @@ export default class DevilSkills extends Phaser.Scene {
         this.levelUpSfx.play();
 
         SAVES.SCORES.devilScore -= SAVES.PLAYER.ReloadUpgradeCost;
-        SAVES.PLAYER.ReloadUpgradeCost *= 2;
+        SAVES.PLAYER.ReloadUpgradeCost += 10;
         SAVES.PLAYER.ReloadLevel++;
         SAVES.PLAYER.ReloadCost -= 2;
     }
+    
     healLevelUp(){
         if(SAVES.PLAYER.HealLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.HealUpgradeCost){
             return;
@@ -253,7 +255,7 @@ export default class DevilSkills extends Phaser.Scene {
         this.levelUpSfx.play();
 
         SAVES.SCORES.devilScore -= SAVES.PLAYER.HealUpgradeCost;
-        SAVES.PLAYER.HealUpgradeCost *= 2;
+        SAVES.PLAYER.HealUpgradeCost += 10;
         SAVES.PLAYER.HealLevel++;
         SAVES.PLAYER.HealCost -= 2;
     }

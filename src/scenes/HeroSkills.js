@@ -169,9 +169,11 @@ export default class HeroSkills extends Phaser.Scene {
         }
         this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.SPIKE.SpikeUpgradeCost;
-        SAVES.SPIKE.SpikeUpgradeCost *= 2;
+        SAVES.SPIKE.SpikeUpgradeCost += 10;
         SAVES.SPIKE.SpikeLevel++;
-        SAVES.SPIKE.SpikeDuration += 1000;
+
+        SAVES.SPIKE.SpikeCoolDown -= 200;
+        SAVES.SPIKE.SpikeDamage += 2;
 
         //add condition to disable upgrade button when level is max?
     }
@@ -184,8 +186,10 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.BOMB.BombUpgradeCost;
         SAVES.BOMB.BombUpgradeCost *= 2;
         SAVES.BOMB.BombLevel++;
-        SAVES.BOMB.BombDuration += 1000;
-        SAVES.BOMB.BombSpeed += 50;
+
+        SAVES.BOMB.BombCoolDown -= 200;
+        SAVES.BOMB.BombSpeed += 10;
+        SAVES.BOMB.BombDamage += 2;
     }
 
     bearTrapLevelUp(){
@@ -196,8 +200,11 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.BEARTRAP.BearTrapUpgradeCost;
         SAVES.BEARTRAP.BearTrapUpgradeCost *= 2;
         SAVES.BEARTRAP.BearTrapLevel++;
-        SAVES.BEARTRAP.BearTrapFreezeTime += 500;
+
+        SAVES.BEARTRAP.BearTrapFreezeTime += 200;
+        SAVES.BEARTRAP.BearTrapCoolDown -= 200;
     }
+
     cannonLevelUp(){
         if(SAVES.CANNON.CannonLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.CANNON.CannonUpgradeCost){
             return;
@@ -206,6 +213,9 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.CANNON.CannonUpgradeCost;
         SAVES.CANNON.CannonUpgradeCost *= 2;
         SAVES.CANNON.CannonLevel++;
-        SAVES.CANNON.CannonSpeed += 100;
+
+        SAVES.CANNON.CannonSpeed += 10;
+        SAVES.CANNON.CannonCoolDown -= 200;
+        SAVES.CANNON.CannonBallDamage += 2;
     }
 }

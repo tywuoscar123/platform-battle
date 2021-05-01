@@ -53,13 +53,13 @@ export var SAVES = {
 
         SuperJumpLevel: 1,
         SuperJumpUpgradeCost: 10,
-        SuperJumpDuration: 2 * 1000,
+        SuperJumpDuration: 4 * 1000,
         SuperJumpCost: 10,
         SuperJumpMultiplier: 2,
 
         SuperSpeedLevel: 1,
         SuperSpeedUpgradeCost: 10,
-        SuperSpeedDuration: 2 * 1000,
+        SuperSpeedDuration: 1 * 1000,
         SuperSpeedCost: 10,
         SuperSpeedMultiplier: 3,
 
