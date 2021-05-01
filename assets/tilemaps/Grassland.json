@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"Grassland.json"
+         "target":"..\/..\/..\/..\/WebstormProjects\/platform-battle_new\/assets\/tilemaps\/Grassland.json"
         }
     },
  "height":40,
@@ -48,8 +48,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":21.7798045833015,
-                 "y":543.176009166603
+                 "x":21.7798,
+                 "y":543.176
                 }, 
                 {
                  "height":0,
@@ -60,8 +60,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1239.47005958292,
-                 "y":543.836036666412
+                 "x":1239.47,
+                 "y":543.836
                 }, 
                 {
                  "height":0,
@@ -72,8 +72,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":564.296081277213,
-                 "y":31.6797800015278
+                 "x":564.296,
+                 "y":31.6798
                 }, 
                 {
                  "height":0,
@@ -84,8 +84,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":948.413413795738,
-                 "y":81.1794362539149
+                 "x":948.413,
+                 "y":81.1794
                 }, 
                 {
                  "height":0,
@@ -96,8 +96,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":485.096631273394,
-                 "y":547.136200443053
+                 "x":485.097,
+                 "y":547.136
                 }, 
                 {
                  "height":0,
@@ -108,8 +108,68 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":182.158735008785,
-                 "y":60.0595829195631
+                 "x":182.159,
+                 "y":60.0596
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":225.525186356449,
+                 "y":551.28378887132
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":306.482945561328,
+                 "y":126.255553045704
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"cannon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":288.171071455463,
+                 "y":286.243505760108
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":116.617724568933,
+                 "y":328.649951057902
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":535.863263308486,
+                 "y":366.23748211731
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -118,16 +178,16 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":7,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.5.0",
+ "tiledversion":"1.6.0",
  "tileheight":16,
  "tilesets":[
         {
          "columns":13,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Grassland\/tiles.png",
+         "image":"..\/..\/..\/maps\/used maps\/Grassland\/tiles.png",
          "imageheight":112,
          "imagewidth":208,
          "margin":0,
@@ -960,7 +1020,7 @@
         {
          "columns":16,
          "firstgid":92,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Grassland\/sunny-mountains-sky.png",
+         "image":"..\/..\/..\/maps\/used maps\/Grassland\/sunny-mountains-sky.png",
          "imageheight":224,
          "imagewidth":256,
          "margin":0,
@@ -972,6 +1032,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":1.5,
+ "version":"1.6",
  "width":80
 }
