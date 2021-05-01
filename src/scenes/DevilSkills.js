@@ -190,9 +190,9 @@ export default class DevilSkills extends Phaser.Scene {
     }
 
     /**
-     * functions to upgrade devil skills
+     * functions to upgrade devil stats
      * IF skill is in max level or devil does not have enough points to upgrade, return
-     * else upgrade skill attributes and multiply upgrade cost by 2
+     * else upgrade skill attributes and increase upgrade cost by 10
      */
      playerLevelUp(){
         if(SAVES.PLAYER.PlayerLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.PlayerUpgradeCost){
@@ -209,6 +209,11 @@ export default class DevilSkills extends Phaser.Scene {
         SAVES.PLAYER.Mana += 10; 
     }
 
+    /**
+     * functions to upgrade devil superJump skills
+     * IF skill is in max level or devil does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
      superJumpLevelUp(){
         if(SAVES.PLAYER.SuperJumpLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.SuperJumpUpgradeCost){
             return;
@@ -223,6 +228,11 @@ export default class DevilSkills extends Phaser.Scene {
         //add condition to disable upgrade button when level is max?
     }
 
+    /**
+     * functions to upgrade devil superSpeed skills
+     * IF skill is in max level or devil does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     superSpeedLevelUp(){
         if(SAVES.PLAYER.SuperSpeedLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.SuperSpeedUpgradeCost){
             return;
@@ -236,6 +246,11 @@ export default class DevilSkills extends Phaser.Scene {
         SAVES.PLAYER.SuperSpeedMultiplier += 0.2;
     }
 
+    /**
+     * functions to upgrade devil reload bullet skills
+     * IF skill is in max level or devil does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     reloadLevelUp(){
         if(SAVES.PLAYER.ReloadLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.ReloadUpgradeCost){
             return;
@@ -247,7 +262,12 @@ export default class DevilSkills extends Phaser.Scene {
         SAVES.PLAYER.ReloadLevel++;
         SAVES.PLAYER.ReloadCost -= 2;
     }
-    
+
+    /**
+     * functions to upgrade devil heal skills
+     * IF skill is in max level or devil does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     healLevelUp(){
         if(SAVES.PLAYER.HealLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.devilScore < SAVES.PLAYER.HealUpgradeCost){
             return;
