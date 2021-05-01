@@ -199,6 +199,21 @@ export default class GameScene extends Phaser.Scene {
             new hpPotion(this, location.x, location.y);
         }
 
+        let spikes = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'spike');
+        for (let location of spikes){
+            new Spike(this, location.x, location.y);
+        }
+
+        let cannons = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'cannon');
+        for (let location of cannons){
+            new Cannon(this, location.x, location.y);
+        }
+
+        let beartraps = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'beartrap');
+        for (let location of beartraps){
+            new Beartrap(this, location.x, location.y);
+        }
+
         /*
             Additional Physics setting for level
          */
