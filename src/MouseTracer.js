@@ -32,7 +32,10 @@ export default class MouseTracer {
         const pointer = this.scene.input.activePointer;
 
         //ignore click if outside the custom bound
-        if (pointer.x < CST.CONFIG.TileSize*3 || pointer.y < 0 || pointer.x > CST.CONFIG.GameX - CST.CONFIG.TileSize*3 || pointer.y > CST.CONFIG.GroundY ){
+        if (pointer.x < CST.CONFIG.TileSize*3 || pointer.y < 0 || pointer.x > CST.CONFIG.GameX - CST.CONFIG.TileSize*3 || pointer.y > CST.CONFIG.GroundY ||
+            (Math.abs(pointer.x - this.scene.wizard.x) < CST.CONFIG.TileSize*5 && Math.abs(pointer.y - this.scene.wizard.y) < CST.CONFIG.TileSize*5) ||
+            (Math.abs(pointer.x - this.scene.spawnPt.x) < CST.CONFIG.TileSize*7 && Math.abs(pointer.y - this.scene.spawnPt.y) < CST.CONFIG.TileSize*7) ||
+            (Math.abs(pointer.x - this.scene.goal.x) < CST.CONFIG.TileSize*7 && Math.abs(pointer.y - this.scene.goal.y) < CST.CONFIG.TileSize*7)){
             return;
         }
 

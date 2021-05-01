@@ -22,6 +22,12 @@ export default class HeroSkills extends Phaser.Scene {
         //load audio
         this.load.audio("levelUpSfx", "assets/Sfx/levelUpSfx.mp3");
         this.load.image('ruin', 'assets/menuBG/ruin.png');
+
+        //load icon
+        this.load.image('spike', 'assets/Traps/spike.png');
+        this.load.image('bomb', 'assets/Traps/bomb.png');
+        this.load.image('cannon', 'assets/Traps/cannon_asset/cannon-icon.png');
+        this.load.image('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png');
     }
 
     /**
@@ -52,9 +58,9 @@ export default class HeroSkills extends Phaser.Scene {
         //add indicator for hero points
         this.upgradePoints = this.add.text(screenCenterX - 200, screenCenterY - 180, "Upgrade Points: " + SAVES.SCORES.heroScore, { font: "15px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
-
+        //----SPIKE----
         //add text for to indicate current skill level
-        this.spikeLevel = this.add.text(screenCenterX -70, screenCenterY - 120, "Spike level " + SAVES.SPIKE.SpikeLevel + " - ", { font: "35px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.spikeLevel = this.add.text(screenCenterX -70, screenCenterY - 120, "Spike level " + SAVES.SPIKE.SpikeLevel + " - ", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
         //add upgrade spike button
         let spikeUpgradeButton = this.utilfunctions.createTextButton(screenCenterX + 110,
             screenCenterY - 120,
@@ -66,12 +72,17 @@ export default class HeroSkills extends Phaser.Scene {
             //call level up function for spike
             this.spikeLevelUp();
             }, this);
+        //desc for spike + icon
+        this.spikeDesc = this.add.text(screenCenterX + 50, screenCenterY - 80, "Deals damage to devil when they step on it", { font: "20px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.spike = this.add.image(screenCenterX - 250, screenCenterY - 100, "spike");
+        this.spike.setScale(1);
 
+        //----BOMB---
         //level indicator
-        this.bombLevel = this.add.text(screenCenterX - 70, screenCenterY - 40, "Bomb level " + SAVES.BOMB.BombLevel + " - ", { font: "35px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.bombLevel = this.add.text(screenCenterX - 70, screenCenterY - 20, "Bomb level " + SAVES.BOMB.BombLevel + " - ", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
         //add upgrade button
         let bombUpgrade = this.utilfunctions.createTextButton(screenCenterX + 110,
-            screenCenterY - 40,
+            screenCenterY - 20,
             "Upgrade",
             { font: "30px Arial", fill: originalColor},
             originalColor,
@@ -80,11 +91,16 @@ export default class HeroSkills extends Phaser.Scene {
             //call level up function for bomb
             this.bombLevelUp();
             }, this);
+        //desc for bomb
+        this.bombDesc = this.add.text(screenCenterX + 140, screenCenterY + 20, "Bouncing bomb that goes towards the player and bounces off platforms", { font: "20px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.bomb = this.add.image(screenCenterX - 250, screenCenterY, "bomb");
+        this.bomb.setScale(1);
         
-        this.bearTrapLevel = this.add.text(screenCenterX - 80, screenCenterY + 40, "Bear Trap level " + SAVES.BEARTRAP.BearTrapLevel + " - ", { font: "35px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        //----BEARTRAP----
+        this.bearTrapLevel = this.add.text(screenCenterX - 80, screenCenterY + 80, "Bear Trap level " + SAVES.BEARTRAP.BearTrapLevel + " - ", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
         //add upgrade button
         let bearTrapUpgrade = this.utilfunctions.createTextButton(screenCenterX + 130,
-            screenCenterY + 40,
+            screenCenterY + 80,
             "Upgrade",
             { font: "30px Arial", fill: originalColor},
             originalColor,
@@ -93,11 +109,15 @@ export default class HeroSkills extends Phaser.Scene {
             //call level up function for bear trap
             this.bearTrapLevelUp();
             }, this);
-
-        this.cannonLevel = this.add.text(screenCenterX - 70, screenCenterY + 120, "Cannon level " + SAVES.CANNON.CannonLevel + " - ", { font: "35px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        //desc for bearTrap
+        this.bearTrapDesc = this.add.text(screenCenterX + 100, screenCenterY + 120, "The Devil will be unable to move for a period after stepping on it", { font: "20px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.bearTrap = this.add.image(screenCenterX - 350, screenCenterY + 100, "beartrap");
+        this.bearTrap.setScale(2);
+        //----CANNON----
+        this.cannonLevel = this.add.text(screenCenterX - 70, screenCenterY + 180, "Cannon level " + SAVES.CANNON.CannonLevel + " - ", { font: "30px Arial", fill: "#ffffff" }).setOrigin(0.5);
         //add upgrade button
         let cannonUpgrade = this.utilfunctions.createTextButton(screenCenterX + 130,
-            screenCenterY + 120,
+            screenCenterY + 180,
             "Upgrade",
             { font: "30px Arial", fill: originalColor},
             originalColor,
@@ -106,6 +126,12 @@ export default class HeroSkills extends Phaser.Scene {
             //call level up function for cannon
             this.cannonLevelUp();
             }, this);
+
+        //desc for cannon 
+        this.cannonDesc = this.add.text(screenCenterX + 60, screenCenterY + 220, "Auto cannon that will aim at the player and shoot", { font: "20px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        this.cannon = this.add.image(screenCenterX - 250, screenCenterY + 200, "cannon");
+        this.cannon.setScale(1);    
+
         //back button to menu
         let backButton = this.utilfunctions.createTextButton(
             80,
@@ -143,9 +169,11 @@ export default class HeroSkills extends Phaser.Scene {
         }
         this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.SPIKE.SpikeUpgradeCost;
-        SAVES.SPIKE.SpikeUpgradeCost *= 2;
+        SAVES.SPIKE.SpikeUpgradeCost += 10;
         SAVES.SPIKE.SpikeLevel++;
-        SAVES.SPIKE.SpikeDuration += 1000;
+
+        SAVES.SPIKE.SpikeCoolDown -= 200;
+        SAVES.SPIKE.SpikeDamage += 2;
 
         //add condition to disable upgrade button when level is max?
     }
@@ -158,8 +186,10 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.BOMB.BombUpgradeCost;
         SAVES.BOMB.BombUpgradeCost *= 2;
         SAVES.BOMB.BombLevel++;
-        SAVES.BOMB.BombDuration += 1000;
-        SAVES.BOMB.BombSpeed += 50;
+
+        SAVES.BOMB.BombCoolDown -= 200;
+        SAVES.BOMB.BombSpeed += 10;
+        SAVES.BOMB.BombDamage += 2;
     }
 
     bearTrapLevelUp(){
@@ -170,8 +200,11 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.BEARTRAP.BearTrapUpgradeCost;
         SAVES.BEARTRAP.BearTrapUpgradeCost *= 2;
         SAVES.BEARTRAP.BearTrapLevel++;
-        SAVES.BEARTRAP.BearTrapFreezeTime += 500;
+
+        SAVES.BEARTRAP.BearTrapFreezeTime += 200;
+        SAVES.BEARTRAP.BearTrapCoolDown -= 200;
     }
+
     cannonLevelUp(){
         if(SAVES.CANNON.CannonLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.CANNON.CannonUpgradeCost){
             return;
@@ -180,6 +213,9 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.SCORES.heroScore -= SAVES.CANNON.CannonUpgradeCost;
         SAVES.CANNON.CannonUpgradeCost *= 2;
         SAVES.CANNON.CannonLevel++;
-        SAVES.CANNON.CannonSpeed += 100;
+
+        SAVES.CANNON.CannonSpeed += 10;
+        SAVES.CANNON.CannonCoolDown -= 200;
+        SAVES.CANNON.CannonBallDamage += 2;
     }
 }

@@ -57,7 +57,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/Traps/bomb.png');
         this.load.atlas('explosion', 'assets/Traps/explosion.png', 'assets/Traps/explosion.json');
         this.load.atlas('cannon', 'assets/Traps/cannon_asset/cannon.png', 'assets/Traps/cannon_asset/Cannon.json');
-        this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json' );
+        this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json');
         this.load.image('magicOrb', 'assets/Attack/Magic_orb.png');
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
         this.load.image('hpPotion', 'assets/Potion/hpPotion.png');
@@ -187,7 +187,7 @@ export default class GameScene extends Phaser.Scene {
 
 
         /*
-         * Create Potions according to tile map
+         * Create Traps and Potions according to tile map
          */
         let manaPotionLocations = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'manaPotion');
         for (let location of manaPotionLocations){
@@ -197,6 +197,21 @@ export default class GameScene extends Phaser.Scene {
         let hpPotionLocations = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'hpPotion');
         for (let location of hpPotionLocations){
             new hpPotion(this, location.x, location.y);
+        }
+
+        let spikes = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'spike');
+        for (let location of spikes){
+            new Spike(this, location.x, location.y);
+        }
+
+        let cannons = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'cannon');
+        for (let location of cannons){
+            new Cannon(this, location.x, location.y);
+        }
+
+        let beartraps = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'beartrap');
+        for (let location of beartraps){
+            new Beartrap(this, location.x, location.y);
         }
 
         /*
@@ -217,17 +232,6 @@ export default class GameScene extends Phaser.Scene {
             }
 
         }, this);
-
-        /*
-             Create Sample objects
-         */
-        //create sample spike
-        let newSpike = new Spike(this, 200, 580);
-        let newSpike2 = new Spike(this, 250, 580);
-        let newBomb = new BouncingBomb(this, 50, 400);
-        let newCannon = new Cannon(this, 300, 550)
-        let newBeartrap = new Beartrap(this, 400, 500);
-        let newMagicOrb = new MagicOrb(this,350, 400, 1);
 
         /*
             Game General Settings:
