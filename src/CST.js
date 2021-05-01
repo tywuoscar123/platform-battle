@@ -26,7 +26,7 @@ export var CST = {
         gravity: 500,
         GameX: 1280,
         GameY: 640,
-        TIMER: 60*1000,
+        TIMER: 3*60*1000,
         TileSize: 16,
         GroundY: 640 - 16,
         AirDensity: 1.22,
