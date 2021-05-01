@@ -9,9 +9,9 @@ export var SAVES = {
     SPIKE: { 
         SpikeLevel: 1,
         SpikeUpgradeCost: 10,
-        SpikeCoolDown: 4*1000,
+        SpikeCoolDown: 5*1000,
         SpikeDuration: 10*1000,
-        SpikeDamage: 30
+        SpikeDamage: 35
     },
     BOMB: {
         BombLevel: 1,
@@ -19,13 +19,13 @@ export var SAVES = {
         BombCoolDown: 6*1000,
         BombDuration: 10*1000,
         BombSpeed: 150,
-        BombDamage: 40,
+        BombDamage: 50,
         BombKnockBackSpeed: 500
     },
     BEARTRAP: {
         BearTrapLevel: 1,
         BearTrapUpgradeCost: 10,
-        BearTrapCoolDown: 4*1000,
+        BearTrapCoolDown: 5*1000,
         BearTrapDuration: 10*1000,
         BearTrapFreezeTime: 3*1000,
         BearTrapDamage: 0
@@ -36,7 +36,7 @@ export var SAVES = {
         CannonCoolDown: 6*1000,
         CannonDuration: 10*1000,
         CannonSpeed: 200,
-        CannonDamage: 10,
+        CannonDamage: 15,
         CannonBallDamage: 30
     },
     PLAYER: {

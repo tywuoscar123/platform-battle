@@ -44,8 +44,21 @@ export default class SettingScene extends Phaser.Scene {
         let timerText = this.add.text(screenCenterX - 320, screenCenterY - buttonOffsetY, `Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`, { font: "25px Arial", fill: "#ffffff" }).setOrigin(0.5);
 
         //add buttons for changing level timer
-        let twoMinutes = this.utilfunctions.createTextButton(
+        let onehalfMinutes = this.utilfunctions.createTextButton(
             screenCenterX +60,
+            screenCenterY - buttonOffsetY,
+            `1.5 minutes`,
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
+        );
+        onehalfMinutes.on('pointerdown', function(){
+            CST.CONFIG.TIMER = 1.5 * 60 * 1000;
+            timerText.setText(`Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`);
+        }, this);
+
+        let twoMinutes = this.utilfunctions.createTextButton(
+            screenCenterX + 200,
             screenCenterY - buttonOffsetY,
             `2 minutes`,
             { font: "25px Arial", fill: originalColor},
@@ -57,29 +70,16 @@ export default class SettingScene extends Phaser.Scene {
             timerText.setText(`Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`);
         }, this);
 
-        let threeMinutes = this.utilfunctions.createTextButton(
-            screenCenterX + 200,
-            screenCenterY - buttonOffsetY,
-            `3 minutes`,
-            { font: "25px Arial", fill: originalColor},
-            originalColor,
-            overColor
-        );
-        threeMinutes.on('pointerdown', function(){
-            CST.CONFIG.TIMER = 3 * 60 * 1000;
-            timerText.setText(`Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`);
-        }, this);
-
-        let fourMinutes = this.utilfunctions.createTextButton(
+        let twohalfMinutes = this.utilfunctions.createTextButton(
             screenCenterX + 340,
             screenCenterY - buttonOffsetY,
-            `4 minutes`,
+            `2.5 minutes`,
             { font: "25px Arial", fill: originalColor},
             originalColor,
             overColor
         );
-        fourMinutes.on('pointerdown', function(){
-            CST.CONFIG.TIMER = 4 * 60 * 1000;
+        twohalfMinutes.on('pointerdown', function(){
+            CST.CONFIG.TIMER = 2.5 * 60 * 1000;
             timerText.setText(`Level Time - Current: ${CST.CONFIG.TIMER/60/1000} minutes`);
         }, this);
 
