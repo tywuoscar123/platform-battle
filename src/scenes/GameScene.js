@@ -187,7 +187,7 @@ export default class GameScene extends Phaser.Scene {
 
 
         /*
-         * Create Potions according to tile map
+         * Create Traps and Potions according to tile map
          */
         let manaPotionLocations = this.map.getObjectLayer('Objects').objects.filter(obj => obj.name === 'manaPotion');
         for (let location of manaPotionLocations){
@@ -232,17 +232,6 @@ export default class GameScene extends Phaser.Scene {
             }
 
         }, this);
-
-        /*
-             Create Sample objects
-         */
-        //create sample spike
-        let newSpike = new Spike(this, 200, 580);
-        let newSpike2 = new Spike(this, 250, 580);
-        let newBomb = new BouncingBomb(this, 50, 400);
-        let newCannon = new Cannon(this, 300, 550)
-        let newBeartrap = new Beartrap(this, 400, 500);
-        let newMagicOrb = new MagicOrb(this,350, 400, 1);
 
         /*
             Game General Settings:
