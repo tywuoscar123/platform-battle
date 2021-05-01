@@ -222,6 +222,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     resetStatus(){
         this.hp = SAVES.PLAYER.InitialHP;
         this.mana = SAVES.PLAYER.Mana;
+        this.remainingBullet = SAVES.PLAYER.InitialBullet;
     }
 
     /**

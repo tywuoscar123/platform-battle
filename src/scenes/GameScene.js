@@ -619,6 +619,7 @@ export default class GameScene extends Phaser.Scene {
         this.wizard.body.setVelocity(0, 0);
         this.wizard.setX(this.spawnPt.x);
         this.wizard.setY(this.spawnPt.y);
+        this.wizard.resetStatus();
 
         //play death transition
         this.wizard.play('Idle', true);
