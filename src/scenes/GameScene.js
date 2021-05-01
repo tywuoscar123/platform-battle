@@ -57,7 +57,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('bomb', 'assets/Traps/bomb.png');
         this.load.atlas('explosion', 'assets/Traps/explosion.png', 'assets/Traps/explosion.json');
         this.load.atlas('cannon', 'assets/Traps/cannon_asset/cannon.png', 'assets/Traps/cannon_asset/Cannon.json');
-        this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json' );
+        this.load.atlas('beartrap', 'assets/Traps/beartrap_assets/Beartrap.png', 'assets/Traps/beartrap_assets/beartrap.json');
         this.load.image('magicOrb', 'assets/Attack/Magic_orb.png');
         this.load.image('cannonball', 'assets/Traps/cannon_asset/cannonball.png');
         this.load.image('hpPotion', 'assets/Potion/hpPotion.png');
