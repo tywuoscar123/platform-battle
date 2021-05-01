@@ -323,7 +323,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         //give player full bullet
         this.remainingBullet = SAVES.PLAYER.InitialBullet;
-        console.log(this.remainingBullet);
+        //console.log(this.remainingBullet);
     }
 
     /**
@@ -341,6 +341,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         //give player full health
         this.hp = SAVES.PLAYER.InitialHP;
-        console.log(this.hp);
+        //console.log(this.hp);
     }
 }

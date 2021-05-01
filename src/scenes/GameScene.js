@@ -219,7 +219,7 @@ export default class GameScene extends Phaser.Scene {
          */
         //destroy projectiles on level edge
         this.physics.world.on('worldbounds', function (body, up, down, left, right) {
-            console.log(body);
+            //console.log(body);
             let object = body.gameObject;
 
             if (object instanceof Player && down){
@@ -294,7 +294,7 @@ export default class GameScene extends Phaser.Scene {
 
         //pause scene is esc key is pressed
         if(this.escKey.isDown){
-            console.log("ESC PRESSED");
+            //console.log("ESC PRESSED");
             this.scene.pause();
             this.scene.launch(CST.SCENES.PAUSE, {
                 sceneKey: this.scene.key,
@@ -384,10 +384,10 @@ export default class GameScene extends Phaser.Scene {
 
         //console.log('rebounce');
         if (object.body.blocked.up || object.body.blocked.down){
-            console.log('bounce Y');
+            //console.log('bounce Y');
             object.body.setVelocityY(-1 * object.VybeforeCollision);
         }else if (object.body.blocked.left || object.body.blocked.right){
-            console.log('bounce X');
+            //console.log('bounce X');
             object.body.setVelocityX(-1 * object.VxbeforeCollision);
         }
 
@@ -522,7 +522,8 @@ export default class GameScene extends Phaser.Scene {
             this.playerShot.play();
         }else if(object2 instanceof BouncingBomb){
             this.explodeSfx.play();
-        };
+        }
+
         //reduce player hp
         this.wizard.takeDamage(object2.damage);
 
@@ -545,13 +546,13 @@ export default class GameScene extends Phaser.Scene {
 
         //assign new velocity to player
         if (object2 instanceof BouncingBomb){
-            console.log('explode');
+            //console.log('explode');
             this.explosionReaction(this.wizard, object2);
         }else{
             this.wizard.body.setVelocity(bounceX * 200, bounceY * 100);
         }
-        console.log(this.wizard.body.velocity.x);
-        console.log(this.wizard.body.velocity.y);
+        //console.log(this.wizard.body.velocity.x);
+        //console.log(this.wizard.body.velocity.y);
 
         //reset devil player if death
         if (this.wizard.hp <= 0){
@@ -639,7 +640,7 @@ export default class GameScene extends Phaser.Scene {
     HeroWin() {
         //game end, hero wins, go to end scene
         this.endLevelSfx.play();
-        console.log("Hero Wins");
+        //console.log("Hero Wins");
         this.gameover = true;
         this.destroyScene();
         //console.log("destroyed");
@@ -657,7 +658,7 @@ export default class GameScene extends Phaser.Scene {
     DevilWin() {
         //game end devil wins, go to end scene
         this.endLevelSfx.play();
-        console.log("Devil Wins");
+        //console.log("Devil Wins");
         this.gameover = true;
         this.destroyScene();
         //console.log("destroyed");

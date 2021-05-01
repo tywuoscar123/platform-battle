@@ -59,7 +59,7 @@ export default class SkillTree extends Phaser.Scene {
             originalColor,
             overColor);
         heroSkillButton.on('pointerdown', function(){
-            console.log("HEROSKIL");
+            //console.log("HEROSKIL");
             this.scene.start(CST.SCENES.HEROSKILLS);
         }, this);
 
