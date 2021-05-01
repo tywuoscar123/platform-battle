@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"Iceland.json"
+         "target":"..\/..\/..\/..\/WebstormProjects\/platform-battle_new\/assets\/tilemaps\/Iceland.json"
         }
     },
  "height":40,
@@ -72,7 +72,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":208.666666666667,
+                 "x":208.667,
                  "y":48
                 }, 
                 {
@@ -84,7 +84,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":670.666666666667,
+                 "x":670.667,
                  "y":260
                 }, 
                 {
@@ -96,8 +96,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":711.333333333333,
-                 "y":543.333333333333
+                 "x":711.333,
+                 "y":543.333
                 }, 
                 {
                  "height":0,
@@ -108,8 +108,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":117.333333333333,
-                 "y":49.3333333333333
+                 "x":117.333,
+                 "y":49.3333
                 }, 
                 {
                  "height":0,
@@ -121,7 +121,7 @@
                  "visible":true,
                  "width":0,
                  "x":982,
-                 "y":80.6666666666667
+                 "y":80.6667
                 }, 
                 {
                  "height":0,
@@ -132,8 +132,68 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":973.333333333333,
-                 "y":525.333333333333
+                 "x":973.333,
+                 "y":525.333
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"cannon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":318.048339733454,
+                 "y":340.215345230028
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":288.171071455463,
+                 "y":487.674120924629
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":233.235449137866,
+                 "y":559.957834500414
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":336.360213839319,
+                 "y":198.539266621489
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":444.303892779158,
+                 "y":265.040283111211
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -142,16 +202,16 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":9,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.5.0",
+ "tiledversion":"1.6.0",
  "tileheight":16,
  "tilesets":[
         {
          "columns":13,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Iceland\/tiles.png",
+         "image":"..\/..\/..\/maps\/used maps\/Iceland\/tiles.png",
          "imageheight":112,
          "imagewidth":208,
          "margin":0,
@@ -984,7 +1044,7 @@
         {
          "columns":64,
          "firstgid":92,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Iceland\/BlueWinter.png",
+         "image":"..\/..\/..\/maps\/used maps\/Iceland\/BlueWinter.png",
          "imageheight":512,
          "imagewidth":1024,
          "margin":0,
@@ -996,6 +1056,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":1.5,
+ "version":"1.6",
  "width":80
 }

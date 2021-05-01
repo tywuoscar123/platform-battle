@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"sky.json"
+         "target":"..\/..\/..\/..\/WebstormProjects\/platform-battle_new\/assets\/tilemaps\/sky.json"
         }
     },
  "height":40,
@@ -108,8 +108,68 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":30.6666666666667,
-                 "y":80.6666666666667
+                 "x":30.6667,
+                 "y":80.6667
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":349.853173706799,
+                 "y":152.277689932987
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":407.680144567427,
+                 "y":510.80490926888
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"cannon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":516.587606354943,
+                 "y":415.390407348844
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":592.726451321437,
+                 "y":320.939688276485
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":158.06038701905,
+                 "y":523.334086288683
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -118,16 +178,16 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":12,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.5.0",
+ "tiledversion":"1.6.0",
  "tileheight":16,
  "tilesets":[
         {
          "columns":33,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Cloud City\/background2.png",
+         "image":"..\/..\/..\/maps\/used maps\/Cloud City\/background2.png",
          "imageheight":528,
          "imagewidth":528,
          "margin":0,
@@ -146,7 +206,7 @@
         {
          "columns":11,
          "firstgid":1090,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Cloud City\/background3.png",
+         "image":"..\/..\/..\/maps\/used maps\/Cloud City\/background3.png",
          "imageheight":176,
          "imagewidth":176,
          "margin":0,
@@ -1249,7 +1309,7 @@
         {
          "columns":13,
          "firstgid":1211,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Cloud City\/tiles.png",
+         "image":"..\/..\/..\/maps\/used maps\/Cloud City\/tiles.png",
          "imageheight":112,
          "imagewidth":208,
          "margin":0,
@@ -2087,6 +2147,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":1.5,
+ "version":"1.6",
  "width":80
 }

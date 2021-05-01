@@ -184,7 +184,7 @@ export default class HeroSkills extends Phaser.Scene {
         }
         this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.BOMB.BombUpgradeCost;
-        SAVES.BOMB.BombUpgradeCost *= 2;
+        SAVES.BOMB.BombUpgradeCost += 10;
         SAVES.BOMB.BombLevel++;
 
         SAVES.BOMB.BombCoolDown -= 200;
@@ -198,7 +198,7 @@ export default class HeroSkills extends Phaser.Scene {
         }
         this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.BEARTRAP.BearTrapUpgradeCost;
-        SAVES.BEARTRAP.BearTrapUpgradeCost *= 2;
+        SAVES.BEARTRAP.BearTrapUpgradeCost += 10;
         SAVES.BEARTRAP.BearTrapLevel++;
 
         SAVES.BEARTRAP.BearTrapFreezeTime += 200;
@@ -211,7 +211,7 @@ export default class HeroSkills extends Phaser.Scene {
         }
         this.levelUpSfx.play();
         SAVES.SCORES.heroScore -= SAVES.CANNON.CannonUpgradeCost;
-        SAVES.CANNON.CannonUpgradeCost *= 2;
+        SAVES.CANNON.CannonUpgradeCost += 10;
         SAVES.CANNON.CannonLevel++;
 
         SAVES.CANNON.CannonSpeed += 10;

@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/..\/..\/platform-battle\/assets\/tilemaps\/Cave.json"
+         "target":"..\/..\/..\/..\/WebstormProjects\/platform-battle\/assets\/tilemaps\/Cave.json"
         }
     },
  "height":40,
@@ -72,8 +72,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":648.662559077525,
-                 "y":132.393041842971
+                 "x":648.663,
+                 "y":132.393
                 }, 
                 {
                  "height":0,
@@ -84,8 +84,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1223.2103531042,
-                 "y":117.823472644941
+                 "x":1223.21,
+                 "y":117.823
                 }, 
                 {
                  "height":0,
@@ -96,8 +96,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":76.6486031722465,
-                 "y":546.675574691312
+                 "x":76.6486,
+                 "y":546.676
                 }, 
                 {
                  "height":0,
@@ -108,8 +108,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1231.44532699874,
-                 "y":342.701605918888
+                 "x":1231.45,
+                 "y":342.702
                 }, 
                 {
                  "height":0,
@@ -120,8 +120,68 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":703.140078687551,
-                 "y":570.74703684458
+                 "x":703.14,
+                 "y":570.747
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"cannon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":306.392440328289,
+                 "y":349.708907461787
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":391.333333333333,
+                 "y":554.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"spike",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":531.333333333333,
+                 "y":118
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":246,
+                 "y":512.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"beartrap",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":273.333333333333,
+                 "y":116.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -130,16 +190,16 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":8,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.5.0",
+ "tiledversion":"1.6.0",
  "tileheight":16,
  "tilesets":[
         {
          "columns":45,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Cave\/CaveTiles.png",
+         "image":"..\/..\/..\/maps\/used maps\/Cave\/CaveTiles.png",
          "imageheight":416,
          "imagewidth":720,
          "margin":0,
@@ -10683,7 +10743,7 @@
         {
          "columns":25,
          "firstgid":1171,
-         "image":"..\/..\/..\/..\/OneDrive - HKUST Connect\/COMP4451\/TiledProject\/Cave\/CaveBG.png",
+         "image":"..\/..\/..\/maps\/used maps\/Cave\/CaveBG.png",
          "imageheight":300,
          "imagewidth":400,
          "margin":0,
@@ -10695,6 +10755,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":1.5,
+ "version":"1.6",
  "width":80
 }
