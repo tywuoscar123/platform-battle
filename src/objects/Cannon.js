@@ -109,8 +109,8 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
         let magnitude = Math.pow(magnitudeX + magnitudeY, 0.5);
         let Vx = (this.scene.wizard.x - this.x)/magnitude * SAVES.CANNON.CannonSpeed;
         let Vy = (this.scene.wizard.y - this.y)/magnitude * SAVES.CANNON.CannonSpeed;
-        console.log(Vx);
-        console.log(Vy);
+        //console.log(Vx);
+        //console.log(Vy);
 
         //create new cannonball
         new Cannonball(this.scene, this.x, this.y, Vx, Vy);
@@ -120,7 +120,7 @@ export default class Cannon extends Phaser.GameObjects.Sprite{
      * Destroy this sprite and set physical body to disable, remove shooting event.
      */
     destroy() {
-        console.log('destroy');
+        //console.log('destroy');
         if (this.scene !== undefined) {
             this.scene.time.removeEvent(this.shootEvent);
         }

@@ -159,9 +159,9 @@ export default class HeroSkills extends Phaser.Scene {
     }
 
     /**
-     * functions to upgrade traps
+     * functions to upgrade spike trap
      * IF skill is in max level or hero does not have enough points to upgrade, return
-     * else upgrade skill attributes and multiply upgrade cost by 2
+     * else upgrade skill attributes and increase upgrade cost by 10
      */
      spikeLevelUp(){
         if(SAVES.SPIKE.SpikeLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.SPIKE.SpikeUpgradeCost){
@@ -178,6 +178,11 @@ export default class HeroSkills extends Phaser.Scene {
         //add condition to disable upgrade button when level is max?
     }
 
+    /**
+     * functions to upgrade bouncing bomb trap
+     * IF skill is in max level or hero does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     bombLevelUp(){
         if(SAVES.BOMB.BombLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.BOMB.BombUpgradeCost){
             return;
@@ -192,6 +197,11 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.BOMB.BombDamage += 2;
     }
 
+    /**
+     * functions to upgrade bear trap
+     * IF skill is in max level or hero does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     bearTrapLevelUp(){
         if(SAVES.BEARTRAP.BearTrapLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.BEARTRAP.BearTrapUpgradeCost){
             return;
@@ -205,6 +215,11 @@ export default class HeroSkills extends Phaser.Scene {
         SAVES.BEARTRAP.BearTrapCoolDown -= 200;
     }
 
+    /**
+     * functions to upgrade cannon trap
+     * IF skill is in max level or hero does not have enough points to upgrade, return
+     * else upgrade skill attributes and increase upgrade cost by 10
+     */
     cannonLevelUp(){
         if(SAVES.CANNON.CannonLevel >=  CST.CONFIG.MaxSkillLevel || SAVES.SCORES.heroScore < SAVES.CANNON.CannonUpgradeCost){
             return;

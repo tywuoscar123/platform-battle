@@ -9,7 +9,7 @@ export default class PauseScene extends Phaser.Scene {
      * Set the key of the scene
      */
     constructor(){
-        console.log("pause");
+        //console.log("pause");
 
         super({
             key: CST.SCENES.PAUSE
@@ -23,7 +23,7 @@ export default class PauseScene extends Phaser.Scene {
     init(data){
         this.sceneKey = data.sceneKey;
         this.gameScene = data.gameScene;
-        console.log(data.gameScene);
+        //console.log(data.gameScene);
     }
 
     preload(){

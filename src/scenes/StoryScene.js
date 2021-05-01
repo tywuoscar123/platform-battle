@@ -13,7 +13,10 @@ export default class StoryScene extends Phaser.Scene {
         this.utilfunctions = new Utils(this);
     }
 
-
+    /**
+     * Pass in title and content of story
+     * @param data
+     */
     init(data){
         this.title = data.title;
         this.content = data.content;
