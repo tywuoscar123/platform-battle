@@ -141,9 +141,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
             let spawnDistance = this.displayWidth / 2;
             this.scene.playerAtkSfx.play();
             if (!this.flipX){
-                new MagicOrb(this.scene, this.x + spawnDistance, this.y, 1);
+                new MagicOrb(this.scene, this.x + spawnDistance, this.y + 2, 1);
             }else{
-                new MagicOrb(this.scene, this.x - spawnDistance, this.y, -1);
+                new MagicOrb(this.scene, this.x - spawnDistance, this.y + 2, -1);
             }
             this.remainingBullet -= 1;
         }
@@ -221,6 +221,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     resetStatus(){
         this.hp = SAVES.PLAYER.InitialHP;
+        this.mana = SAVES.PLAYER.Mana;
     }
 
     /**

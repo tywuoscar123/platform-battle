@@ -101,6 +101,19 @@ export default class SettingScene extends Phaser.Scene {
             audioText.setText(`Audio -  ${CST.CONFIG.AUDIO}`);
         }, this);
 
+        //add function to unlock all levels
+        let unlocktext = this.add.text(screenCenterX - 320, screenCenterY - buttonOffsetY + 160, "Unlock all levels", { font: "25px Arial", fill: "#ffffff" }).setOrigin(0.5);
+        let unlockButton = this.utilfunctions.createTextButton(
+            screenCenterX +60,
+            screenCenterY - buttonOffsetY + 160,
+            `Unlock`,
+            { font: "25px Arial", fill: originalColor},
+            originalColor,
+            overColor
+        );
+        unlockButton.on('pointerdown', function(){
+            SAVES.PROGRESS.GameLevel = 8;
+        }, this);
 
         //button to return to menu
         let backButton = this.utilfunctions.createTextButton(
