@@ -54,10 +54,10 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.text(80, 280, "D - Go backwards", { font: "25px Arial", fill: devilColor });
         this.add.text(80, 340, "W - Jump", { font: "25px Arial", fill: devilColor });
 
-        this.add.text(360, 220, "1 - Activate Super Jump", { font: "25px Arial", fill: devilColor });
-        this.add.text(360, 280, "2 - Activate Super Speed", { font: "25px Arial", fill: devilColor });
-        this.add.text(360, 340, "3 - Heal", { font: "25px Arial", fill: devilColor });
-        this.add.text(360, 400, "4 - Reload Magic Orb", { font: "25px Arial", fill: devilColor });
+        this.add.text(360, 220, "H - Activate Super Jump", { font: "25px Arial", fill: devilColor });
+        this.add.text(360, 280, "J - Activate Super Speed", { font: "25px Arial", fill: devilColor });
+        this.add.text(360, 340, "K - Reload Magic Orb", { font: "25px Arial", fill: devilColor });
+        this.add.text(360, 400, "L - Heal", { font: "25px Arial", fill: devilColor });
 
         this.add.text(80, 460, "Goal: Control the devil avatar and reach the bottom right goal of each level within the time limit to defeat the Hero", { font: "25px Arial", fill: devilColor, wordWrap: { width: 600 } });
 
@@ -65,10 +65,10 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.text(900, 120, " Hero Controls", { font: "40px Arial", fill: heroColor });
         this.add.text(800, 180, "Controls (Mouse): ", { font: "25px Arial", fill: heroColor});
 
-        this.add.text(800, 220, "In each level, first, Left click on map to select a location (indicated by white square)", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
-        this.add.text(800, 310, "Then, select a trap on the right of the screen", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
-        this.add.text(800, 370, "Click on the trap icon to spawn the trap at the selected location", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
-        this.add.text(800, 460, "Goal: Stop the Devil from reaching the end of the map in the time limit by setting traps in the level", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
+        this.add.text(800, 220, "In each level, first, Left click on map to select a location (indicated by white square) (Note: Area near Devil, Spawn Point and Goal Point cannot be selected)", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
+        this.add.text(800, 370, "Then, select a trap on the right of the screen", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
+        this.add.text(800, 430, "Click on the trap icon to spawn the trap at the selected location", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
+        this.add.text(800, 520, "Goal: Stop the Devil from reaching the end of the map in the time limit by setting traps in the level", { font: "25px Arial", fill: heroColor, wordWrap: { width: 500 } });
 
         //button to return to menu
         let backButton = this.utilfunctions.createTextButton(

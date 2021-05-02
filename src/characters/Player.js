@@ -77,16 +77,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.playBearTrapSfx = true;
 
         //get the keyboard input for controlling player
-        const { W, A, D } = Phaser.Input.Keyboard.KeyCodes;
+        const { W, A, D, H, J, K, L } = Phaser.Input.Keyboard.KeyCodes;
         this.keys = this.scene.input.keyboard.addKeys({
             w: W,
             a: A,
             d: D,
-            space: 'SPACE',
-            one: 'ONE',
-            two: 'TWO',
-            three: 'THREE',
-            four: 'FOUR',
+            h: H,
+            j: J,
+            k: K,
+            l: L,
+            space: 'SPACE'
         });
 
         this.VxbeforeCollision = this.body.velocity.x;
@@ -121,18 +121,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //console.log(this.body.velocity.x);
         //console.log(this.body.velocity.y);
         //map skill buttons
-        if (Phaser.Input. Keyboard.JustDown(this.keys.one)){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.h)){
             this.scene.abilitySfx.play();
             this.superJump();
         }
-        if (Phaser.Input. Keyboard.JustDown(this.keys.two)){
+        if (Phaser.Input.Keyboard.JustDown(this.keys.j)){
             this.scene.abilitySfx.play();
             this.superSpeed();
         }
-        if(Phaser.Input.Keyboard.JustDown(this.keys.three)){
+        if(Phaser.Input.Keyboard.JustDown(this.keys.k)){
             this.reload();
         }
-        if(Phaser.Input.Keyboard.JustDown(this.keys.four)){
+        if(Phaser.Input.Keyboard.JustDown(this.keys.l)){
             this.heal();
         }
 
