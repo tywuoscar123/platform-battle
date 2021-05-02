@@ -8,3 +8,4 @@ Instruction to run:
 2. Open the project in an IDE
 3. run command "npm install" in the terminal
 4. run command "npm start" in the terminal
+5. Visit the URL given by the command above in a browser to play the game
