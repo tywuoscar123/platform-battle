@@ -97,11 +97,11 @@ export default class GameScene extends Phaser.Scene {
          */
         this.spikeSfx = this.sound.add('spikeSfx');
         this.bearTrapSfx = this.sound.add('bearTrapSfx');
-        this.playerAtkSfx = this.sound.add('playerAtkSfx');
+        this.playerAtkSfx = this.sound.add('playerAtkSfx', {volume: 0.4});
         this.abilitySfx = this.sound.add("abilitySfx");
         this.healSfx = this.sound.add("healSfx");
         this.manaUpSfx = this.sound.add("manaUpSfx");
-        this.hitMarker = this.sound.add("hitMarker");
+        this.hitMarker = this.sound.add("hitMarker", {volume: 0.4});
         this.playerShot = this.sound.add("playerShot");
         this.explodeSfx = this.sound.add("explodeSfx", {volume: 0.4});
         this.endLevelSfx = this.sound.add("endLevelSfx", {volume: 0.2});

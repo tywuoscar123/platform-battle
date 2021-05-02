@@ -36,7 +36,7 @@ export default class level3 extends GameScene{
         this.map.addTilesetImage('CaveTiles');
         this.map.addTilesetImage('CaveBG');
 
-        this.bgm = this.sound.add("caveBgm", {volume: 0.2, loop: true});
+        this.bgm = this.sound.add("caveBgm", {volume: 0.1, loop: true});
         this.bgm.play();
 
         this.backgroundLayer = this.map.createLayer('Background', 'CaveBG');

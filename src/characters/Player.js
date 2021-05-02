@@ -105,7 +105,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //assign audio to variables so they can be called later
     create(args){
         this.scene.bearTrapSfx = this.scene.sound.add('bearTrapSfx');
-        this.scene.playerAtkSfx = this.scene.sound.add('playerAtkSfx');
+        this.scene.playerAtkSfx = this.scene.sound.add('playerAtkSfx', {volume: 0.5});
         this.scene.abilitySfx = this.scene.sound.add("abilitySfx");
         this.scene.healSfx = this.scene.sound.add("healSfx");
         this.scene.manaUpSfx = this.scene.sound.add("manaUpSfx");
