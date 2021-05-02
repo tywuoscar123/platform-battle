@@ -53,13 +53,14 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.text(80, 220, "A - Go forward", { font: "25px Arial", fill: devilColor });
         this.add.text(80, 280, "D - Go backwards", { font: "25px Arial", fill: devilColor });
         this.add.text(80, 340, "W - Jump", { font: "25px Arial", fill: devilColor });
+        this.add.text(80, 400, "Space - Shoot Magic bullet to destroy traps", { font: "25px Arial", fill: devilColor, wordWrap: { width: 260 } });
 
         this.add.text(360, 220, "H - Activate Super Jump", { font: "25px Arial", fill: devilColor });
         this.add.text(360, 280, "J - Activate Super Speed", { font: "25px Arial", fill: devilColor });
         this.add.text(360, 340, "K - Reload Magic Orb", { font: "25px Arial", fill: devilColor });
         this.add.text(360, 400, "L - Heal", { font: "25px Arial", fill: devilColor });
 
-        this.add.text(80, 460, "Goal: Control the devil avatar and reach the bottom right goal of each level within the time limit to defeat the Hero", { font: "25px Arial", fill: devilColor, wordWrap: { width: 600 } });
+        this.add.text(80, 480, "Goal: Control the devil avatar and reach the bottom right goal of each level within the time limit to defeat the Hero", { font: "25px Arial", fill: devilColor, wordWrap: { width: 600 } });
 
         //text for hero tutorial 
         this.add.text(900, 120, " Hero Controls", { font: "40px Arial", fill: heroColor });
